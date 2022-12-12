@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route,Routes} from "react-router-dom";
 import Home from "./components/home/Home";
-
+import "./style/App.css";
+import "./style/reset.css";
 
 const App = () => {
     return (

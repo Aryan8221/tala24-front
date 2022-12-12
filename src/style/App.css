@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "IRANYekan";
+    src: url("../font/Qs_Iranyekan.ttf");
+}
+body{
+    font-family: IRANYekan;
+    background-color: #303030;
+}
+h1{
+    background-color: #252525;
+    color:#d0a94d;
+}
+
