@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from "./Navbar";
+import MainNavbar from "./MainNavbar";
 
 const Home = () => {
     return (
         <>
-            <Navbar/>
+            <MainNavbar/>
         </>
     )
 }

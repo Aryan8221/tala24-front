@@ -2,7 +2,9 @@
     font-family: "IRANYekan";
     src: url("../font/Qs_Iranyekan.ttf");
 }
+
 body{
+    direction: rtl;
     font-family: IRANYekan;
     background-color: #303030;
 }
