@@ -20,22 +20,17 @@ module.exports = withMT({
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
-      'mainGold': '#d0a94d',
-        'dark': 'rgb(23, 26, 30)',
-        'cardDark': '#252525',
-        'footerColor': '#131212'
+      mainGold: '#d0a94d',
+      dark: 'rgb(23, 26, 30)',
+      cardDark: '#252525',
+      footerColor: '#131212'
     },
-
-    extend: {},
     extend: {
       fontWeight: {
         medium: 1000,
       },
       colors: {
-        'mainGold': '#d0a94d',
-        'dark': 'rgb(23, 26, 30)',
-        'cardDark': '#252525',
-        'footerColor': '#131212'
+
       },
       height: {
         '-100%': '-100%',
