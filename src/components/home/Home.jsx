@@ -1,4 +1,6 @@
 import React from 'react';
+import MainNavbar from "./MainNavbar";
+import Slider from "./Slider";
 import Navbar from "./Navbar";
 import Cards from "./Cards";
 import Stream from "./Stream";
@@ -8,8 +10,7 @@ import Footer from "./Footer";
 const Home = () => {
     return (
         <>
-            <Navbar/>
-
+            <MainNavbar/>
             <Cards />
             <Stream />
             <Footer />
