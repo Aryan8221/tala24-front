@@ -4,7 +4,27 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontWeight: {
+        medium: 1000,
+      },
+      colors: {
+        'mainGold': '#d0a94d',
+        'dark': 'rgb(23, 26, 30)',
+        'cardDark': '#252525',
+        'footerColor': '#131212'
+      },
+      height: {
+        '-100%': '-100%',
+        '100%': '100%',
+      },
+      screens: {
+        'xsm': '350px'
+      },
+      fontSize: {
+        '20px': '20px'
+      }
+    },
   },
   plugins: [],
 }
