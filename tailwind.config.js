@@ -22,6 +22,7 @@ module.exports = {
         '100%': '100%',
       },
       screens: {
+        'md1': '1000px',
         'xsm': '350px'
       },
       fontSize: {

@@ -10,74 +10,10 @@ import '../../style/footer.css'
 const Footer = () => {
     return (
         <div className={'bg-footerColor xsm:mt-5'}>
-            <div className={'xsm:block footer-style md:flex text-white text-right lg:p-10'}>
 
-                <div className={'md:flex hidden md:items-center'}>
-                    <div>
-                        <img src={etemad1} className={'w-[700px] lg:w-[900px]'} alt={'etemad1'}/>
-                    </div>
-                    <div>
-                        <img src={etemad2} className={'w-[700px] lg:w-[900px]'} alt={'etemad2'}/>
-                    </div>
-                </div>
+            <div className={'xsm:block footer-style md:flex text-white text-right md:p-10'}>
 
-                <div className={'whitespace-nowrap xsm:mb-3 xsm:pt-5 md:flex md:items-center md:mx-5'}>
-                    <div>
-                        <h2 className={'text-sm mb-3 xsm:text-center'}>
-                            لینک های مفید
-                        </h2>
-                        <div className={'text-xs md:leading-8'}>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    شماره تماس :021212121
-                                </p>
-                                <BsTelephone color={'#d0a94d'} className={'ml-2 mt-2'} size={"16px"}/>
-                            </div>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    آدرس: تهران، پل پارک وی، خیابان ولیعصر
-                                </p>
-                                <IoLocationOutline color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>
-                            </div>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    milad1380@gmail.com :پست الکترونیک
-                                </p>
-                                <HiOutlineMail color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={'whitespace-nowrap xsm:mb-3 xsm:pt-5 md:flex md:items-center'}>
-                    <div>
-                        <h2 className={'text-sm mb-3 xsm:text-center'}>
-                            لینک های مفید
-                        </h2>
-                        <div className={'text-xs md:leading-8'}>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    شماره تماس :021212121
-                                </p>
-                                <BsTelephone color={'#d0a94d'} className={'ml-2 mt-2'} size={"16px"}/>
-                            </div>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    آدرس: تهران، پل پارک وی، خیابان ولیعصر
-                                </p>
-                                <IoLocationOutline color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>
-                            </div>
-                            <div className={'flex md:float-right xsm:justify-center'}>
-                                <p>
-                                    milad1380@gmail.com :پست الکترونیک
-                                </p>
-                                <HiOutlineMail color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={'xsm:text-center xsm:p-5 md:flex md:items-center'}>
+                <div className={'xsm:p-5 md:flex md:items-center text-right'}>
                     <div>
                         <h2 className={'text-sm mb-3'}>
                             درباره ما
@@ -91,19 +27,101 @@ const Footer = () => {
                             تستی استاین یک پیام تستی استاین یک پیام تستی است
                         </p>
                     </div>
+                    <div className={'f1 mt-4'}></div>
                 </div>
-                <div className={'flex xsm:p-3 justify-center md:hidden'}>
+
+                <div className={'whitespace-nowrap xsm:mb-3 md:flex md:items-center md:mx-5 xsm:mx-3'}>
                     <div>
-                        <img src={etemad1} className={'sm:w-[200px] w-[700px]'} alt={'etemad1'}/>
+                        <h2 className={'text-sm md:mb-3 xsm:mb-5'}>
+                            ارتباط با ما
+                        </h2>
+                        <div className={'text-xs md:leading-8'}>
+                            <div className={'flex md:float-right'}>
+                                <BsTelephone color={'#d0a94d'} className={'md:ml-2 md:mt-2 xsm:-mt-1 xsm:mb-3 xsm:ml-2'} size={"16px"}/>
+                                <p>
+                                    شماره تماس :021212121
+                                </p>
+                            </div>
+                            <div className={'flex md:float-right'}>
+                                <IoLocationOutline color={'#d0a94d'} className={'md:ml-2 md:mt-2 xsm:mb-3 xsm:ml-2'} size={"18px"}/>
+                                <p>
+                                    آدرس: تهران، پل پارک وی، خیابان ولیعصر
+                                </p>
+                            </div>
+                            <div className={'flex md:float-right'}>
+                                <HiOutlineMail color={'#d0a94d'} className={'md:ml-2 md:mt-2 xsm:mb-3 xsm:ml-2'} size={"18px"}/>
+                                <p>
+                                    milad1380@gmail.com :پست الکترونیک
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'f1 mt-4'}></div>
+                </div>
+
+                <div className={'whitespace-nowrap xsm:pt-3 md:flex md:items-center xsm:mx-3'}>
+                    <div>
+                        <h2 className={'text-sm mb-3'}>
+                            لینک های مفید
+                        </h2>
+                        <div className={'text-xs md:leading-8 xsm:leading-8'}>
+                            <div className={'flex'}>
+                                <p>
+                                    خدمات
+                                </p>
+                                {/*<BsTelephone color={'#d0a94d'} className={'ml-2 mt-2'} size={"16px"}/>*/}
+                            </div>
+                            <div className={'flex'}>
+                                <p>
+                                    خدمات
+                                </p>
+                                {/*<IoLocationOutline color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>*/}
+                            </div>
+                            <div className={'flex'}>
+                                <p>
+                                    خدمات
+                                </p>
+                                {/*<HiOutlineMail color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>*/}
+                            </div>
+                            <div className={'flex'}>
+                                <p>
+                                    خدمات
+                                </p>
+                                {/*<HiOutlineMail color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>*/}
+                            </div>
+                            <div className={'flex'}>
+                                <p>
+                                    خدمات
+                                </p>
+                                {/*<HiOutlineMail color={'#d0a94d'} className={'ml-2 mt-2'} size={"18px"}/>*/}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'f1 mt-4'}></div>
+                </div>
+
+                <div className={'flex xsm:p-3 justify-center md:items-center'}>
+                    <div>
+                        <img src={etemad1} className={'xsm:w-[150px] sm:w-[175px] md:w-[700px]'} alt={'etemad1'}/>
                     </div>
                     <div>
-                        <img src={etemad2} className={'sm:w-[200px] w-[700px]'} alt={'etemad2'}/>
+                        <img src={etemad2} className={'xsm:w-[150px] sm:w-[175px] md:w-[700px]'} alt={'etemad2'}/>
                     </div>
                 </div>
+
+                {/*<div className={'md:flex hidden md:items-center'}>*/}
+                {/*    <div>*/}
+                {/*        <img src={etemad1} className={'md:w-[400px] lg:w-[500px]'} alt={'etemad1'}/>*/}
+                {/*    </div>*/}
+                {/*    <div>*/}
+                {/*        <img src={etemad2} className={'md:w-[400px] lg:w-[500px]'} alt={'etemad2'}/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
 
+
             <div className={'flex justify-center text-white text-xs p-5'}>
-                است<span className={'text-mainGold mx-2'}>طلا ۲۴</span> تمامی حقوق این وبسایت، متعلق به
+                تمامی حقوق این وبسایت، متعلق به <span className={'text-mainGold mx-2'}>طلا ۲۴</span> است
             </div>
         </div>
     )

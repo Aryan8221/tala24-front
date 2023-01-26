@@ -14,19 +14,16 @@
 
 @media (min-width: 300px) {
     @media (max-width: 767px) {
-        .card2 {
+        .card1 {
             border-bottom: 1px solid #979797;
         }
 
-        .card3 {
+        .card2 {
             border-bottom: 1px solid #979797;
         }
     }
 }
 
-.image{
-    width: 180px;
-}
 .image2{
     height: 60px;
 }
