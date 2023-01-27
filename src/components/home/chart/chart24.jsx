@@ -2,7 +2,7 @@ import '../../../style/chart.css'
 import person from '../../../images/person.svg'
 import goldPrice from '../../../images/goldPriceChart.png'
 import {Line, Bar} from "react-chartjs-2";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Chart24 = () => {
 
@@ -122,7 +122,7 @@ const Chart24 = () => {
                             </p>
                         </div>
 
-                        <Line className={'mb-[50px] md1:p-0'} data={userData} options={{scales: {y: {beginAtZero: true}}}} type={'line'}/>
+                        <Line className={'mb-[50px] md1:p-0'} data={userData} type={'line'}/>
 
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import {BsTelephone} from 'react-icons/bs'
 import {IoLocationOutline} from 'react-icons/io5'
 import {HiOutlineMail} from 'react-icons/hi'
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import etemad1 from '../../images/etemad1.png'
 import etemad2 from '../../images/etemad2.png'
 
@@ -102,21 +103,22 @@ const Footer = () => {
 
                 <div className={'flex xsm:p-3 justify-center md:items-center'}>
                     <div>
-                        <img src={etemad1} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad1'}/>
+                        <LazyLoadImage src={etemad1}
+                                       className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'}
+                                       alt={'etemad1'}
+                        />
+                        {/*<img src={etemad1} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad1'}/>*/}
                     </div>
                     <div>
-                        <img src={etemad2} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad2'}/>
+                        <LazyLoadImage src={etemad2}
+                                       className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'}
+                                       alt={'etemad2'}
+                        />
+
+                        {/*<img src={etemad2} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad2'}/>*/}
                     </div>
                 </div>
 
-                {/*<div className={'md:flex hidden md:items-center'}>*/}
-                {/*    <div>*/}
-                {/*        <img src={etemad1} className={'md:w-[400px] lg:w-[500px]'} alt={'etemad1'}/>*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src={etemad2} className={'md:w-[400px] lg:w-[500px]'} alt={'etemad2'}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
 
 
