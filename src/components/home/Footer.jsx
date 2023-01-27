@@ -104,14 +104,14 @@ const Footer = () => {
                 <div className={'flex xsm:p-3 justify-center md:items-center'}>
                     <div>
                         <LazyLoadImage src={etemad1}
-                                       className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'}
+                                       className={'xsm:w-[130px] sm:w-[150px] md:w-[600px] lg:w-[400px]'}
                                        alt={'etemad1'}
                         />
                         {/*<img src={etemad1} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad1'}/>*/}
                     </div>
                     <div>
                         <LazyLoadImage src={etemad2}
-                                       className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'}
+                                       className={'xsm:w-[130px] sm:w-[150px] md:w-[600px] lg:w-[400px]'}
                                        alt={'etemad2'}
                         />
 

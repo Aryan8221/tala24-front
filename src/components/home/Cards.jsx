@@ -19,10 +19,10 @@ const Cards = () => {
                     {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'}/>*/}
                 </div>
                 <div>
-                    <h5 className={'md:text-[20px] text-[16px] pb-5'}>
+                    <h5 className={'text-[20px] pb-5'}>
                         سرمایه گذاری با کمترین مبلغ
                     </h5>
-                    <p className={'text1 md1:text-right md:text-[10px] text-[14px]'}>
+                    <p className={'text1 md1:text-right text-[10px]'}>
                         این یک پیام مربوط به عنوان است این یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان است
                     </p>
                 </div>
@@ -37,10 +37,10 @@ const Cards = () => {
                     {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />*/}
                 </div>
                 <div>
-                    <h5 className={'md:text-[20px] text-[16px] pb-5'}>
+                    <h5 className={'text-[20px] pb-5'}>
                         سرمایه گذاری با کمترین مبلغ
                     </h5>
-                    <p className={'text1 md1:text-right md:text-[10px] text-[14px] '}>
+                    <p className={'text1 md1:text-right text-[10px]'}>
                         این یک پیام مربوط به عنوان است این یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان است
                     </p>
                 </div>
@@ -55,10 +55,10 @@ const Cards = () => {
                     {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />*/}
                 </div>
                 <div>
-                    <h5 className={'md:text-[20px] text-[16px] pb-5'}>
+                    <h5 className={'text-[20px] pb-5'}>
                         سرمایه گذاری با کمترین مبلغ
                     </h5>
-                    <p className={'text1 md1:text-right md:text-[10px] text-[14px]'}>
+                    <p className={'text1 md1:text-right text-[10px]'}>
                         این یک پیام مربوط به عنوان است این یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان استاین یک پیام مربوط به عنوان است
                     </p>
                 </div>
