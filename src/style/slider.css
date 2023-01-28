@@ -1,62 +1,196 @@
-.slide-container {
-    direction: ltr;
-    width: 100%;
-    margin: auto;
+/* page styles */
+.ax-hidden {
+    visibility: hidden;
+    position: absolute;
 }
 
-.each-slide > div {
-    display: flex;
+/* carousel styles */
+.carousel {
+    --carousel-height: 400px;
+    --carousel-width: 1000px;
+    --carousel-item-height: 13rem;
+    --carousel-item-width: 150px;
+    width: 70%;
+}
+
+.carousel-container {
     align-items: center;
-    justify-content: center;
-    background-size: cover;
-    height: 300px;
+    min-height: var(--carousel-height);
+    margin: 0 auto;
+    max-width: var(--carousel-width);
+    position: relative;
 }
 
-.react-slideshow-container .nav[data-type="prev"] span {
-    margin-left: .4rem;
-    border-right: none;
-    border-top: none;
+.carousel-item {
+    height: var(--carousel-item-height);
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: all 0.3s ease-in-out;
+    width: var(--carousel-item-width);
+    z-index: 0;
 }
 
-.react-slideshow-container .nav[data-type="next"] span {
-    margin-right: .4rem;
-    border-left: none;
-    border-bottom: none;
+.carousel-item-1 {
+    left: 15%;
+    opacity: 0.3;
+    border-radius: 11rem;
 }
 
-.each-slide span {
-    padding: 1.25rem;
-    font-size: 1.25rem;
-    background: #efefef;
-    text-align: center;
+.carousel-item-2{
+    height: calc(var(--carousel-item-height) * 1.5);
+    opacity: 0.6;
+    width: calc(var(--carousel-item-width) * 1.5);
+    z-index: 1;
+    border-radius: 11rem;
 }
 
-.each-fade {
+.carousel-item-2 {
+    left: 30%;
+    border-radius: 11rem;
+}
+
+.carousel-item-3 {
+    box-shadow: 0 0 8px 6px #000000a1;
+    height: calc(var(--carousel-item-height) * 2);
+    opacity: 1;
+    left: 50%;
+    width: calc(var(--carousel-item-width) * 2);
+    z-index: 2;
+    border-radius: 11rem;
+}
+.carousel-item-3::before{
+    content: "";
+    border: 3px solid #fff;
+    height: 30px;
+    width: 60px;
+    position: absolute;
+    top: 0;
+}
+.carousel-controls {
     display: flex;
-}
-
-.each-fade .image-container {
-    width: 75%;
-    overflow: hidden;
-}
-
-.each-fade .image-container img {
-    width: 100%;
-}
-
-.each-fade h2 {
-    width: 25%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 0;
-    background: #adceed;
+    margin: 30px 0;
 }
 
-.react-slideshow-container + div.indicators > div:last-of-type {
-    margin-right: .6rem;
+/* carousel button styles */
+.carousel-control {
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 4px;
+    color: #aaa;
+    cursor: pointer;
+    height: 22px;
+    margin: 0 20px;
+    position: relative;
+    transform: scale(1.5);
+    transition: transform 0.5s ease-out;
+    width: 22px;
 }
 
-.react-slideshow-wrapper {
-    height: 30vh;
+.carousel-control:hover {
+    transform: scale(1.3);
+}
+
+/* previous button */
+.carousel-control-previous::after,
+.carousel-control-previous::before {
+    box-sizing: border-box;
+    content: '';
+    display: block;
+    height: 8px;
+    position: absolute;
+    top: 5px
+}
+.carousel-control-previous::before {
+    background: currentColor;
+    border-radius: 2px;
+    right: 11px;
+    width: 2px;
+}
+.carousel-control-previous::after {
+    border-bottom: 4px solid transparent;
+    border-right: 5px solid;
+    border-top: 4px solid transparent;
+    right: 5px;
+    width: 0;
+}
+
+/* next button */
+.carousel-control-next::after,
+.carousel-control-next::before {
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 8px;
+    position: absolute;
+    top: 5px
+}
+.carousel-control-next::before {
+    background: currentColor;
+    border-radius: 2px;
+    left: 11px;
+    width: 2px;
+}
+.carousel-control-next::after {
+    border-bottom: 4px solid transparent;
+    border-left: 5px solid;
+    border-top: 4px solid transparent;
+    left: 5px;
+    width: 0;
+}
+
+/* play button */
+.carousel-control-play::before {
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    border-top: 5px solid transparent;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 10px;
+    position: absolute;
+    left: 7px;
+    top: 4px;
+    width: 0;
+}
+
+/* pause button */
+.carousel-control-play.playing::before {
+    border-bottom: 0;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-top: 0;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 6px;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 6px;
+}
+
+/* add button */
+.carousel-control-add::after,
+.carousel-control-add::before {
+    background: currentColor;
+    border-radius: 5px;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    width: 10px;
+}
+.carousel-control-add::after {
+    height: 10px;
+    left: 8px;
+    top: 4px;
+    width: 2px;
+}
+.slide{
+    border: 1px solid #fff;
 }
