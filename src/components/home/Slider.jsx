@@ -36,6 +36,7 @@ const Slider = () => {
         },
     ])
     const [carouselInView, setCarouselInView] = useState([3, 2, 1])
+
     return (
         <>
             <div className="flex flex-wrap justify-center">
@@ -55,7 +56,7 @@ const Slider = () => {
                         </div>
                     </div>
                 </div>
-                <div className="carousel my-10">
+                <div className="carousel mt-5 mb-10">
                     <div className="carousel-container" ref={carouselContainer}>
                         {carouselData.map((item, index) => {
                             return (
@@ -65,7 +66,10 @@ const Slider = () => {
                             )
                         })}
                     </div>
-                    <div className="carousel-controls">
+                    <div className="carousel-dots flex justify-center mt-20">
+                        <div className={carouselInView[0] == 1 ? "dot active-dot" :"dot"}></div>
+                        <div className={carouselInView[0] == 2 ? "dot active-dot" :"dot"}></div>
+                        <div className={carouselInView[0] == 3 ? "dot active-dot" :"dot"}></div>
                     </div>
                 </div>
             </div>
