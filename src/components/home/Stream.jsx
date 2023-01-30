@@ -21,10 +21,10 @@ const Stream = () => {
 
                 <div className={'flex items-center lg:mt-0 sm:mx-[50px] xsm:ml-5 justify-center xsm:text-center md1:text-right xsm:mr-[20px]'}>
                     <div>
-                        <h2 className={'whitespace-nowrap md:text-[30px] mb-4 xsm:text-center xsm:text-[22px] xsm:mt-3'}>
+                        <h2 className={'xsm:text-center xsm:text-[1.375rem] xsm:mt-3 md:text-[1.875rem] mb-4 whitespace-nowrap'}>
                             مطمئن ترین راه برای نگهداری طلا شما
                         </h2>
-                        <p className={'text-[10px] leading-7 font-thin'}>
+                        <p className={'text-[0.65rem] leading-7 font-thin'}>
                             اینجا یک متن درباره توضیحات وبسایت قرار میگیرد اینجا
                             یک متن درباره توضیحات وبسایت قرار میگیرداینجا یک متن درباره توضیحات
                             وبسایت قرار میگیرداینجا یک متن درباره توضیحات وبسایت قرار میگیرداینجا

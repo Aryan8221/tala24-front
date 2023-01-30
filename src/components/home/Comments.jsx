@@ -17,10 +17,10 @@ const Comments = () => {
                     />
                     {/*<img src={p1} alt={'person1'} className={'ml-5 mb-5 w-[80px]'}/>*/}
                     <div className={'text-white'}>
-                        <p className={'text-[14px] mb-4'}>
+                        <p className={'text-[0.875rem] mb-4'}>
                             میلاد سعیدی
                         </p>
-                        <p className={'text-[10px] leading-5'}>
+                        <p className={'text-[0.65rem] leading-5'}>
                             این یک پیام تستی است این یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
                             استاین یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
                             استاین یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
@@ -36,10 +36,10 @@ const Comments = () => {
                     />
                     {/*<img src={p2} alt={'person2'} className={'ml-5 mb-5 w-[80px]'}/>*/}
                     <div className={'text-white'}>
-                        <p className={'text-[14px] mb-4'}>
+                        <p className={'text-[0.875rem] mb-4'}>
                             میلاد سعیدی
                         </p>
-                        <p className={'text-[10px] leading-5'}>
+                        <p className={'text-[0.65rem] leading-5'}>
                             این یک پیام تستی است این یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
                             استاین یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
                             استاین یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی
