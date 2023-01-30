@@ -9,7 +9,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Cards = () => {
     return (
-        <div className={'cards-style flex text-white p-5 flex-col md:flex-row text-center w-full'}>
+        <div className={'cards-style flex text-white p-5 flex-col md:flex-row text-center md1:text-right w-full'}>
             <div className={'card1 md1:flex text-[13px] lg:text-[15px] p-2 mb-4 xsm:pb-[30px] md:w-1/3 md:mr-4'}>
                 <div className={'justify-center flex ml-5 mr-4'}>
                     <LazyLoadImage src={image3}

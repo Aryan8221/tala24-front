@@ -80,7 +80,8 @@ const Chart24 = () => {
                                         <p>ساعت اخیر</p>
                                         <p className={'text-mainGold'}>۰.۵٪ +</p>
                                     </div>
-                                    <button className={'register px-4 py-3 flex text-black hidden md2:flex'}>
+
+                                    <button className={'register m-2.5 px-6 py-3 flex text-black hidden md2:flex'}>
                                         <img src={person} alt={'person'} className={'ml-2'}/>
                                         ثبت نام
                                     </button>
@@ -111,8 +112,8 @@ const Chart24 = () => {
                     </button>
                 </div>
 
-                <div className={'md1:block md1:w-2/3 md2:w-3/5 xsm:pr-0 sm:pr-[20px] mb-[50px] md2:m-0 md2:p-0 mr-[50px]'}>
-                    <div className={'main-chart mt-[30px] xsm:ml-[30px]'}>
+                <div className={'mr-[50px] mb-[50px] xsm:pr-0 sm:pr-[20px] md2:w-3/5 md2:m-0 md2:p-0 md1:block md1:w-2/3'}>
+                    <div className={'main-chart mt-[30px] ml-[30px]'}>
                         <div className={'mainPrice mb-3 pb-5'}>
                             <p className={'text-[12px]'}>
                                 طلای ۲۴ عیار
@@ -122,11 +123,11 @@ const Chart24 = () => {
                             </p>
                         </div>
 
-                        <Line className={'mb-[50px] md1:p-0'} data={userData} type={'line'}/>
+                        <Line className={'mb-12 xl:mx-24 md1:mx-16 md1:p-0'} data={userData} type={'line'}/>
 
                     </div>
                 </div>
-                {/*<Line className={'mb-[50px] md1:p-0'} data={userData} options={{scales: {y: {beginAtZero: true}}}} type={'line'}/>*/}
+
             </div>
         </>
     )
