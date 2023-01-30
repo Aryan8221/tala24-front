@@ -8,10 +8,12 @@ import Footer from "./Footer";
 import HomePageChart from "./chart/HomePageChart";
 import Comments from "./Comments";
 
+
 const Home = () => {
     return (
         <>
             <MainNavbar/>
+            <Slider/>
             <Cards />
             <Stream />
             <HomePageChart />
