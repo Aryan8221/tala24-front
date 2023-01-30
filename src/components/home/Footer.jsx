@@ -12,9 +12,9 @@ const Footer = () => {
     return (
         <div className={'bg-footerColor xsm:mt-5'}>
 
-            <div className={'xsm:block footer-style md:flex text-white text-right md:p-10'}>
+            <div className={'xsm:block footer-style items-start md:flex text-white text-right md:p-10'}>
 
-                <div className={'xsm:p-5 md:flex md:items-center text-right'}>
+                <div className={'md:flex md:items-center text-right md:mx-5 xsm:mx-3 xsm:mb-2 py-6 md:py-0'}>
                     <div>
                         <h2 className={'text-sm mb-3'}>
                             درباره ما
@@ -60,7 +60,7 @@ const Footer = () => {
                     <div className={'f1 mt-4'}></div>
                 </div>
 
-                <div className={'whitespace-nowrap xsm:pt-3 md:flex md:items-center xsm:mx-3'}>
+                <div className={'whitespace-nowrap  md:flex md:items-center xsm:mx-3'}>
                     <div>
                         <h2 className={'text-sm mb-3'}>
                             لینک های مفید
@@ -104,23 +104,19 @@ const Footer = () => {
                 <div className={'flex xsm:p-3 justify-center md:items-center'}>
                     <div>
                         <LazyLoadImage src={etemad1}
-                                       className={'xsm:w-[130px] sm:w-[150px] md:w-[600px] lg:w-[400px]'}
+                                       className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[17rem]'}
                                        alt={'etemad1'}
                         />
-                        {/*<img src={etemad1} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad1'}/>*/}
                     </div>
                     <div>
                         <LazyLoadImage src={etemad2}
-                                       className={'xsm:w-[130px] sm:w-[150px] md:w-[600px] lg:w-[400px]'}
+                                       className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[15rem]'}
                                        alt={'etemad2'}
                         />
-
-                        {/*<img src={etemad2} className={'xsm:w-[150px] sm:w-[175px] md:w-[600px] lg:w-[400px]'} alt={'etemad2'}/>*/}
                     </div>
                 </div>
 
             </div>
-
 
             <div className={'flex justify-center text-white text-xs p-5'}>
                 تمامی حقوق این وبسایت، متعلق به <span className={'text-mainGold mx-2'}>طلا ۲۴</span> است

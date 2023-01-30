@@ -39,14 +39,13 @@ const Slider = () => {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center">
-                <div className="w-[30%]">
-                    <div className={'flex items-center lg:mt-0 mr-[50px] xsm:ml-5'}>
-                        <div className="mt-20">
-                            <h2 className={'font-bold text-white whitespace-nowrap md:text-[30px] mb-4 xsm:text-center xsm:text-[22px] xsm:mt-3'}>
+            <div className="flex  flex-col items-center md:items-start md:flex-row  justify-center">
+                <div className="w-[85%] md:w-[30%] flex justify-center items-center mr-0 md:mr-6">
+                        <div className="mt-16 md:mt-20">
+                            <h2 className={'font-bold text-white whitespace-nowrap lg:text-[2rem] md:text-[1.5rem] mb-7 xsm:text-center xsm:text-[1.5rem] xsm:mt-3'}>
                                 مطمئن ترین راه برای <span className={"text-span text-gold"}>نگهداری طلا </span>شما
                             </h2>
-                            <p className={'text-white md:text-[10px] leading-7 font-thin xsm:text-[13px]'}>
+                            <p className={'text-white  lg:text-[0.8rem] md:text-[0.6rem] leading-7 font-thin xsm:text-[0.9rem]'}>
                                 اینجا یک متن درباره توضیحات وبسایت قرار میگیرد اینجا
                                 یک متن درباره توضیحات وبسایت قرار میگیرداینجا یک متن درباره توضیحات
                                 وبسایت قرار میگیرداینجا یک متن درباره توضیحات وبسایت قرار میگیرداینجا
@@ -54,7 +53,6 @@ const Slider = () => {
                                 وبسایت قرار میگیرداینجا یک متن درباره توضیحات وبسایت قرار میگیرد
                             </p>
                         </div>
-                    </div>
                 </div>
                 <div className="carousel mt-5 mb-10">
                     <div className="carousel-container" ref={carouselContainer}>

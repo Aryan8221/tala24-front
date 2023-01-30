@@ -124,3 +124,14 @@
     border-radius: 50rem;
     transition: all 0.5s linear;
 }
+
+@media screen and (max-width: 768px) {
+    .carousel {
+        --carousel-height: 21rem;
+        --carousel-width: 50rem;
+        --carousel-item-height: 12rem;
+        --carousel-item-width: 10rem;
+        width: 60%;
+        background: none;
+    }
+}
