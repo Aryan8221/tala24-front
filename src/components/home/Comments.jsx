@@ -47,6 +47,14 @@ class Comments extends Component {
         super(props);
         this.state = {
             isVisible: true,
+            pictures: [
+                {
+                    fileName: '../../images/samplePerson1.svg'
+                },
+                {
+                    fileName: '../../images/samplePerson2.svg'
+                },
+            ],
             slides: [
                 "این یک پیام تستی است این یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی\n" +
                 "                                        استاین یک پیام تستی استاین یک پیام تستی استاین یک پیام تستی\n" +
@@ -64,6 +72,11 @@ class Comments extends Component {
         };
     }
     componentDidMount() {
+        this.state.pictures.forEach((picture) => {
+            const img = new Image();
+            img.src = picture.fileName;
+        });
+
         setInterval(() => {
             this.changeSlide();
         }, 5000);
@@ -88,11 +101,11 @@ class Comments extends Component {
             <>
                 <div className={'comments-container flex my-[50px] hidden sm:flex'}>
                     <div className={'c1 flex p-10'}>
-                        <LazyLoadImage src={p1}
-                                       className={'ml-5 mb-5 w-[80px]'}
-                                       alt={'person1'}
-                        />
-                        {/*<img src={p1} alt={'person1'} className={'ml-5 mb-5 w-[80px]'}/>*/}
+                        {/*<LazyLoadImage src={p1}*/}
+                        {/*               className={'ml-5 mb-5 w-[80px]'}*/}
+                        {/*               alt={'person1'}*/}
+                        {/*/>*/}
+                        <img src={p1} alt={'person1'} className={'ml-5 mb-5 w-[80px]'}/>
                         <div className={'text-white'}>
                             <p className={'text-[0.875rem] mb-4'}>
                                 میلاد سعیدی
@@ -107,11 +120,11 @@ class Comments extends Component {
                     </div>
 
                     <div className={'flex p-10'}>
-                        <LazyLoadImage src={p2}
-                                       className={'ml-5 mb-5 w-[80px]'}
-                                       alt={'person2'}
-                        />
-                        {/*<img src={p2} alt={'person2'} className={'ml-5 mb-5 w-[80px]'}/>*/}
+                        {/*<LazyLoadImage src={p2}*/}
+                        {/*               className={'ml-5 mb-5 w-[80px]'}*/}
+                        {/*               alt={'person2'}*/}
+                        {/*/>*/}
+                        <img src={p2} alt={'person2'} className={'ml-5 mb-5 w-[80px]'}/>
                         <div className={'text-white'}>
                             <p className={'text-[0.875rem] mb-4'}>
                                 میلاد سعیدی

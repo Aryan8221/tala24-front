@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {BsTelephone} from 'react-icons/bs'
 import {IoLocationOutline} from 'react-icons/io5'
 import {HiOutlineMail} from 'react-icons/hi'
@@ -9,6 +9,23 @@ import etemad2 from '../../images/etemad2.png'
 import '../../style/footer.css'
 
 const Footer = () => {
+
+    const [pictures, setPictures] = useState([
+        {
+            fileName: '../../images/etemad1.png',
+        },
+        {
+            fileName: '../../images/etemad2.png',
+        }
+    ]);
+
+    useEffect(() => {
+        pictures.forEach((picture) => {
+            const img = new Image();
+            img.src = picture.fileName;
+        });
+    }, [])
+
     return (
         <div className={'bg-footerColor xsm:mt-5'}>
 
@@ -103,15 +120,23 @@ const Footer = () => {
 
                 <div className={'flex xsm:p-3 justify-center md:items-center'}>
                     <div>
-                        <LazyLoadImage src={etemad1}
-                                       className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[17rem]'}
-                                       alt={'etemad1'}
+                        {/*<LazyLoadImage src={etemad1}*/}
+                        {/*               className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[17rem]'}*/}
+                        {/*               alt={'etemad1'}*/}
+                        {/*/>*/}
+                        <img  src={etemad1}
+                              className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[17rem]'}
+                              alt={'etemad1'}
                         />
                     </div>
                     <div>
-                        <LazyLoadImage src={etemad2}
-                                       className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[15rem]'}
-                                       alt={'etemad2'}
+                        {/*<LazyLoadImage src={etemad2}*/}
+                        {/*               className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[15rem]'}*/}
+                        {/*               alt={'etemad2'}*/}
+                        {/*/>*/}
+                        <img src={etemad2}
+                             className={'xsm:w-[8rem] sm:w-[10rem] md:w-[17rem] lg:w-[15rem]'}
+                             alt={'etemad2'}
                         />
                     </div>
                 </div>

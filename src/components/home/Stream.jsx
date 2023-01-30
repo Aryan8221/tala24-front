@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import video1 from '../../videos/videoTest.mp4'
 import highlight5 from '../../images/Highlight_05.svg'
 import highlight4 from '../../images/Highlight_04.svg'
@@ -7,13 +7,30 @@ import p2 from "../../images/samplePerson2.svg";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Stream = () => {
+
+    const [pictures, setPictures] = useState([
+        {
+            fileName: '../../images/Highlight_05.svg',
+        },
+        {
+            fileName: '../../images/Highlight_04.svg',
+        }
+    ]);
+
+    useEffect(() => {
+        pictures.forEach((picture) => {
+            const img = new Image();
+            img.src = picture.fileName;
+        });
+    }, [])
+
     return (
         <div>
             <div className={'highlight4 flex justify-start md:mb-[50px] lg:mb-0 mr-[100px] mt-[20px]'}>
-                <LazyLoadImage src={highlight4}
-                               alt={'highlight4'}
-                />
-                {/*<img src={highlight4} alt={'highlight4'}/>*/}
+                {/*<LazyLoadImage src={highlight4}*/}
+                {/*               alt={'highlight4'}*/}
+                {/*/>*/}
+                <img src={highlight4} alt={'highlight4'}/>
             </div>
 
             <div className={'stream-style xsm:block md1:flex justify-center text-white text-right -mt-[30px] ' +
@@ -35,10 +52,10 @@ const Stream = () => {
                 </div>
 
                 <div className={'highlight5 flex items-end md:mr-4 md:mb-[80px] md:-ml-[50px] xsm:hidden md1:flex'}>
-                    <LazyLoadImage src={highlight5}
-                                   alt={'highlight5'}
-                    />
-                    {/*<img src={highlight5} alt={'highlight5'}/>*/}
+                    {/*<LazyLoadImage src={highlight5}*/}
+                    {/*               alt={'highlight5'}*/}
+                    {/*/>*/}
+                    <img src={highlight5} alt={'highlight5'}/>
                 </div>
 
                 <div className={'md:p-[70px] xsm:p-5'}>

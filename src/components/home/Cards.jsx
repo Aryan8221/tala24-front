@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {GiGoldBar} from "react-icons/gi";
 import '../../style/cards.css'
 import image1 from '../../images/image1.svg'
@@ -8,15 +8,28 @@ import p2 from "../../images/samplePerson2.svg";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Cards = () => {
+    const [pictures, setPictures] = useState([
+        {
+            fileName: '../../images/image3.svg',
+        }
+    ]);
+
+    useEffect(() => {
+        pictures.forEach((picture) => {
+            const img = new Image();
+            img.src = picture.fileName;
+        });
+    }, [])
+
     return (
         <div className={'cards-style flex text-white p-5 flex-col md:flex-row text-center md1:text-right w-full'}>
             <div className={'card1 md1:flex p-2 mb-4 xsm:pb-[30px] md:w-1/3 md:mr-4'}>
                 <div className={'justify-center flex ml-5 mr-4'}>
-                    <LazyLoadImage src={image3}
-                                   className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}
-                                   alt={'image3'}
-                    />
-                    {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'}/>*/}
+                    {/*<LazyLoadImage src={image3}*/}
+                    {/*               className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}*/}
+                    {/*               alt={'image3'}*/}
+                    {/*/>*/}
+                    <img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'}/>
                 </div>
                 <div>
                     <h5 className={'text-[1.25rem] pb-5'}>
@@ -30,11 +43,11 @@ const Cards = () => {
 
             <div className={'card2 md1:flex p-2 mb-4 xsm:pb-[30px] md:w-1/3 md:mx-4'}>
                 <div className={'justify-center flex ml-5 mr-4'}>
-                    <LazyLoadImage src={image3}
-                                   className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}
-                                   alt={'image3'}
-                    />
-                    {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />*/}
+                    {/*<LazyLoadImage src={image3}*/}
+                    {/*               className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}*/}
+                    {/*               alt={'image3'}*/}
+                    {/*/>*/}
+                    <img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />
                 </div>
                 <div>
                     <h5 className={'text-[1.25rem] pb-5'}>
@@ -48,11 +61,11 @@ const Cards = () => {
 
             <div className={'card3 md1:flex p-2 mb-4 xsm:pb-[30px] md:w-1/3 md:ml-4'}>
                 <div className={'justify-center flex ml-5 mr-4'}>
-                    <LazyLoadImage src={image3}
-                                   className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}
-                                   alt={'image3'}
-                    />
-                    {/*<img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />*/}
+                    {/*<LazyLoadImage src={image3}*/}
+                    {/*               className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'}*/}
+                    {/*               alt={'image3'}*/}
+                    {/*/>*/}
+                    <img className={'image md1:w-[150px] w-[60px] md1:m-0 mb-3'} src={image3} alt={'image3'} />
                 </div>
                 <div>
                     <h5 className={'text-[1.25rem] pb-5'}>
