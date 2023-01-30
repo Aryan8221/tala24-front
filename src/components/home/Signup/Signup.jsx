@@ -25,7 +25,7 @@ const Signup = () => {
     return (
         <>
             <div className={'flex justify-center items-center h-screen bg-[#000] '}>
-                <div className={'container w-[300px] h-[350px] bg-[#1D1C1C]'}>
+                <div className={'container w-[300px] h-[390px] bg-[#1D1C1C]'}>
                     <div className={'flex justify-center'}>
                         <img src={logo} alt={'logo'} className={'w-[90px] mt-[30px]'}/>
                     </div>
