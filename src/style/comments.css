@@ -22,3 +22,24 @@
 .container {
     /*height: 100%;*/
 }
+
+/*.dot span:nth-child(1):after {*/
+/*    !*content: 'wew';*!*/
+/*}*/
+
+.active-dot {
+    width: 1.5rem !important;
+    height: 0.6rem;
+    margin: 0 0.2rem;
+    background-color: #d0a94d !important;
+    border-radius: 50rem;
+    transition: all 0.5s linear;
+}
+
+.dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin: 0 0.2rem;
+    background-color: white;
+    border-radius: 50rem;
+}
