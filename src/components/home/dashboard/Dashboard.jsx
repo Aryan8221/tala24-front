@@ -25,7 +25,11 @@ const Dashboard = () => {
         <>
             <div className={'flex'} id={'main-container'}>
 
-                <div className={'md1:block hidden'} id={'ham'}>
+                <div className={'hidden'} id={'ham'}>
+                    <Hamburger selected={selected} setSelected={setSelected}/>
+                </div>
+
+                <div className={'hidden md1:block'} id={'ham1'}>
                     <Hamburger selected={selected} setSelected={setSelected}/>
                 </div>
 

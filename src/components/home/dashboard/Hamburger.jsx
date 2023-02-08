@@ -10,10 +10,9 @@ const Hamburger = ({selected, setSelected}) => {
         <div className={'w-[250px] h-screen bg-[#141414] rounded-l-[35px]'}>
             <div className={'flex justify-end text-white pl-4 pt-4 md1:hidden'}>
                 <AiOutlineClose className={'cursor-pointer'} onClick={() => {
-                    document.getElementById('ham').className = 'slide-right absolute top-0'
+                    document.getElementById('ham').className = 'slide-right absolute top-0 block'
+                    // document.getElementById('ham1').className = 'md1:block'
                     document.getElementById('main-container').className = 'flex'
-
-                    // document.getElementById('ham').className = 'hidden'
 
                 }}/>
             </div>
