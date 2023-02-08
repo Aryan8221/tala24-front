@@ -7,18 +7,20 @@ import highlight4 from "../../images/Highlight_04.svg";
 import Footer from "./Footer";
 import HomePageChart from "./chart/HomePageChart";
 import Comments from "./Comments";
+import Dashboard from "./dashboard/Dashboard";
 
 
 const Home = () => {
     return (
         <>
-            <MainNavbar/>
-            <Slider/>
-            <Cards />
-            <Stream />
-            <HomePageChart />
-            <Comments />
-            <Footer />
+            {/*<MainNavbar/>*/}
+            {/*<Slider/>*/}
+            {/*<Cards />*/}
+            {/*<Stream />*/}
+            {/*<HomePageChart />*/}
+            {/*<Comments />*/}
+            {/*<Footer />*/}
+            <Dashboard />
         </>
     )
 }

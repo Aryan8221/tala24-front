@@ -1,0 +1,36 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 20px;
+}
+
+th:nth-child(1) {
+    border-radius: 0 10px 10px 0;
+}
+
+th:nth-last-child(1) {
+    border-radius: 10px 0 0 10px;
+}
+
+th {
+    /*border: 1px solid #dddddd;*/
+    background-color: #2A2A2A;
+    text-align: right;
+}
+
+td {
+    font-size: 15px;
+}
+tr:nth-child(2n+ 3) {
+    /*background-color: #dddddd;*/
+    border-top: 1px solid #dddddd;
+}
+
+.status {
+    background-color: rgba(33, 186, 85, 0.15);
+    width: fit-content;
+    color: #21BA55;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
