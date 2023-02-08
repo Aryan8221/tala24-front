@@ -18,38 +18,38 @@ const Logs = () => {
                         فیلتر
                     </h2>
                 </div>
-                <div className={'flex text-[0.7rem] mt-6 w-2/3 pb-4'} style={{borderBottom: '1px solid #6F6F6F'}}>
-                    <div>
-                        <div className={'mb-2'}>
-                            از تاریخ
+                <div className={'sm:flex justify-center text-[0.7rem] mt-6 pb-4'} style={{borderBottom: '1px solid #6F6F6F'}}>
+                    <div className={'sm:flex'}>
+                        <div className={'mt-2'}>
+                            <div className={'mb-2'}>
+                                از تاریخ
+                            </div>
+                            <div>
+                                <input className={'field bg-[#212121] w-full sm:w-[150px] h-[48px] p-4 text-white'}/>
+                            </div>
                         </div>
-                        <div>
-                            <input className={'field bg-[#212121] w-[150px] rounded-sm h-[48px] p-4 text-white'}/>
-                        </div>
-                    </div>
-                    <div className={'mx-5'}>
-                        <div className={'mb-2'}>
-                            تا تاریخ
-                        </div>
-                        <div>
-                            <select className={'field text-[0.6rem] bg-[#212121] rounded-sm w-[150px] h-[48px] p-4 text-white'} >
-                                <option>
-                                    بانک سامان
-                                </option>
-                            </select>
+                        <div className={'sm:ml-5 sm:mx-5'}>
+                            <div className={'mb-2 mt-4 sm:mt-2'}>
+                                تا تاریخ
+                            </div>
+                            <div>
+                                <input className={'field bg-[#212121] w-full sm:w-[150px] h-[48px] p-4 text-white'}/>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div className={'mt-6'}/>
-                        <button className={'h-[48px] px-10 bg-[#DFAF3D] text-[0.8rem] rounded-lg text-black'}>
-                            جستجو
-                        </button>
+                    <div className={'md:flex'}>
+                        <div className={''}>
+                            <div className={'mt-6'}/>
+                            <button className={'h-[50px] w-full sm:w-[150px] bg-[#DFAF3D] text-[0.9rem] text-black rounded-lg mt-2'}>
+                                جستجو
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div>
+                <div className={'overflow-scroll'}>
                     <h2 className={'my-5'}>
-                        گزارشات
+                        سابقه واریزی ها
                     </h2>
 
                     <table>
