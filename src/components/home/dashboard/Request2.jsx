@@ -55,7 +55,7 @@ const Request2 = () => {
                     </div>
                 </div>
 
-                <div className={'overflow-scroll'}>
+                <div className={'overflow-scroll overflow-y-hidden'}>
                     <h2 className={'my-5'}>
                         سابقه برداشت ها
                     </h2>

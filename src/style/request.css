@@ -34,3 +34,7 @@ tr:nth-child(2n+ 3) {
     padding: 2px 15px;
     border-radius: 20px;
 }
+
+::-webkit-scrollbar{
+    height: 0;
+}
