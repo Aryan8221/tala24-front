@@ -1,0 +1,12 @@
+.container {
+    /*background-color: #d0a94d;*/
+    border-radius: 8px;
+}
+
+.text {
+    border-bottom: 1px solid #6D6D6D;
+}
+
+.field {
+    border: 1px solid #d0a94d;
+}
