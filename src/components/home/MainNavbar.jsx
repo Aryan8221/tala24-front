@@ -3,6 +3,8 @@ import logo from "../../images/lastLogo.png"
 import { useState, useEffect } from "react";
 import {RxEnter} from "react-icons/rx"
 import "../../style/home.css"
+import {Link} from "react-router-dom"
+
 import {
     Navbar,
     MobileNav,
@@ -71,7 +73,7 @@ const MainNavbar = () => {
                     <div className="flex flex-1 flex-wrap items-center justify-end mx-auto">
                         <button className="flex items-center bg-transparent text-sm hover:bg-gold text-white  hover:text-bgGray py-2 px-4 border border-gold hover:border-transparent rounded">
                             <RxEnter fontSize="15px" className="transform rotate-180"/>
-                            <spna className="mr-2" >ورود | ثبت نام</spna>
+                            <Link to="/login"><spna className="mr-2" >ورود | ثبت نام</spna></Link>
                         </button>
                     </div>
                 </div>

@@ -1,11 +1,13 @@
-import logo from "../../../images/logo.svg";
+import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
+import {Link} from "react-router-dom";
 
 const Success = () => {
+
     return (
         <>
-            <div className={'flex justify-center items-center h-screen bg-[#000] '}>
-                <div className={'container w-[300px] h-[350px] bg-[#1D1C1C]'}>
+            <div className={'flex justify-center items-center h-screen'}>
+                <div className={'container w-[300px] h-[350px] bg-[#1b1b1b] shadow-lg'}>
                     <div className={'flex justify-center'}>
                         <img src={logo} alt={'logo'} className={'w-[90px] mt-[30px]'}/>
                     </div>
@@ -18,19 +20,19 @@ const Success = () => {
                     </p>
 
                     <div className={'mx-4 mt-5'}>
-                        <button className={'bg-mainGold w-full rounded h-[45px]'}>
-                            <p className={'text-black'}>
+                        <Link to="/"  className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
+                            <span className={'text-black'}>
                                 بازگشت به صفحه اصلی
-                            </p>
-                        </button>
+                            </span>
+                        </Link>
                     </div>
 
                     <div className={'mx-4 mt-5'}>
-                        <button className={'bg-[#212121] w-full rounded h-[45px]'}>
-                            <p className={'text-white'}>
+                        <Link to="/" className={'flex justify-center items-center bg-[#212121] w-full rounded h-[45px]'}>
+                            <span className={'text-white'}>
                                 تکمیل مشخصات
-                            </p>
-                        </button>
+                            </span>
+                        </Link>
                     </div>
 
                 </div>

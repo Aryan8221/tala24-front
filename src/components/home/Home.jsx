@@ -16,7 +16,6 @@ import Success from "./Signup/Success";
 const Home = () => {
     return (
         <>
-
             <MainNavbar/>
             <Slider/>
             <Cards />
@@ -24,11 +23,6 @@ const Home = () => {
             <HomePageChart />
             <Comments />
             <Footer />
-
-            {/*<SignupOrLogin />*/}
-            {/*<Login />*/}
-            {/*<Signup />*/}
-            {/*<Success />*/}
 
         </>
     )

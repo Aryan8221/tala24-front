@@ -43,3 +43,9 @@
     background-color: white;
     border-radius: 50rem;
 }
+.comments-container{
+    background-color: #101010;
+    background-image: url("../images/cartographer.png");
+    background-position: center center;
+    background-repeat: repeat;
+}

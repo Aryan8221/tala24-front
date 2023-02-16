@@ -1,4 +1,4 @@
-import logo from "../../../images/logo.svg";
+import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
 
 const Login = () => {
@@ -30,10 +30,10 @@ const Login = () => {
                     </button>
 
                     <div className={'mx-4 mt-5'}>
-                        <button className={'bg-mainGold w-full rounded h-[45px]'}>
-                            <p className={'text-black'}>
+                        <button className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
+                            <span className={'text-black'}>
                                 تایید
-                            </p>
+                            </span>
                         </button>
                     </div>
                 </div>
