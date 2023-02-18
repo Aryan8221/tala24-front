@@ -17,6 +17,7 @@ const App = () => {
                     <Route path="/login" element={(<SignupOrLogin/>)}/>
                     <Route path="/OTP-code" element={(<Signup/>)}/>
                     <Route path="/welcome" element={(<Success/>)}/>
+                    <Route path="/dashboard" element={(<Dashboard/>)}/>
                 </Routes>
             </BrowserRouter>
         </>

@@ -3,7 +3,7 @@ import Bazaar from "./Bazaar";
 import Request1 from "./Request1";
 import Logs from "./Logs";
 
-import logo from '../../../images/logo.svg';
+import logo from '../../../images/lastLogo.png';
 import bazaar from '../../../images/bazaar.svg';
 import {AiOutlineStock} from "react-icons/ai";
 import {BiFirstAid} from "react-icons/bi";

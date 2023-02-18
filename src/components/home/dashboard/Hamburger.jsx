@@ -1,4 +1,4 @@
-import logo from "../../../images/logo.svg";
+import logo from "../../../images/lastLogo.png";
 import {AiOutlineClose, AiOutlineStock} from "react-icons/ai";
 import {BiFirstAid} from "react-icons/bi";
 import {TbReportAnalytics} from "react-icons/tb";
