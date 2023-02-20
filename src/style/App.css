@@ -43,4 +43,7 @@ h1{
     height: 1px;
     background: linear-gradient(to left, #ffd700 0, #ffd700 35%, #ffd700 65%, transparent 100%);
 }
+.active{
+   color: #ffd700;
+}
 
