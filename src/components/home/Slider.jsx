@@ -4,6 +4,7 @@ import image1 from "../../images/1744263.jpg"
 import image2 from "../../images/bars-New-York-Assay-Office-US-Mint.webp"
 import image3 from "../../images/GettyImages-1130532216.jpg"
 
+
 const Slider = () => {
 
     const [count, setCount] = useState(0);
@@ -48,8 +49,6 @@ const Slider = () => {
                             <p className={'text-white lg:text-[0.8rem] md:text-[0.6rem] leading-7 font-thin xsm:text-[0.9rem]'}>
                                 اینجا یک متن درباره توضیحات وبسایت قرار میگیرد اینجا
                                 یک متن درباره توضیحات وبسایت قرار میگیرداینجا یک متن درباره توضیحات
-                                وبسایت قرار میگیرداینجا یک متن درباره توضیحات وبسایت قرار میگیرداینجا
-                                یک متن درباره توضیحات وبسایت قرار میگیرداینجا یک متن درباره توضیحات
                                 وبسایت قرار میگیرداینجا یک متن درباره توضیحات وبسایت قرار میگیرد
                             </p>
                         </div>
@@ -60,7 +59,7 @@ const Slider = () => {
                             return (
                                 <img src={item.src}
                                      className={`gradient-box carousel-item carousel-item-${carouselInView[index]}`}
-                                     data-index={`${index + 1}`} loading="lazy"/>
+                                     data-index={`${index + 1}`}/>
                             )
                         })}
                     </div>
@@ -75,10 +74,8 @@ const Slider = () => {
     )
 
     function next() {
-
         let updateCarouselInView = [...carouselInView]
         updateCarouselInView.unshift(updateCarouselInView.pop());
-        console.log(updateCarouselInView)
         setCarouselInView(updateCarouselInView)
 
     }

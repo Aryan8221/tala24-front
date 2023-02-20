@@ -46,8 +46,8 @@ const Chart24 = () => {
             {
                 label: "قیمت طلا",
                 data: UserData.map((i) => i.userGain),
-                backgroundColor: ["#d0a94d"],
-                borderColor: ["#d0a94d"],
+                backgroundColor: ["#FFC800"],
+                borderColor: ["#FFC800"],
                 tension: 0.1,
                 // borderDash: [3],
                 // borderDashOffset: 5

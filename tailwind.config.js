@@ -9,10 +9,10 @@ module.exports = {
         medium: 1000,
       },
       colors: {
-        'gold':'#d0a94d',
+        'gold':'#FFC800',
         'mainGray':'#303030',
         'bgGray':'#252525',
-        'mainGold': '#d0a94d',
+        'mainGold': '#FFC800',
         'dark': 'rgb(23, 26, 30)',
         'cardDark': '#252525',
         'footerColor': '#131212'
