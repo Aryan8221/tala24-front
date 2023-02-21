@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from "../../images/lastLogo.png"
+import logo from "../../../images/lastLogo.png"
 import { useState, useEffect } from "react";
 import {RxEnter} from "react-icons/rx"
-import "../../style/home.css"
+import "../../../style/home.css"
 import {Link, NavLink} from "react-router-dom"
 
 import {

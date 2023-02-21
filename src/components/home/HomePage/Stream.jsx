@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import video1 from '../../videos/videoTest.mp4'
-import highlight5 from '../../images/Highlight_05.svg'
-import highlight4 from '../../images/Highlight_04.svg'
-import '../../style/stream.css'
-import p2 from "../../images/samplePerson2.svg";
+import video1 from '../../../videos/videoTest.mp4'
+import highlight5 from '../../../images/Highlight_05.svg'
+import highlight4 from '../../../images/Highlight_04.svg'
+import '../../../style/stream.css'
+import p2 from "../../../images/samplePerson2.svg";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Stream = () => {

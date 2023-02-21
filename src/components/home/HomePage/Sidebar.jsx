@@ -1,9 +1,9 @@
 
-import logo from "../../images/lastLogo.png";
+import logo from "../../../images/lastLogo.png";
 import {AiOutlineClose, AiOutlineStock} from "react-icons/ai";
 import {BiFirstAid} from "react-icons/bi";
 import {TbReportAnalytics} from "react-icons/tb";
-import '../../style/hamburger.css';
+import '../../../style/hamburger.css';
 import {NavLink} from "react-router-dom";
 import React from "react"
 

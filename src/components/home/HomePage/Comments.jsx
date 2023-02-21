@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import '../../style/comments.css';
-import p1 from '../../images/samplePerson1.svg'
-import p2 from '../../images/samplePerson2.svg'
+import '../../../style/comments.css';
+import p1 from '../../../images/samplePerson1.svg'
+import p2 from '../../../images/samplePerson2.svg'
 import Slider from "react-slick";
 import {GrFormNext,GrFormPrevious} from "react-icons/gr"
 class Comments extends Component {

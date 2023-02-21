@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {GiGoldBar} from "react-icons/gi";
-import '../../style/cards.css'
-import image1 from '../../images/image1.svg'
-import image2 from '../../images/Frame 10.svg'
-import image3 from '../../images/image3.svg'
-import p2 from "../../images/samplePerson2.svg";
+import '../../../style/cards.css'
+import image1 from '../../../images/image1.svg'
+import image2 from '../../../images/Frame 10.svg'
+import image3 from '../../../images/image3.svg'
+import p2 from "../../../images/samplePerson2.svg";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Cards = () => {

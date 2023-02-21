@@ -3,10 +3,10 @@ import {BsTelephone} from 'react-icons/bs'
 import {IoLocationOutline} from 'react-icons/io5'
 import {HiOutlineMail} from 'react-icons/hi'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import etemad1 from '../../images/etemad1.png'
-import etemad2 from '../../images/etemad2.png'
+import etemad1 from '../../../images/etemad1.png'
+import etemad2 from '../../../images/etemad2.png'
 
-import '../../style/footer.css'
+import '../../../style/footer.css'
 
 const Footer = () => {
 
