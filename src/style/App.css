@@ -7,6 +7,7 @@ body{
     direction: rtl;
     font-family: IRANYekan;
     background-color: #1E1E1E;
+    min-height: 100%;
 }
 
 h1{
@@ -43,7 +44,9 @@ h1{
     height: 1px;
     background: linear-gradient(to left, #ffd700 0, #ffd700 35%, #ffd700 65%, transparent 100%);
 }
+
 .active{
    color: #ffd700;
+    background-color: #1E1E1E;
 }
 
