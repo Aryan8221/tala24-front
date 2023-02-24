@@ -10,3 +10,22 @@
 .field {
     border: 1px solid #d0a94d;
 }
+
+.MuiInputBase-root {
+    border: 1px solid #d0a94d !important;
+    height: 45px;
+}
+
+.Mui-focused {
+    border: none !important;
+    height: 45px;
+}
+
+.Mui-error {
+     border: none !important;
+     height: 45px;
+ }
+
+.MuiInputBase-input {
+    color: white !important;
+}

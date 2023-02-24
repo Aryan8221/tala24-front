@@ -91,10 +91,7 @@ class Comments extends Component {
     }
     changeSlide() {
         let { slides, currentSlide } = this.state;
-        //4
         let nextSlide = slides.length - 1 > currentSlide ? currentSlide + 1 : 0;
-        // let nextSlide = currentSlide + 1;
-        console.log('asd' + currentSlide, nextSlide);
 
         this.setState({ isVisible: true, currentSlide: nextSlide });
         const that = this;
@@ -175,7 +172,7 @@ class Comments extends Component {
 
                     {
                         this.state.slides.map((slide, index) => (
-                            <div className={`${currentSlide === index ? "active-dot " : "dot"} mx-1`} onClick={() => this.setState({currentSlide: index})} />
+                            <div key={index} className={`${currentSlide === index ? "active-dot " : "dot"} mx-1`} onClick={() => this.setState({currentSlide: index})} />
                         ))
                     }
 

@@ -1,7 +1,134 @@
 import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
+import {TextField} from "@mui/material";
+import {useContext, useEffect, useState} from "react";
+import * as yup from "yup";
+import {PersianToEnglish} from "../../../helper/PersianToEnglish";
+import LoginApi from "../../../api/LoginApi";
+import {useNavigate} from "react-router-dom";
+import signup from "../../../contexts/signup";
+import api from "../../../api/api";
+import axios from "axios";
 
 const Login = () => {
+    const info = useContext(signup)
+
+    const [errors, setErrors] = useState([])
+    const [password, setPassword] = useState("")
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (info.passwordAllowed === false) {
+            navigate("/")
+        }
+    }, [])
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    const validation = async () => {
+        const schema = yup.object().shape({
+            password: yup.string().required("لطفا رمز خود را وارد کنید.")
+        })
+        try {
+            return await schema.validate({password})
+        } catch (error) {
+            setErrors(error.errors)
+        }
+    }
+
+    const handleInput = (value) => {
+        setPassword(value.target.value)
+    }
+
+    const handleSubmit = async () => {
+
+        const result = await validation()
+        if (result !== undefined) {
+            setErrors([])
+            localStorage.setItem("password", password)
+            const res = await LoginApi()
+
+            console.log(123)
+            console.log(res)
+
+            if (res.status === 403) {
+                setErrors(["رمز عبور اشتباه است."])
+            } else if (res.status === 200) {
+                // info.setDashboardAllowed(true)
+                const res = await api.get(`account/user/${localStorage.getItem("username")}`)
+
+                console.log(444)
+                console.log(res)
+
+                localStorage.setItem("id", res.id)
+
+                if (res.verified === false) {
+
+                    // await api.post("info", {
+                    //     accountId: res.id,
+                    //     value: localStorage.getItem("username"),
+                    //     infoType: "phoneNumber"
+                    // })
+
+                    // document.cookie = "XSRF-TOKEN= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+
+                    const res1 = await axios.post("http://localhost:8090/api/v1/info", { // bug not fixed
+                        accountId: res.id,
+                        value: localStorage.getItem("username"),
+                        infoType: "phoneNumber"
+                    }, {
+                        headers: {
+                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                            'Authorization': localStorage.getItem("Authorization"),
+                        }
+                    }).catch((errors) => {
+                        console.log(errors)
+                    })
+
+                    console.log(12333333)
+
+                    const res2 = await axios.post("http://localhost:8090/api/v1/info", {
+                        accountId: res.id,
+                        value: localStorage.getItem("username"),
+                        infoType: "phoneNumber"
+                    }, {
+                        headers: {
+                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                            'Authorization': localStorage.getItem("Authorization"),
+                        }
+                    }).catch((errors) => {
+                        console.log(errors)
+                    })
+
+                    // console.log(res1)
+
+                    navigate("/accountCompleteRegistration")
+                } else {
+                    navigate("/dashboard")
+                }
+
+                // const res2 = await api.post(`account/${res1.id}`)
+
+                // console.log(res2)
+            }
+            // console.log(res.response.status);
+        }
+    }
+
     return (
         <>
             <div className={'flex justify-center items-center h-screen bg-[#000] '}>
@@ -16,21 +143,31 @@ const Login = () => {
                         رمز عبور را وارد کنید
                     </p>
 
-                    <div className={'flex justify-center mx-4 mt-4'}>
-                        <input
+                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                        <TextField
+                            error={errors.length !== 0}
+                            value={password}
                             type={"password"}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
+                            onChange={(value) => handleInput(value)}
                         />
+                        {
+                            errors.map((error, index) =>
+                                <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
+                            )
+                        }
                     </div>
 
-                    <button className={'text-white text-[9px] mx-4'}>
+                    <button className={'text-white text-[9px] mx-4'} onClick={() => {
+                        navigate("/forgot-password")
+                    }}>
                         <small>
-                            دریافت رمز یکبار مصرف
+                            فراموشی رمز عبور
                         </small>
                     </button>
 
                     <div className={'mx-4 mt-5'}>
-                        <button className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
+                        <button className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'} onClick={() => handleSubmit()}>
                             <span className={'text-black'}>
                                 تایید
                             </span>

@@ -1,13 +1,26 @@
 import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Countdown from "react-countdown";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import OTPInput from "../../OTPInput";
+import api from "../../../api/api";
+import RegisterApi from "../../../api/RegisterApi";
+import signup from "../../../contexts/signup";
 
 const Signup = () => {
+    const info = useContext(signup)
+
     const [mobileNumber, setMobileNumber] = useState('۰۹۱۲۳۴۵۶۷۸۹');
     const [timer, setTimer] = useState('');
 
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (info.OTPAllowed === false) {
+            navigate("/")
+        }
+    }, [])
 
     const renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
@@ -23,6 +36,17 @@ const Signup = () => {
         }
     };
 
+    const checkOTP = async (code) => {
+
+        const res = await RegisterApi.post("checkOTP", {
+            phoneNumber: info.newUserPhoneNumber,
+            otp: code
+        })
+        if (true) {
+            info.setCreatePassAllowed(true)
+            navigate("/create-password")
+        }
+    }
     return (
         <>
             <div className={'flex justify-center items-center h-screen'}>
@@ -43,11 +67,8 @@ const Signup = () => {
                         حساب کاربری با شماره موبایل {mobileNumber} وجود ندارد. برای ساخت حساب جدید کد تایید برای این شماره ارسال گردید.
                     </p>
 
-                    <div className={'flex justify-center mx-4 mt-4'}>
-                        <input
-                            type={"password"}
-                            className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
-                        />
+                    <div className={'flex justify-center mx-4 mt-4 w-100'}>
+                        <OTPInput handleCheckOTP={checkOTP}/>
                     </div>
 
                     <p className={'text-[9px] mx-4 text-[#6D6D6D] mt-3 text-center'}>
@@ -60,7 +81,7 @@ const Signup = () => {
                     </p>
                     
                     <div className={'mx-4 mt-5'}>
-                        <Link to="/welcome" className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
+                        <Link to="/create-password" className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
                             <span className={'text-black'}>
                                 ادامه
                             </span>

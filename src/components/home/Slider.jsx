@@ -58,7 +58,7 @@ const Slider = () => {
                     <div className="carousel-container" ref={carouselContainer}>
                         {carouselData.map((item, index) => {
                             return (
-                                <img src={item.src}
+                                <img key={index} src={item.src}
                                      className={`gradient-box carousel-item carousel-item-${carouselInView[index]}`}
                                      data-index={`${index + 1}`} loading="lazy"/>
                             )
@@ -78,9 +78,7 @@ const Slider = () => {
 
         let updateCarouselInView = [...carouselInView]
         updateCarouselInView.unshift(updateCarouselInView.pop());
-        console.log(updateCarouselInView)
         setCarouselInView(updateCarouselInView)
-
     }
 }
 export default Slider;

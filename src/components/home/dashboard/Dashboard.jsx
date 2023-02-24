@@ -1,7 +1,8 @@
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Bazaar from "./Bazaar";
 import Request1 from "./Request1";
 import Logs from "./Logs";
+import BuyGold from './BuyGold/BuyGold'
 
 import logo from '../../../images/lastLogo.png';
 import bazaar from '../../../images/bazaar.svg';
@@ -13,13 +14,39 @@ import {FcPlus} from "react-icons/fc";
 import Request2 from "./Request2";
 import {RxHamburgerMenu} from "react-icons/rx";
 import Hamburger from "./Hamburger";
+import { Outlet } from "react-router-dom";
 
 import '../../../style/hamburger.css'
+import signup from "../../../contexts/signup";
+import {useNavigate} from "react-router-dom";
+import LoginApi from "../../../api/LoginApi";
+import axios from "axios";
 
 
 const Dashboard = () => {
+    const info = useContext(signup)
 
     const [selected, setSelected] = useState('bazaar');
+
+    const navigate = useNavigate()
+
+    useEffect( () => {
+        axios.post("http://localhost:8090/login",
+            {username: localStorage.getItem("username"), password: localStorage.getItem("password")}, {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Headers': ['Set-Cookie', 'Content-Type', "x-xsrf-token"],
+                }
+            }
+        ).then((response) => {
+            localStorage.setItem("Authorization", response.headers["authorization"])
+        }).catch((error) => {
+            navigate("/")
+        })
+
+
+
+    }, [])
 
     return (
         <>
@@ -69,13 +96,7 @@ const Dashboard = () => {
                             </p>
                         </div>
                     </div>
-                    {
-                        selected === "bazaar"
-                            ? <Bazaar />
-                            : selected === 'request'
-                            ? <Request2 />
-                            : <Logs />
-                    }
+                    <Outlet />
                 </div>
 
             </div>

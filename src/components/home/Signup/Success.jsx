@@ -1,8 +1,20 @@
 import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import signup from "../../../contexts/signup";
 
 const Success = () => {
+
+    const info = useContext(signup)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (info.successAllowed === false) {
+            navigate("/")
+        }
+    }, [])
 
     return (
         <>

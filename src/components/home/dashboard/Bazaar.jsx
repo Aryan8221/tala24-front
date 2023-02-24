@@ -1,8 +1,6 @@
 import '../../../style/chart.css'
-import person from '../../../images/person.svg'
-import goldPrice from '../../../images/goldPriceChart.png'
-import {Line, Bar} from "react-chartjs-2";
-import {useEffect, useState} from "react";
+import {Line} from "react-chartjs-2";
+import {useState} from "react";
 
 const Bazaar = () => {
 
