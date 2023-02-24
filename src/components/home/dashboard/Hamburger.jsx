@@ -1,10 +1,9 @@
-import logo from "../../../images/lastLogo.png";
+import logo from "../../../images/lastLogo.png"
 import {AiOutlineClose, AiOutlineStock} from "react-icons/ai";
 import {BiFirstAid} from "react-icons/bi";
 import {TbReportAnalytics} from "react-icons/tb";
 import {Link} from "react-router-dom"
 import '../../../style/hamburger.css';
-
 
 const Hamburger = ({selected, setSelected}) => {
     return (
@@ -12,9 +11,7 @@ const Hamburger = ({selected, setSelected}) => {
             <div className={'flex justify-end text-white pl-4 pt-4 md1:hidden'}>
                 <AiOutlineClose className={'cursor-pointer'} onClick={() => {
                     document.getElementById('ham').className = 'slide-right absolute top-0 block'
-                    // document.getElementById('ham1').className = 'md1:block'
                     document.getElementById('main-container').className = 'flex'
-
                 }}/>
             </div>
 

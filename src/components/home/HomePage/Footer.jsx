@@ -3,10 +3,10 @@ import {BsTelephone} from 'react-icons/bs'
 import {IoLocationOutline} from 'react-icons/io5'
 import {HiOutlineMail} from 'react-icons/hi'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import etemad1 from '../../images/etemad1.png'
-import etemad2 from '../../images/etemad2.png'
+import etemad1 from '../../../images/etemad1.png'
+import etemad2 from '../../../images/etemad2.png'
 
-import '../../style/footer.css'
+import '../../../style/footer.css'
 
 const Footer = () => {
 
@@ -33,7 +33,7 @@ const Footer = () => {
 
                 <div className={'md:flex md:items-center text-right md:mx-5 xsm:mx-3 xsm:mb-2 py-6 md:py-0'}>
                     <div>
-                        <h2 className={'text-sm mb-3'}>
+                        <h2 className={'footer-title text-sm mb-3'}>
                             درباره ما
                         </h2>
                         <p className={'text-xs leading-5'}>
@@ -50,7 +50,7 @@ const Footer = () => {
 
                 <div className={'whitespace-nowrap xsm:mb-3 md:flex md:items-center md:mx-5 xsm:mx-3'}>
                     <div>
-                        <h2 className={'text-sm md:mb-3 xsm:mb-5'}>
+                        <h2 className={'footer-title text-sm md:mb-3 xsm:mb-5'}>
                             ارتباط با ما
                         </h2>
                         <div className={'text-xs md:leading-8'}>
@@ -79,7 +79,7 @@ const Footer = () => {
 
                 <div className={'whitespace-nowrap  md:flex md:items-center xsm:mx-3'}>
                     <div>
-                        <h2 className={'text-sm mb-3'}>
+                        <h2 className={'footer-title text-sm mb-3'}>
                             لینک های مفید
                         </h2>
                         <div className={'text-xs md:leading-8 xsm:leading-8'}>

@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from "../../images/lastLogo.png"
+import logo from "../../../images/lastLogo.png"
 import { useState, useEffect } from "react";
 import {RxEnter} from "react-icons/rx"
-import "../../style/home.css"
-import {Link} from "react-router-dom"
+import "../../../style/home.css"
+import {Link, NavLink} from "react-router-dom"
 
 import {
     Navbar,
@@ -12,24 +12,28 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
+import Sidebar from "./Sidebar";
 
 const MainNavbar = () => {
 
-    const [openNav, setOpenNav] = useState(false);
+    const [isOpenNav, setIsOpenNav] = useState(false);
 
     useEffect(() => {
-        window.addEventListener(
-            "resize",
-            () => window.innerWidth >= 960 && setOpenNav(false)
-        );
     }, []);
 
+    function toggleNavbar(){
+        if(isOpenNav){
+            setIsOpenNav(false);
+        }else{
+            setIsOpenNav(true);
+        }
+    }
     return (
         <div className="mb-7">
             <nav className="border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900" style={{backgroundColor:"transparent"}}>
                 <div className="container  flex flex-1 flex-wrap justify-between">
                     <div className="flex flex-wrap items-center justify-start mx-auto">
-                        <button data-collapse-toggle="navbar-default" type="button"
+                        <button onClick={()=>{toggleNavbar()}} data-collapse-toggle="navbar-default" type="button"
                                 className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                 aria-controls="navbar-default" aria-expanded="false">
                             <span className="sr-only">Open main menu</span>
@@ -44,28 +48,27 @@ const MainNavbar = () => {
                             <img src={logo} className="h-6 mr-3 sm:h-9"
                                  alt="Tala24"/>
                         </a>
-
                         <div className="hidden mr-8 w-full md:block md:w-auto" id="navbar-default">
-                            <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-transparent md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700" style={{backgroundColor:"transparent"}}>
+                            <ul className="flex flex-col items-center p-4 mt-4 border border-gray-100 rounded-lg bg-transparent md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent" style={{backgroundColor:"transparent"}}>
                                 <li>
-                                    <a href="#"
-                                       className="block ml-7 py-2 pl-3 pr-4 text-white hover:text-gold rounded  md:active:text-gold md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">خانه</a>
+                                    <NavLink to="/" activeClassName="active"
+                                       className="block ml-7 py-2 pl-3 pr-4 text-white hover:text-gold font-light">خانه</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-white rounded hover:text-gold md:hover:bg-transparent md:hover:text-gold md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">خدمات</a>
+                                    <NavLink to="/services" activeClassName="active"
+                                       className="block py-2 pl-3 pr-4 text-white rounded  md:border-0 md:p-0 hover:text-gold font-light ">خدمات</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-white  rounded hover:text-gold md:hover:bg-transparent md:hover:text-gold md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">درباره ما</a>
+                                    <NavLink to="/about-us" activeClassName="active"
+                                       className="block py-2 pl-3 pr-4 text-white rounded  md:border-0 md:p-0 hover:text-gold font-light ">درباره ما</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-white rounded hover:text-gold md:hover:bg-transparent md:hover:text-gold md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">تماس با ما</a>
+                                    <NavLink to="/contact-us" activeClassName="active"
+                                       className="block py-2 pl-3 pr-4 text-white rounded  md:border-0 md:p-0 hover:text-gold font-light ">تماس با ما</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-white rounded hover:text-gold md:hover:bg-transparent md:hover:text-gold md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"> ورود به سامانه</a>
+                                    <NavLink to="/login" activeClassName="active"
+                                       className="block py-2 pl-3 pr-4 text-white rounded  md:border-0 md:p-0 hover:text-gold font-light "> ورود به سامانه</NavLink>
                                 </li>
                             </ul>
                         </div>
@@ -78,6 +81,9 @@ const MainNavbar = () => {
                     </div>
                 </div>
             </nav>
+            {isOpenNav && (
+                <Sidebar isOpenNav={isOpenNav} toggleNavbar={()=>toggleNavbar()}/>
+            )}
         </div>
     )
 }
