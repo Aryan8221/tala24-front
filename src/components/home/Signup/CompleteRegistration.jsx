@@ -40,7 +40,7 @@ const CompleteRegistration = () => {
             lastName: yup.string().required("این فیلد الزامی است.")
         })
         const nationalCodeSchema = yup.object().shape({
-            nationalCode: yup.string().required("این فیلد الزامی است.").min(10, "کد ملی باید ۱۰ رقم باشد.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
+            nationalCode: yup.string().required("این فیلد الزامی است.").length(10, "کد ملی باید ۱۰ رقم باشد.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
         })
         const accountNumberSchema = yup.object().shape({
             accountNumber: yup.string().required("این فیلد الزامی است.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
