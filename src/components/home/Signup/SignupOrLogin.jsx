@@ -41,24 +41,17 @@ const SignupOrLogin = () => {
         if (result !== undefined) {
             setErrors([])
 
-            await axios.post("http://localhost:8090/login",
-                {username: "asd", password: "asd"}, {
-                    withCredentials: true,
-                    headers: {
-                        'Access-Control-Allow-Headers': ['Set-Cookie', 'Content-Type', "x-xsrf-token"],
-                    }
-                }
-            ).then((response) => {}).catch((error) => {})
-
             const res = await RegisterApi.post("init", {
                 phoneNumber: number
             })
 
-            if (res.status === "newUser") {
+            console.log(res)
+
+            if (res?.data.status === "newUser") {
                 info.setOTPAllowed(true)
                 info.setNewUserPhoneNumber(number)
                 navigate("/OTP-code")
-            } else if (res.status === "exist") {
+            } else if (res?.data.status === "exist") {
                 info.setPasswordAllowed(true)
                 localStorage.setItem("username", number)
                 navigate("/password")

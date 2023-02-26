@@ -5,11 +5,11 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import {FormLabel, TextField} from "@mui/material";
 
-function StepPayment() {
-    const [value, setValue] = React.useState('cash');
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
+function StepPayment(props) {
+    // const [value, setValue] = React.useState('cash');
+    // const handleChange = (event) => {
+    //     setValue(event.target.value);
+    // };
     return (
         <>
             <h2 className="text-white text-xl font-medium mb-6">
@@ -20,10 +20,10 @@ function StepPayment() {
                     <FormControl>
                         <FormLabel className='mb-3' id="demo-radio-buttons-group-label">انتخاب روش پرداخت:</FormLabel>
                         <RadioGroup
-                            aria-labelledby="demo-controlled-radio-buttons-group"
+                            // aria-labelledby="demo-controlled-radio-buttons-group"
                             name="controlled-radio-buttons-group"
-                            value={value}
-                            onChange={handleChange}
+                            value={props.value}
+                            onChange={props.handleChange}
                             className='mr-3'
                         >
                             <FormControlLabel value="cash" control={<Radio/>} label="پرداخت اینترنتی"/>
@@ -35,16 +35,16 @@ function StepPayment() {
                     <div className='mb-2 text-md text-white'>اطلاعات تکمیلی:</div>
                     <div className="flex flex-row justify-between">
                         <div>قیمت طلا</div>
-                        <div>257588125 ریال</div>
+                        <div>{props.valuePrice.numberformat} ریال</div>
                     </div>
                     <div className="flex flex-row justify-between">
                         <div>هزینه ارسال</div>
-                        <div>257588125 ریال</div>
+                        <div>{props.valuePrice.numberformat} ریال</div>
                     </div>
                     <div className="border border-sky-50 border-solid my-2"></div>
                     <div className="flex flex-row justify-between">
                         <div>قابل پرداخت</div>
-                        <div>257588125 ریال</div>
+                        <div>{props.valuePrice.numberformat} ریال</div>
                     </div>
                 </div>
             </div>

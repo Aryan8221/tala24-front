@@ -46,8 +46,8 @@ const Chart24 = () => {
             {
                 label: "قیمت طلا",
                 data: UserData.map((i) => i.userGain),
-                backgroundColor: ["#FFC800"],
-                borderColor: ["#FFC800"],
+                backgroundColor: ["#d0a94d"],
+                borderColor: ["#d0a94d"],
                 tension: 0.1,
                 // borderDash: [3],
                 // borderDashOffset: 5
@@ -63,35 +63,37 @@ const Chart24 = () => {
             <div className={'details-container w-100 md2:flex pb-[50px] md2:p-0'}>
                 <div className={'md2:w-2/5 md2:justify-start md1:w-5/12 w-100 whitespace-nowrap flex justify-center'}>
                     <div className={'mr-5 mt-[60px] mb-[40px]'}>
+
                         <h2 className={'mb-5 text-center'}>
                             مشاهده قیمت طلا به صورت آنلاین
                         </h2>
                         <div className={''}>
                             <div className={'flex float-right'}>
+
                                 <div className={''}>
-                                    <div className={'details text-[0.62rem] p-2 pl-[4rem] leading-5'}>
+                                    <div className={'details text-[0.62rem] p-2 pl-[50px] leading-5'}>
                                         <p>مظنه خرید</p>
                                         <p className={'text-mainGold'}> 19,271,425 ریال</p>
                                     </div>
 
-                                    <div className={'details text-[0.62rem] p-2 pl-[4rem] leading-5'}>
+                                    <div className={'details text-[0.62rem] p-2 pl-[50px] leading-5'}>
                                         <p>ساعت اخیر</p>
                                         <p className={'text-mainGold'}>۰.۵٪ +</p>
                                     </div>
 
-                                    <button className={'register m-2.5 px-7 py-3 flex text-black hidden md2:flex'}>
+                                    <button className={'register m-2.5 px-6 py-3 flex text-black hidden md2:flex'}>
                                         <img src={person} alt={'person'} className={'ml-2'}/>
                                         ثبت نام
                                     </button>
                                 </div>
 
                                 <div className={''}>
-                                    <div className={'details text-[0.62rem] p-2 pl-[4rem] leading-5'}>
+                                    <div className={'details text-[0.62rem] p-2 pl-[50px] leading-5'}>
                                         <p>مظنه فروش</p>
                                         <p className={'text-mainGold'}> 19,271,425 ریال</p>
                                     </div>
 
-                                    <div className={'details text-[0.62rem] p-2 pl-[4rem] leading-5'}>
+                                    <div className={'details text-[0.62rem] p-2 pl-[50px] leading-5'}>
                                         <p>هفته اخیر</p>
                                         <p className={'text-mainGold'}>۰.۵٪ +</p>
                                     </div>
@@ -120,7 +122,9 @@ const Chart24 = () => {
                                 5.987,34
                             </p>
                         </div>
+
                         <Line className={'md1:p-0 mb-12'} data={userData} type={'line'}/>
+
                     </div>
                 </div>
 

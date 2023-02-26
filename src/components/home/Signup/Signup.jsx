@@ -13,6 +13,8 @@ const Signup = () => {
 
     const [mobileNumber, setMobileNumber] = useState('۰۹۱۲۳۴۵۶۷۸۹');
     const [timer, setTimer] = useState('');
+    const [OTPError, setOTPError] = useState(false)
+    const [OTPCode, setOTPCode] = useState("")
 
     const navigate = useNavigate()
 
@@ -37,14 +39,19 @@ const Signup = () => {
     };
 
     const checkOTP = async (code) => {
+        setOTPError(false)
 
         const res = await RegisterApi.post("checkOTP", {
             phoneNumber: info.newUserPhoneNumber,
             otp: code
         })
-        if (true) {
+
+        console.log(res)
+        if (res.status !== 406) {
             info.setCreatePassAllowed(true)
             navigate("/create-password")
+        } else {
+            setOTPError(true)
         }
     }
     return (
@@ -68,8 +75,14 @@ const Signup = () => {
                     </p>
 
                     <div className={'flex justify-center mx-4 mt-4 w-100'}>
-                        <OTPInput handleCheckOTP={checkOTP}/>
+                        <OTPInput handleCheckOTP={checkOTP} handleSetOTP={setOTPCode}/>
                     </div>
+
+                    <small className={"text-red-600 mt-1 text-[0.6rem] mx-4 -mt-2"}
+                           style={{display: OTPError === true ? "block" : "none"}}
+                    >
+                        کد اشتباه است!
+                    </small>
 
                     <p className={'text-[9px] mx-4 text-[#6D6D6D] mt-3 text-center'}>
 
@@ -81,11 +94,11 @@ const Signup = () => {
                     </p>
                     
                     <div className={'mx-4 mt-5'}>
-                        <Link to="/create-password" className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
+                        <button onClick={() => checkOTP(OTPCode)} className={'flex justify-center items-center bg-mainGold w-full rounded h-[45px]'}>
                             <span className={'text-black'}>
                                 ادامه
                             </span>
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

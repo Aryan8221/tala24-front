@@ -21,6 +21,7 @@ import signup from "../../../contexts/signup";
 import {useNavigate} from "react-router-dom";
 import LoginApi from "../../../api/LoginApi";
 import axios from "axios";
+import api from "../../../api/api";
 
 
 const Dashboard = () => {
@@ -44,6 +45,16 @@ const Dashboard = () => {
             navigate("/")
         })
 
+        async function test(){
+            const res = await api.get(`account/user/${localStorage.getItem("username")}`)
+            localStorage.setItem("id", res.id)
+            info.setInformation(res.infos)
+            console.log(res)
+        }
+
+        test()
+
+
 
 
     }, [])
@@ -51,10 +62,6 @@ const Dashboard = () => {
     return (
         <>
             <div className={'flex'} id={'main-container'}>
-
-                <div className={'hidden'} id={'ham'}>
-                    <Hamburger selected={selected} setSelected={setSelected}/>
-                </div>
 
                 <div className={'hidden md1:block'} id={'ham1'}>
                     <Hamburger selected={selected} setSelected={setSelected}/>
@@ -97,6 +104,10 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <Outlet />
+                </div>
+
+                <div className={'hidden'} id={'ham'}>
+                    <Hamburger selected={selected} setSelected={setSelected}/>
                 </div>
 
             </div>

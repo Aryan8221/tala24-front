@@ -69,63 +69,8 @@ const Login = () => {
                 setErrors(["رمز عبور اشتباه است."])
             } else if (res.status === 200) {
                 // info.setDashboardAllowed(true)
-                const res = await api.get(`account/user/${localStorage.getItem("username")}`)
-
-                console.log(444)
-                console.log(res)
-
-                localStorage.setItem("id", res.id)
-
-                if (res.verified === false) {
-
-                    // await api.post("info", {
-                    //     accountId: res.id,
-                    //     value: localStorage.getItem("username"),
-                    //     infoType: "phoneNumber"
-                    // })
-
-                    // document.cookie = "XSRF-TOKEN= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
-
-                    const res1 = await axios.post("http://localhost:8090/api/v1/info", { // bug not fixed
-                        accountId: res.id,
-                        value: localStorage.getItem("username"),
-                        infoType: "phoneNumber"
-                    }, {
-                        headers: {
-                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                            'Authorization': localStorage.getItem("Authorization"),
-                        }
-                    }).catch((errors) => {
-                        console.log(errors)
-                    })
-
-                    console.log(12333333)
-
-                    const res2 = await axios.post("http://localhost:8090/api/v1/info", {
-                        accountId: res.id,
-                        value: localStorage.getItem("username"),
-                        infoType: "phoneNumber"
-                    }, {
-                        headers: {
-                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                            'Authorization': localStorage.getItem("Authorization"),
-                        }
-                    }).catch((errors) => {
-                        console.log(errors)
-                    })
-
-                    // console.log(res1)
-
-                    navigate("/accountCompleteRegistration")
-                } else {
-                    navigate("/dashboard")
-                }
-
-                // const res2 = await api.post(`account/${res1.id}`)
-
-                // console.log(res2)
+                navigate("/dashboard")
             }
-            // console.log(res.response.status);
         }
     }
 

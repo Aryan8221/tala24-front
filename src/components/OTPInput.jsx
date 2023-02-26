@@ -47,6 +47,7 @@ const OTPInput = (props) => {
             } else {
                 setLengthError("")
                 props.handleCheckOTP(OtpCode)
+                props.handleSetOTP(OtpCode)
                 return;
             }
         }

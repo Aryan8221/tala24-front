@@ -28,6 +28,16 @@ const CompleteRegistration = () => {
     const [accountNumberErrors, setAccountNumberErrors] = useState([]);
     const [emailErrors, setEmailErrors] = useState([]);
     const [postalCodeErrors, setPostalCodeErrors] = useState([]);
+
+    const [firstNameAllowed, setFirstNameAllowed] = useState(true);
+    const [lastNameAllowed, setLastNameAllowed] = useState(true);
+    const [nationalCodeAllowed, setNationalCodeAllowed] = useState(true);
+    const [accountNumberAllowed, setAccountNumberAllowed] = useState(true);
+    const [emailAllowed, setEmailAllowed] = useState(true);
+    const [postalCodeAllowed, setPostalCodeAllowed] = useState(true);
+    const [addressAllowed, setAddressAllowed] = useState(true);
+    const [fatherNameAllowed, setFatherNameAllowed] = useState(true);
+
     const info = useContext(signup)
 
     const navigate = useNavigate()
@@ -40,7 +50,7 @@ const CompleteRegistration = () => {
             lastName: yup.string().required("این فیلد الزامی است.")
         })
         const nationalCodeSchema = yup.object().shape({
-            nationalCode: yup.string().required("این فیلد الزامی است.").length(10, "کد ملی باید ۱۰ رقم باشد.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
+            nationalCode: yup.string().required("این فیلد الزامی است.").min(10, "کد ملی باید ۱۰ رقم باشد.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
         })
         const accountNumberSchema = yup.object().shape({
             accountNumber: yup.string().required("این فیلد الزامی است.").matches(/^[0-9]*$/, "لطفا عدد وارد کنید.")
@@ -97,11 +107,111 @@ const CompleteRegistration = () => {
         return field1 && field2 && field3 && field4 && field5 && field6
     }
 
+
     useEffect(() => {
         if (info.accountCompleteRegistrationAllowed === false) {
             navigate("/")
         }
-    }, [])
+
+        console.log(442)
+        console.log(info.information)
+
+        info.information.map((info) => {
+            switch (info.infoType) {
+                case "accountNumber":
+                    console.log(1)
+                    setAccountNumber(info.value)
+                    setAccountNumberAllowed(false)
+                    break;
+                case "firstName":
+                    console.log(2)
+                    setFirstName(info.value)
+                    setFirstNameAllowed(false)
+                    break;
+                case "lastName":
+                    console.log(3)
+                    setLastName(info.value)
+                    setLastNameAllowed(false)
+                    break;
+                case "nationalCode":
+                    console.log(4)
+                    setNationalCode(info.value)
+                    setNationalCodeAllowed(false)
+                    break;
+                case "email":
+                    console.log(5)
+                    setEmail(info.value)
+                    setEmailAllowed(false)
+                    break;
+                case "postalCode":
+                    console.log(6)
+                    setPostalCode(info.value)
+                    setPostalCodeAllowed(false)
+                    break;
+                case "address":
+                    console.log(7)
+                    setAddress(info.value)
+                    setAddressAllowed(false)
+                    break;
+                case "fatherName":
+                    console.log(8)
+                    setFatherName(info.value)
+                    setFatherNameAllowed(false)
+                    break;
+            }
+        })
+
+    }, [info.information])
+
+    const postInfos = async () => {
+        firstNameAllowed ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: firstName,
+            infoType: "firstName"
+        }) : await console.log()
+
+        lastNameAllowed ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: lastName,
+            infoType: "lastName"
+        }) : await console.log()
+
+        nationalCodeAllowed ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: nationalCode,
+            infoType: "nationalCode"
+        }) : await console.log()
+
+        accountNumberAllowed ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: accountNumber,
+            infoType: "accountNumber"
+        }) : await console.log()
+
+        emailAllowed && email !== "" ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: email,
+            infoType: "email"
+        }) : await console.log()
+
+        postalCodeAllowed && postalCode !== "" ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: postalCode,
+            infoType: "postalCode"
+        }) : await console.log()
+
+        addressAllowed && address !== "" ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: address,
+            infoType: "address"
+        }) : await console.log()
+
+        fatherNameAllowed && fatherName !== "" ? await api.post("info", {
+            accountId: localStorage.getItem("id"),
+            value: fatherName,
+            infoType: "fatherName"
+        }) : await console.log()
+    }
 
     const handleInputs = async () => {
         // if (valid)
@@ -112,91 +222,72 @@ const CompleteRegistration = () => {
         setEmailErrors([])
         setPostalCodeErrors([])
         const valid = await validation()
-        console.log(valid)
-        const res = await api.get("info")
 
+        if (valid) {
+            await postInfos()
+        }
 
-        // api.post("info/bulkSave", [
-        //     {
-        //         accountId: localStorage.getItem("id"),
-        //         value: phoneNumber,
-        //         infoType: "phoneNumber"
-        //     },
-        //     {
-        //         accountId: localStorage.getItem("id"),
-        //         value: firstName,
-        //         infoType: "firstName"
-        //     },
-        //     {
-        //         accountId: localStorage.getItem("id"),
-        //         value: lastName,
-        //         infoType: "lastName"
-        //     },
-        //     {
-        //         accountId: localStorage.getItem("id"),
-        //         value: accountNumber,
-        //         infoType: "accountNumber"
-        //     },
-        // ])
+        await new Promise(r => setTimeout(r, 3000));
+
+        const res = await api.get(`account/user/${localStorage.getItem("username")}`)
+
+        localStorage.setItem("id", res.id)
+        await info.setInformation(res.infos)
+
     }
 
     return (
         <>
             <div className={'flex justify-center'}>
-                <div className={'container w-[300px] pb-4 bg-[#1b1b1b]'}>
-                    <div className={'flex justify-center'}>
-                        <img src={logo} alt={'logo'} className={'w-[90px] mt-[30px]'}/>
-                    </div>
-
-
-                    <button onClick={()=>console.log(document.cookie)}>
-                        asd
-                    </button>
-
-                    <p className={'text text-center text-white mt-4 pb-4 mx-4'}>
-                        مطمئن ترین راه برای نگهداری <span className={'text-mainGold'}>طلا</span> شما
-                    </p>
+                <div className={'container w-100 pb-4 bg-[#1b1b1b]'}>
 
                     <p className={'text-[1rem] text-center mx-4 text-white mt-3'}>
                         تکمیل مشخصات
                     </p>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
-                        <TextField
-                            placeholder={"نام*"}
-                            // error={errors.length !== 0}
-                            value={firstName}
-                            type={"text"}
-                            className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        {
-                            firstNameErrors.map((error, index) =>
-                                <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
-                            )
-                        }
+                    <div className={'flex w-100'}>
+
+                        <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
+                            <TextField
+                                placeholder={"نام*"}
+                                // error={errors.length !== 0}
+                                disabled={!firstNameAllowed}
+                                value={firstName}
+                                type={"text"}
+                                className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            {
+                                firstNameErrors.map((error, index) =>
+                                    <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
+                                )
+                            }
+                        </div>
+
+                        <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
+                            <TextField
+                                placeholder={"نام خانوادگی*"}
+                                // error={errors.length !== 0}
+                                disabled={!lastNameAllowed}
+                                value={lastName}
+                                type={"text"}
+                                className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                            {
+                                lastNameErrors.map((error, index) =>
+                                    <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
+                                )
+                            }
+                        </div>
                     </div>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
-                        <TextField
-                            placeholder={"نام خانوادگی*"}
-                            // error={errors.length !== 0}
-                            value={lastName}
-                            type={"text"}
-                            className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                        {
-                            lastNameErrors.map((error, index) =>
-                                <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
-                            )
-                        }
-                    </div>
-
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex w-100'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"کد ملی*"}
                             // error={errors.length !== 0}
+                            disabled={!nationalCodeAllowed}
                             value={EnglishToPersian(nationalCode)}
                             type={"text"}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
@@ -209,10 +300,11 @@ const CompleteRegistration = () => {
                         }
                     </div>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"شماره شبا*"}
                             // error={errors.length !== 0}
+                            disabled={!accountNumberAllowed}
                             value={EnglishToPersian(accountNumber)}
                             type={"text"}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
@@ -224,9 +316,10 @@ const CompleteRegistration = () => {
                             )
                         }
                     </div>
+                    </div>
 
-
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex w-100'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"ایمیل"}
                             // error={errors.length !== 0}
@@ -242,7 +335,7 @@ const CompleteRegistration = () => {
                         }
                     </div>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"کدپستی"}
                             // error={errors.length !== 0}
@@ -257,8 +350,10 @@ const CompleteRegistration = () => {
                             )
                         }
                     </div>
+                    </div>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex w-100'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"آدرس"}
                             // error={errors.length !== 0}
@@ -269,7 +364,7 @@ const CompleteRegistration = () => {
                         />
                     </div>
 
-                    <div className={'flex flex-col justify-center mx-4 mt-4'}>
+                    <div className={'flex flex-col justify-center mx-4 mt-4 w-1/2'}>
                         <TextField
                             placeholder={"نام پدر"}
                             // error={errors.length !== 0}
@@ -278,6 +373,7 @@ const CompleteRegistration = () => {
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setFatherName(e.target.value)}
                         />
+                    </div>
                     </div>
 
                     <div className={'mx-4 mt-5'}>

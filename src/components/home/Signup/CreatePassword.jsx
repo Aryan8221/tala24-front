@@ -8,6 +8,7 @@ import signup from "../../../contexts/signup";
 import {useNavigate} from "react-router-dom";
 import api from "../../../api/api";
 import ResgisterApi from "../../../api/RegisterApi";
+import LoginApi from "../../../api/LoginApi";
 
 const CreatePassword= () => {
     const info = useContext(signup)
@@ -61,8 +62,24 @@ const CreatePassword= () => {
                 password: password
             })
 
-            info.setSuccessAllowed(true)
-            console.log(res)
+            if (res?.status === 201) {
+                info.setSuccessAllowed(true)
+                localStorage.setItem("password", password)
+                localStorage.setItem("username", info.newUserPhoneNumber)
+            } else {
+                console.log("error")
+            }
+
+            await LoginApi();
+
+            const res1 = await api.get(`account/user/${info.newUserPhoneNumber}`)
+            localStorage.setItem("id", res1.id)
+
+            await api.post("info", { // bug not fixed
+                accountId: res1.id,
+                value: localStorage.getItem("username"),
+                infoType: "phoneNumber"
+            })
 
             info.setAccountCompleteRegistrationAllowed(true)
 

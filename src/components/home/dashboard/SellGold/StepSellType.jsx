@@ -20,11 +20,11 @@ const NumericFormatCustom = React.forwardRef(function NumericFormatCustom(
             getInputRef={ref}
             onValueChange={(values) => {
                 onChange({
-                    target: {
-                        name: props.name,
-                        value: values.value,
-                    },
-                }
+                        target: {
+                            name: props.name,
+                            value: values.value,
+                        },
+                    }
                 );
             }}
             thousandSeparator
@@ -41,18 +41,18 @@ NumericFormatCustom.propTypes = {
 };
 
 
-function StepBuyGold(props) {
+function StepSellType() {
     const [value, setValue] = React.useState('price');
-    // const [valuePrice, setValuePrice] = React.useState({
-    //     numberformat: '1320',
-    // });
-    //
-    // const handleChangePrice = (event) => {
-    //     setValuePrice({
-    //         ...valuePrice,
-    //         [event.target.name]: event.target.value,
-    //     });
-    // };
+    const [valuePrice, setValuePrice] = React.useState({
+        numberformat: '1320',
+    });
+
+    const handleChangePrice = (event) => {
+        setValuePrice({
+            ...valuePrice,
+            [event.target.name]: event.target.value,
+        });
+    };
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -61,7 +61,7 @@ function StepBuyGold(props) {
     return (
         <>
             <h2 className="text-sky-100 text-xl font-medium mb-6">
-                خرید طلا
+                فروش طلا
             </h2>
             <div className="px-4 flex md:flex-row flex-col items-center">
                 <FormControl className="md:w-1/2">
@@ -81,8 +81,8 @@ function StepBuyGold(props) {
                             ? (
                                 <TextField
                                     label="مبلغ پرداختی"
-                                    value={props.valuePrice.numberformat}
-                                    onChange={props.handleChangePrice}
+                                    value={valuePrice.numberformat}
+                                    onChange={handleChangePrice}
                                     name="numberformat"
                                     id="formatted-numberformat-input"
                                     InputProps={{
@@ -109,4 +109,4 @@ function StepBuyGold(props) {
     )
 }
 
-export default StepBuyGold
+export default StepSellType

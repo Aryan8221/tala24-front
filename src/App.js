@@ -19,6 +19,7 @@ import BuyGold from "./components/home/dashboard/BuyGold/BuyGold";
 import UserTicket from "./components/home/dashboard/Ticket/UserTicket";
 import UserChat from "./components/home/dashboard/Ticket/UserChat"
 import CompleteRegistration from "./components/home/Signup/CompleteRegistration";
+import SellGold from "./components/home/dashboard/SellGold/SellGold";
 
 const App = () => {
     const [OTPAllowed, setOTPAllowed] = useState(false)
@@ -27,6 +28,11 @@ const App = () => {
     const [createPassAllowed, setCreatePassAllowed] = useState(false)
     const [successAllowed, setSuccessAllowed] = useState(false)
     const [accountCompleteRegistrationAllowed, setAccountCompleteRegistrationAllowed] = useState(true)
+    const [information, setInformation] = useState([])
+    const [verified, setVerified] = useState(false)
+    const [selected, setSelected] = useState("bazaar")
+
+    const [logs, setLogs] = useState([])
 
     const [newUserPhoneNumber, setNewUserPhoneNumber] = useState("")
     const [newUserPassword, setNewUserPassword] = useState("")
@@ -48,6 +54,18 @@ const App = () => {
 
                 successAllowed: successAllowed,
                 setSuccessAllowed: setSuccessAllowed,
+
+                verified: verified,
+                setVerified: setVerified,
+
+                information: information,
+                setInformation: setInformation,
+
+                selected: selected,
+                setSelected: setSelected,
+
+                logs: logs,
+                setLogs: setLogs,
 
                 accountCompleteRegistrationAllowed: accountCompleteRegistrationAllowed,
                 setAccountCompleteRegistrationAllowed: setAccountCompleteRegistrationAllowed,
@@ -72,11 +90,13 @@ const App = () => {
                             <Route path="request" element={<Request2 />} />
                             <Route path="logs" element={<Logs />} />
                             <Route path="buy-gold" element={<BuyGold />} />
+                            <Route path="sell-gold" element={<SellGold />} />
                             <Route path="ticket" element={<UserTicket />} />
                             <Route path="ticket/chat" element={<UserChat />} />
+                            <Route path="complete-info" element={<CompleteRegistration />} />
                         </Route>
                         <Route path="/forgot-password" element={(<ForgotPassword/>)}/>
-                        <Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>
+                        {/*<Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>*/}
                     </Routes>
                 </BrowserRouter>
             </signup.Provider>

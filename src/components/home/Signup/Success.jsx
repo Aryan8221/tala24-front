@@ -40,9 +40,9 @@ const Success = () => {
                     </div>
 
                     <div className={'mx-4 mt-5'}>
-                        <Link to="/" className={'flex justify-center items-center bg-[#212121] w-full rounded h-[45px]'}>
+                        <Link to="/dashboard" className={'flex justify-center items-center bg-[#212121] w-full rounded h-[45px]'}>
                             <span className={'text-white'}>
-                                تکمیل مشخصات
+                                داشبورد
                             </span>
                         </Link>
                     </div>

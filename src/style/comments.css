@@ -31,12 +31,15 @@
     width: 1.5rem !important;
     height: 0.6rem;
     margin: 0 0.2rem;
-    background-color: #FFC800 !important;
+    background-color: #d0a94d !important;
     border-radius: 50rem;
     transition: all 0.5s linear;
 }
 
-.dot-comments {
+.dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin: 0 0.2rem;
     background-color: white;
     border-radius: 50rem;
 }
@@ -45,38 +48,4 @@
     background-image: url("../images/cartographer.png");
     background-position: center center;
     background-repeat: repeat;
-}
-
-.heading-title-comment{
-    position: relative;
-    display: inline-block;
-    color: #FFC800;
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: -1.3px;
-    padding: 0 0.4rem;
-}
-.heading-title-comment::before{
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -53%;
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(to right, #ffd700 0, #ffd700 35%, #ffd700 65%, transparent 100%);
-}
-.heading-title-comment::after{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -49%;
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(to left, #ffd700 0, #ffd700 35%, #ffd700 65%, transparent 100%);
-}
-.slick-dots li button::before{
-    color: white !important;
-}
-.slick-dots li.slick-active button::before{
-    color: #ffd700 !important;
 }
