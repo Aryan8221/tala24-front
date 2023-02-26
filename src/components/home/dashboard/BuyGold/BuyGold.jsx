@@ -28,9 +28,10 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import {InputAdornment} from "@mui/material";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import signup from "../../../../contexts/signup";
 import api from "../../../../api/api";
+import {valueOrDefault} from "chart.js/helpers";
 
 
 const ColorlibConnector = styled(StepConnector)(({theme}) => ({
@@ -138,6 +139,9 @@ export default function BuyGold() {
     const [valuePrice, setValuePrice] = React.useState({
         numberformat: '1320',
     });
+    const [valueWeight, setValueWeight] = useState("");
+    const [rialToWeightCoefficient, setRialToWeightCoefficient] = useState(50000000);
+    const [type, setType] = useState("price");
 
     const [value, setValue] = React.useState('cash');
     const handleChange = (event) => {
@@ -162,24 +166,27 @@ export default function BuyGold() {
 
     const handleSubmit = async () => {
 
-        // await api.post("", {
-        //
-        // })
+        await api.post("payment", {
+            weight: type === "price" ? valuePrice.numberformat / rialToWeightCoefficient : valueWeight,
+            price: type === "weight" ? valueWeight * rialToWeightCoefficient : valuePrice.numberformat,
+            status: "pending",
+            isConverted: false,
+            accountId: localStorage.getItem("id")
+        })
     }
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
             handleSubmit()
-        } else {
-            let newSkipped = skipped;
-            if (isStepSkipped(activeStep)) {
-                newSkipped = new Set(newSkipped.values());
-                newSkipped.delete(activeStep);
-            }
-
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            setSkipped(newSkipped);
         }
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
     };
 
     const handleBack = () => {
@@ -238,7 +245,14 @@ export default function BuyGold() {
                                             if (activeStep === 0) {
                                                 return <StepReceiveType/>;
                                             } else if (activeStep === 1) {
-                                                return <StepBuyGold valuePrice={valuePrice} handleChangePrice={handleChangePrice}/>;
+                                                return <StepBuyGold
+                                                    valuePrice={valuePrice}
+                                                    handleChangePrice={handleChangePrice}
+                                                    valueWeight={valueWeight}
+                                                    handleChangeWeight={setValueWeight}
+                                                    type={type}
+                                                    setType={setType}
+                                                />;
                                             } else if (activeStep === 2) {
                                                 return <StepPayment valuePrice={valuePrice} value={value} handleChange={handleChange}/>;
                                             }

@@ -27,10 +27,26 @@ tr:nth-child(2n+ 3) {
     border-top: 1px solid #dddddd;
 }
 
-.status {
+.statusSuccessful {
     background-color: rgba(33, 186, 85, 0.15);
     width: fit-content;
     color: #21BA55;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+
+.statusFailed {
+    background-color: rgb(174, 2, 2);
+    width: fit-content;
+    color: #f37272;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+
+.statusPending {
+    background-color: #2A2A2A;
+    width: fit-content;
+    color: #858585;
     padding: 2px 15px;
     border-radius: 20px;
 }

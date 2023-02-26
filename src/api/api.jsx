@@ -27,12 +27,11 @@ const api = (axios) => {
                             return response.data
                         })
                         .catch(() => {
-                            document.cookie = ""
-                            localStorage.removeItem("Authorization")
-                            localStorage.removeItem("username")
-                            localStorage.removeItem("password")
-                            localStorage.removeItem("id")
-                            window.location = '/'
+                            // localStorage.removeItem("Authorization")
+                            // localStorage.removeItem("username")
+                            // localStorage.removeItem("password")
+                            // localStorage.removeItem("id")
+                            // window.location = '/'
                         })
                 }),
 
@@ -52,7 +51,6 @@ const api = (axios) => {
                             return response.data
                         })
                         .catch(() => {
-                            document.cookie = ""
                             localStorage.removeItem("Authorization")
                             localStorage.removeItem("username")
                             localStorage.removeItem("password")
@@ -79,7 +77,6 @@ const api = (axios) => {
                             return response.data
                         })
                         .catch(() => {
-                            document.cookie = ""
                             localStorage.removeItem("Authorization")
                             localStorage.removeItem("username")
                             localStorage.removeItem("password")
@@ -105,7 +102,6 @@ const api = (axios) => {
                             return response.data
                         })
                         .catch(() => {
-                            document.cookie = ""
                             localStorage.removeItem("Authorization")
                             localStorage.removeItem("username")
                             localStorage.removeItem("password")

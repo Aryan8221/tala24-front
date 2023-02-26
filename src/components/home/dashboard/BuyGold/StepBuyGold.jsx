@@ -42,21 +42,6 @@ NumericFormatCustom.propTypes = {
 
 
 function StepBuyGold(props) {
-    const [value, setValue] = React.useState('price');
-    // const [valuePrice, setValuePrice] = React.useState({
-    //     numberformat: '1320',
-    // });
-    //
-    // const handleChangePrice = (event) => {
-    //     setValuePrice({
-    //         ...valuePrice,
-    //         [event.target.name]: event.target.value,
-    //     });
-    // };
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
 
     return (
         <>
@@ -68,8 +53,8 @@ function StepBuyGold(props) {
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
                         name="controlled-radio-buttons-group"
-                        value={value}
-                        onChange={handleChange}
+                        value={props.type}
+                        onChange={(e) => props.setType(e.target.value)}
                     >
                         <FormControlLabel value="price" control={<Radio/>} label="بر اساس مبلغ"/>
                         <FormControlLabel value="weight" control={<Radio/>} label="بر اساس وزن طلا"/>
@@ -77,7 +62,7 @@ function StepBuyGold(props) {
                 </FormControl>
                 <div className="md:w-1/2 mt-4 md:mt-0">
                     {
-                        value === 'price'
+                        props.type === 'price'
                             ? (
                                 <TextField
                                     label="مبلغ پرداختی"
@@ -94,6 +79,8 @@ function StepBuyGold(props) {
                                 <TextField
                                     label="وزن طلا"
                                     id="outlined-start-adornment"
+                                    value={props.valueWeight}
+                                    onChange={props.handleChangeWeight}
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">گرم</InputAdornment>,
                                     }}

@@ -32,8 +32,6 @@ const App = () => {
     const [verified, setVerified] = useState(false)
     const [selected, setSelected] = useState("bazaar")
 
-    const [logs, setLogs] = useState([])
-
     const [newUserPhoneNumber, setNewUserPhoneNumber] = useState("")
     const [newUserPassword, setNewUserPassword] = useState("")
 
@@ -63,9 +61,6 @@ const App = () => {
 
                 selected: selected,
                 setSelected: setSelected,
-
-                logs: logs,
-                setLogs: setLogs,
 
                 accountCompleteRegistrationAllowed: accountCompleteRegistrationAllowed,
                 setAccountCompleteRegistrationAllowed: setAccountCompleteRegistrationAllowed,

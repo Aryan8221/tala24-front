@@ -2,9 +2,22 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "
 import Paper from '@mui/material/Paper';
 import '../../../style/request.css'
 import {FiFilter} from "react-icons/fi";
+import {useEffect, useState} from "react";
+import api from '../../../api/api'
 
 
 const Logs = () => {
+    const [logs, setLogs] = useState([]);
+
+    useEffect(() => {
+        // api.get(`payment/search/${localStorage.getItem("id")}/search?status=pending`).then((response) => { // bug not fixed!
+        //     // setLogs(response)
+        //     console.log(response)
+        // })
+
+
+    }, [])
+
     return (
         <div className={'mx-9 mt-5'}>
             <h2 className={'text-white'}>
@@ -48,41 +61,81 @@ const Logs = () => {
                 </div>
 
                 <div className={'overflow-scroll'}>
-                    <h2 className={'my-5'}>
-                        سابقه واریزی ها
-                    </h2>
 
-                    <table>
-                        <tr>
-                            <th className={'p-4'}>شماره</th>
-                            <th className={'p-4'}>تاریخ</th>
-                            <th className={'p-4'}>وضعیت درخواست</th>
-                            <th className={'p-4'}>کد رهگیری</th>
-                            <th className={'p-4'}>مبلغ</th>
-                        </tr>
-                        <tr>
-                            <td className={'p-3'}>۱۲۳۴۵۶</td>
-                            <td className={'p-3'}>1401/11/14</td>
-                            <td className={'p-3'}>
-                                <p className={'status'}>
-                                    فعال
-                                </p>
-                            </td>
-                            <td className={'p-3'}>۸۱۲۳۸۹۲</td>
-                            <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>
-                        </tr>
-                        <tr>
-                            <td className={'p-3'}>۱۲۳۴۵۶</td>
-                            <td className={'p-3'}>1401/11/14</td>
-                            <td className={'p-3'}>
-                                <p className={'status'}>
-                                    فعال
-                                </p>
-                            </td>
-                            <td className={'p-3'}>۸۱۲۳۸۹۲</td>
-                            <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>
-                        </tr>
-                    </table>
+                    {
+                        logs.length !== 0 ?
+                            <>
+                                <h2 className={'my-5'}>
+                                    سابقه واریزی ها
+                                </h2>
+                                <table>
+                                    <tr>
+                                        <th className={'p-4'}>شماره</th>
+                                        <th className={'p-4'}>تاریخ</th>
+                                        <th className={'p-4'}>وضعیت درخواست</th>
+                                        <th className={'p-4'}>کد رهگیری</th>
+                                        <th className={'p-4'}>مبلغ</th>
+                                    </tr>
+
+                                    {
+                                        logs.map((log, index) => (
+                                            <tr>
+                                                <td className={'p-3'}>{index}</td>
+                                                <td className={'p-3'}>{log.date}</td>
+                                                <td className={'p-3'}>
+                                                    {
+                                                        log.status === "pending"
+                                                            ? <p className={'statusPending'}>
+                                                                در حال بررسی
+                                                            </p>
+                                                            : log.status === "failed"
+                                                            ? <p className={'statusFailed'}>
+                                                                رد شده
+                                                            </p>
+                                                            : log.status === "successful"
+                                                                ? <p className={'statusSuccessful'}>
+                                                                    موفق
+                                                                </p>
+                                                                : null
+                                                    }
+                                                </td>
+                                                <td className={'p-3'}>۸۱۲۳۸۹۲</td>
+                                                <td className={'p-3'}>{log.price}</td>
+                                            </tr>
+                                        ))
+                                    }
+
+                                    {/*<tr>*/}
+                                    {/*    <td className={'p-3'}>۱۲۳۴۵۶</td>*/}
+                                    {/*    <td className={'p-3'}>1401/11/14</td>*/}
+                                    {/*    <td className={'p-3'}>*/}
+                                    {/*        <p className={'status'}>*/}
+                                    {/*            فعال*/}
+                                    {/*        </p>*/}
+                                    {/*    </td>*/}
+                                    {/*    <td className={'p-3'}>۸۱۲۳۸۹۲</td>*/}
+                                    {/*    <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>*/}
+                                    {/*</tr>*/}
+
+                                    {/*<tr>*/}
+                                    {/*    <td className={'p-3'}>۱۲۳۴۵۶</td>*/}
+                                    {/*    <td className={'p-3'}>1401/11/14</td>*/}
+                                    {/*    <td className={'p-3'}>*/}
+                                    {/*        <p className={'status'}>*/}
+                                    {/*            فعال*/}
+                                    {/*        </p>*/}
+                                    {/*    </td>*/}
+                                    {/*    <td className={'p-3'}>۸۱۲۳۸۹۲</td>*/}
+                                    {/*    <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>*/}
+                                    {/*</tr>*/}
+
+                                </table>
+                            </>
+                            :
+                            <h2 className={"text-[red] mt-5 text-[1.3rem] text-center"}>
+                                تراکنشی انجام نشده!
+                            </h2>
+                    }
                 </div>
             </div>
         </div>
