@@ -1,22 +1,145 @@
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Paper from '@mui/material/Paper';
 import '../../../style/request.css'
 import {FiFilter} from "react-icons/fi";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import api from '../../../api/api'
+import axios from "axios";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import {useNavigate} from "react-router-dom";
+import {VscError} from "react-icons/vsc"
+import {IoClose} from "react-icons/io5";
+import {AiOutlineCheck} from "react-icons/ai";
+import signup from "../../../contexts/signup";
 
 
 const Logs = () => {
-    const [logs, setLogs] = useState([]);
+    const [showErrorModal, setShowErrorModal] = useState(false)
+    const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const navigate = useNavigate()
+
+    const info = useContext(signup)
+
+    const [logs, setLogs] = useState([{
+        id: "123",
+        weight: 2,
+        price: 200000,
+        date: "1401/01/02",
+        status: "pending",
+        isConverted: false,
+        isAuthorized: false,
+
+    }
+    ]);
+
+    const handleClose = () => {
+        setShowErrorModal(false)
+        setShowSuccessModal(false)
+
+        navigate("")
+    }
 
     useEffect(() => {
-        // api.get(`payment/search/${localStorage.getItem("id")}/search?status=pending`).then((response) => { // bug not fixed!
-        //     // setLogs(response)
+
+        // async function apiCall() {
+        //     const res = await api.post(`payment/search/${localStorage.getItem("id")}`,  {
+        //         status: "pending"
+        //     })
+        //     setLogs(res)
+        // }
+        // apiCall()
+
+        // api.post(`payment/search/${localStorage.getItem("id")}`,  {
+        //     status: "pending"
+        // }).then((response) => {
         //     console.log(response)
         // })
 
+        axios.post(`http://localhost:8090/api/v1/payment/search/${localStorage.getItem("id")}`, {
+            status: "pending"
+        }, {
+            headers: {
+                'Authorization': localStorage.getItem("Authorization"),
+            }
+        }).then((response) => {
+            setLogs(response.data)
+        })
+
+        let currentURL = window.location.href;
+        if (currentURL.slice(-3) === "NOK") {
+            setShowErrorModal(true)
+            console.log("Not OK")
+        } else if (currentURL.slice(-3) === "=OK") {
+            let authority = currentURL.slice(-46, -10)
+
+            axios.post("http://localhost:8090/api/v1/zarinpal/verify", {
+                Authority: authority,
+                Amount: parseInt(localStorage.getItem("price"))
+            }, {
+                headers: {
+                    'Authorization': localStorage.getItem("Authorization"),
+                }
+            }).then((response) => {
+                setShowSuccessModal(true)
+                console.log("OK")
+            })
+
+            // api.post("zarinpal/purchase/verify", {
+            //     authority: authority,
+            //
+            // })
+        }
 
     }, [])
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 250,
+        height: 300,
+        borderRadius: 6,
+        bgcolor: '#3c3c3c',
+        border: '2px solid #000',
+        boxShadow: 24,
+        padding: '15px'
+    };
+
+    const handleBuyGold = async (log) => {
+        // const res = await api.post("zarinpal/purchase/init", {
+        //     Amount: log.price,
+        //     Description: "شارژ اکانت",
+        //     CallbackURL: "https://isna.ir",
+        // })
+        //
+        // console.log(res)
+        localStorage.setItem("price", log.price)
+
+        let res;
+        await axios.post("http://localhost:8090/api/v1/zarinpal/purchase/init", {
+            Amount: log.price,
+            Description: "شارژ اکانت",
+            CallbackURL: "http://localhost:3000/dashboard/logs",
+        }, {
+            'Authorization': localStorage.getItem("Authorization"),
+        }).then((response) => {
+            res = response.data
+            // console.log(response)
+        })
+
+        // console.log(res)
+
+        if (res.Status === "100") {
+            window.location.replace(`https://sandbox.zarinpal.com/pg/StartPay/${res.Authority}`)
+        } else {
+            console.log("error")
+        }
+    }
 
     return (
         <div className={'mx-9 mt-5'}>
@@ -63,7 +186,7 @@ const Logs = () => {
                 <div className={'overflow-scroll'}>
 
                     {
-                        logs.length !== 0 ?
+                        logs ?
                             <>
                                 <h2 className={'my-5'}>
                                     سابقه واریزی ها
@@ -75,11 +198,12 @@ const Logs = () => {
                                         <th className={'p-4'}>وضعیت درخواست</th>
                                         <th className={'p-4'}>کد رهگیری</th>
                                         <th className={'p-4'}>مبلغ</th>
+                                        <th className={'p-4'}>پرداخت</th>
                                     </tr>
 
                                     {
-                                        logs.map((log, index) => (
-                                            <tr>
+                                        logs?.map((log, index) => (
+                                            <tr key={index}>
                                                 <td className={'p-3'}>{index}</td>
                                                 <td className={'p-3'}>{log.date}</td>
                                                 <td className={'p-3'}>
@@ -101,33 +225,14 @@ const Logs = () => {
                                                 </td>
                                                 <td className={'p-3'}>۸۱۲۳۸۹۲</td>
                                                 <td className={'p-3'}>{log.price}</td>
+                                                <td className={'p-3'}>
+                                                    <button className={"status"} onClick={() => handleBuyGold(log)}>
+                                                        خرید
+                                                    </button>
+                                                </td>
                                             </tr>
                                         ))
                                     }
-
-                                    {/*<tr>*/}
-                                    {/*    <td className={'p-3'}>۱۲۳۴۵۶</td>*/}
-                                    {/*    <td className={'p-3'}>1401/11/14</td>*/}
-                                    {/*    <td className={'p-3'}>*/}
-                                    {/*        <p className={'status'}>*/}
-                                    {/*            فعال*/}
-                                    {/*        </p>*/}
-                                    {/*    </td>*/}
-                                    {/*    <td className={'p-3'}>۸۱۲۳۸۹۲</td>*/}
-                                    {/*    <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>*/}
-                                    {/*</tr>*/}
-
-                                    {/*<tr>*/}
-                                    {/*    <td className={'p-3'}>۱۲۳۴۵۶</td>*/}
-                                    {/*    <td className={'p-3'}>1401/11/14</td>*/}
-                                    {/*    <td className={'p-3'}>*/}
-                                    {/*        <p className={'status'}>*/}
-                                    {/*            فعال*/}
-                                    {/*        </p>*/}
-                                    {/*    </td>*/}
-                                    {/*    <td className={'p-3'}>۸۱۲۳۸۹۲</td>*/}
-                                    {/*    <td className={'p-3'}>۱۲۰۰۰۰ تومان</td>*/}
-                                    {/*</tr>*/}
 
                                 </table>
                             </>
@@ -138,6 +243,72 @@ const Logs = () => {
                     }
                 </div>
             </div>
+
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={showSuccessModal}
+                onClose={handleClose}
+                closeAfterTransition
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                }}
+            >
+                <Fade in={showSuccessModal}>
+                    <Box sx={style}>
+                        <div className={'flex justify-end'} onClick={handleClose}>
+                            <IoClose size={15} color={"#fff"}/>
+                        </div>
+                        <div className={'mt-5'}>
+                            <Typography id="transition-modal-title" variant="h5" component="h2" color={"white"} className={'text-center'}>
+                                پرداخت با موفقیت انجام شد!
+                            </Typography>
+                        </div>
+                        <div className={'flex justify-center mt-[50px]'}>
+                            <Typography id="transition-modal-description" variant="h5" component="h2" color={"#1ea000"}>
+                                <AiOutlineCheck size={100}/>
+                            </Typography>
+                        </div>
+                    </Box>
+                </Fade>
+            </Modal>
+
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={showErrorModal}
+                onClose={handleClose}
+                closeAfterTransition
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                }}
+            >
+                <Fade in={showErrorModal}>
+                    <Box sx={style}>
+                        <div className={'flex justify-end'} onClick={handleClose}>
+                            <IoClose size={15} color={"#fff"}/>
+                        </div>
+                        <div className={'mt-5'}>
+                            <Typography id="transition-modal-title" variant="h5" component="h2" color={"white"} className={'text-center'}>
+                                خطا در پرداخت!
+                            </Typography>
+                        </div>
+                        <div className={'flex justify-center mt-[50px]'}>
+                            <Typography id="transition-modal-description" variant="h5" component="h2" color={"#ff3030"}>
+                                <VscError size={100}/>
+                            </Typography>
+                        </div>
+
+                    </Box>
+                </Fade>
+            </Modal>
+
         </div>
     )
 }
