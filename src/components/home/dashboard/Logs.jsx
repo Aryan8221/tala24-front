@@ -16,7 +16,6 @@ import {IoClose} from "react-icons/io5";
 import {AiOutlineCheck} from "react-icons/ai";
 import signup from "../../../contexts/signup";
 
-
 const Logs = () => {
     const [showErrorModal, setShowErrorModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -39,64 +38,40 @@ const Logs = () => {
     const handleClose = () => {
         setShowErrorModal(false)
         setShowSuccessModal(false)
-
         navigate("")
     }
 
     useEffect(() => {
+        const zarinHandle = async () => {
+            const getRes = await api.post(`payment/search/${localStorage.getItem("id")}`, {status: "pending"})
 
-        // async function apiCall() {
-        //     const res = await api.post(`payment/search/${localStorage.getItem("id")}`,  {
-        //         status: "pending"
-        //     })
-        //     setLogs(res)
-        // }
-        // apiCall()
-
-        // api.post(`payment/search/${localStorage.getItem("id")}`,  {
-        //     status: "pending"
-        // }).then((response) => {
-        //     console.log(response)
-        // })
-
-        axios.post(`http://localhost:8090/api/v1/payment/search/${localStorage.getItem("id")}`, {
-            status: "pending"
-        }, {
-            headers: {
-                'Authorization': localStorage.getItem("Authorization"),
+            if (getRes) {
+                setLogs(getRes)
             }
-        }).then((response) => {
-            setLogs(response.data)
-        })
 
-        let currentURL = window.location.href;
-        if (currentURL.slice(-3) === "NOK") {
-            setShowErrorModal(true)
-            console.log("Not OK")
-        } else if (currentURL.slice(-3) === "=OK") {
-            let authority = currentURL.slice(-46, -10)
-
-            axios.post("http://localhost:8090/api/v1/zarinpal/verify", {
-                Authority: authority,
-                Amount: parseInt(localStorage.getItem("price"))
-            }, {
-                headers: {
-                    'Authorization': localStorage.getItem("Authorization"),
+            let currentURL = window.location.href;
+            if (currentURL.slice(-3) === "NOK") {
+                setShowErrorModal(true)
+                console.log("Not OK")
+            } else if (currentURL.slice(-3) === "=OK") {
+                let authority = currentURL.slice(-46, -10)
+                const verifyRes = await api.post("zarinpal/purchase/verify", {
+                    Authority: authority,
+                    Amount: parseInt(localStorage.getItem("price"))
+                })
+                if (verifyRes?.Status === 100 || verifyRes?.Status === 101) {
+                    setShowSuccessModal(true)
+                    console.log("OK")
+                } else {
+                    setShowErrorModal(true)
+                    console.log("Not OK")
                 }
-            }).then((response) => {
-                setShowSuccessModal(true)
-                console.log("OK")
-            })
-
-            // api.post("zarinpal/purchase/verify", {
-            //     authority: authority,
-            //
-            // })
+            }
         }
-
+        zarinHandle()
     }, [])
 
-    const style = {
+    const successStyle = {
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -110,32 +85,30 @@ const Logs = () => {
         padding: '15px'
     };
 
-    const handleBuyGold = async (log) => {
-        // const res = await api.post("zarinpal/purchase/init", {
-        //     Amount: log.price,
-        //     Description: "شارژ اکانت",
-        //     CallbackURL: "https://isna.ir",
-        // })
-        //
-        // console.log(res)
-        localStorage.setItem("price", log.price)
+    const errorStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 250,
+        height: 325,
+        borderRadius: 6,
+        bgcolor: '#3c3c3c',
+        border: '2px solid #000',
+        boxShadow: 24,
+        padding: '15px'
+    };
 
-        let res;
-        await axios.post("http://localhost:8090/api/v1/zarinpal/purchase/init", {
+    const handleBuyGold = async (log) => {
+        localStorage.setItem("price", log.price)
+        const initRes = await api.post("zarinpal/purchase/init", {
             Amount: log.price,
             Description: "شارژ اکانت",
             CallbackURL: "http://localhost:3000/dashboard/logs",
-        }, {
-            'Authorization': localStorage.getItem("Authorization"),
-        }).then((response) => {
-            res = response.data
-            // console.log(response)
+            accountId: localStorage.getItem("id")
         })
-
-        // console.log(res)
-
-        if (res.Status === "100") {
-            window.location.replace(`https://sandbox.zarinpal.com/pg/StartPay/${res.Authority}`)
+        if (initRes?.Status === "100") {
+            window.location.replace(`https://sandbox.zarinpal.com/pg/StartPay/${initRes.Authority}`)
         } else {
             console.log("error")
         }
@@ -258,7 +231,7 @@ const Logs = () => {
                 }}
             >
                 <Fade in={showSuccessModal}>
-                    <Box sx={style}>
+                    <Box sx={successStyle}>
                         <div className={'flex justify-end'} onClick={handleClose}>
                             <IoClose size={15} color={"#fff"}/>
                         </div>
@@ -290,7 +263,7 @@ const Logs = () => {
                 }}
             >
                 <Fade in={showErrorModal}>
-                    <Box sx={style}>
+                    <Box sx={errorStyle}>
                         <div className={'flex justify-end'} onClick={handleClose}>
                             <IoClose size={15} color={"#fff"}/>
                         </div>
@@ -298,17 +271,17 @@ const Logs = () => {
                             <Typography id="transition-modal-title" variant="h5" component="h2" color={"white"} className={'text-center'}>
                                 خطا در پرداخت!
                             </Typography>
+                            <p className={"text-center text-white mt-3 text-[0.8rem]"}>                                 در صورت کسر وجه از حساب شما، مبلغ کاسته شده تا حداکثر ۷۲ ساعت آینده به حساب شما بازگردانده می شود
+                            </p>
                         </div>
-                        <div className={'flex justify-center mt-[50px]'}>
+                        <div className={'flex justify-center mt-[35px]'}>
                             <Typography id="transition-modal-description" variant="h5" component="h2" color={"#ff3030"}>
                                 <VscError size={100}/>
                             </Typography>
                         </div>
-
                     </Box>
                 </Fade>
             </Modal>
-
         </div>
     )
 }
