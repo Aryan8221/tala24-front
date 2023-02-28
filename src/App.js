@@ -81,14 +81,14 @@ const App = () => {
                         <Route path="/signup" element={(<Signup/>)}/>
                         <Route path="/create-password" element={(<CreatePassword/>)}/>
                         <Route path="/dashboard" element={(<Dashboard/>)}>
-                            <Route path="" element={<Bazaar />} />
-                            <Route path="request" element={<Request2 />} />
-                            <Route path="logs" element={<Logs />} />
-                            <Route path="buy-gold" element={<BuyGold />} />
-                            <Route path="sell-gold" element={<SellGold />} />
-                            <Route path="ticket" element={<UserTicket />} />
-                            <Route path="ticket/chat" element={<UserChat />} />
-                            <Route path="complete-info" element={<CompleteRegistration />} />
+                            <Route  path="home" element={<Bazaar />} />
+                            <Route  path="request" element={<Request2 />} />
+                            <Route  path="logs" element={<Logs />} />
+                            <Route  path="buy-gold" element={<BuyGold />} />
+                            <Route  path="sell-gold" element={<SellGold />} />
+                            <Route  path="ticket" element={<UserTicket />} />
+                            <Route  path="ticket/chat" element={<UserChat />} />
+                            <Route  path="complete-info" element={<CompleteRegistration />} />
                         </Route>
                         <Route path="/forgot-password" element={(<ForgotPassword/>)}/>
                         {/*<Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>*/}

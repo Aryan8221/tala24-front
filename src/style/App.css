@@ -49,4 +49,7 @@ h1{
     color: #ffd700;
     background-color: #1E1E1E;
 }
-
+.active-navbar{
+    color: #1E1E1E;
+    background-color: #ffd700;
+}
