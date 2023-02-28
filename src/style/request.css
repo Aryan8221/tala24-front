@@ -22,9 +22,12 @@ th {
 td {
     font-size: 15px;
 }
-tr:nth-child(2n+ 3) {
-    /*background-color: #dddddd;*/
-    border-top: 1px solid #dddddd;
+
+tr {
+    border-top: 1px solid #fff3;
+}
+tr:first-child , tr:nth-child(2) {
+    border-top: none;
 }
 
 .statusSuccessful {

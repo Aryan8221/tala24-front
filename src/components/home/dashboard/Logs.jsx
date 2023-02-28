@@ -19,6 +19,19 @@ import signup from "../../../contexts/signup";
 const Logs = () => {
     const [showErrorModal, setShowErrorModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            const getPaymentsRes = await api.get(`account/${localStorage.getItem("id")}`)
+            if (getPaymentsRes) {
+                setData(getPaymentsRes.payments)
+            }
+        }
+        getData()
+        console.log(data)
+    }, []);
+
     const navigate = useNavigate()
 
     const info = useContext(signup)
@@ -159,7 +172,7 @@ const Logs = () => {
                 <div className={'overflow-scroll'}>
 
                     {
-                        logs ?
+                        data ?
                             <>
                                 <h2 className={'my-5'}>
                                     سابقه واریزی ها
@@ -168,38 +181,39 @@ const Logs = () => {
                                     <tr>
                                         <th className={'p-4'}>شماره</th>
                                         <th className={'p-4'}>تاریخ</th>
-                                        <th className={'p-4'}>وضعیت درخواست</th>
+                                        <th className={'p-4'}>وضعیت پرداخت</th>
                                         <th className={'p-4'}>کد رهگیری</th>
                                         <th className={'p-4'}>مبلغ</th>
+                                        <th className={'p-4'}>وضعیت درخواست</th>
                                         <th className={'p-4'}>پرداخت</th>
                                     </tr>
 
                                     {
-                                        logs?.map((log, index) => (
+                                        data?.map((data, index) => (
                                             <tr key={index}>
-                                                <td className={'p-3'}>{index}</td>
-                                                <td className={'p-3'}>{log.date}</td>
+                                                <td className={'p-3'}>{index + 1}</td>
+                                                <td className={'p-3'}>{data.date}</td>
                                                 <td className={'p-3'}>
                                                     {
-                                                        log.status === "pending"
+                                                        data.status === "pending"
                                                             ? <p className={'statusPending'}>
                                                                 در حال بررسی
                                                             </p>
-                                                            : log.status === "failed"
+                                                            : data.status === "failed"
                                                             ? <p className={'statusFailed'}>
                                                                 رد شده
                                                             </p>
-                                                            : log.status === "successful"
+                                                            : data.status === "successful"
                                                                 ? <p className={'statusSuccessful'}>
                                                                     موفق
                                                                 </p>
                                                                 : null
                                                     }
                                                 </td>
-                                                <td className={'p-3'}>۸۱۲۳۸۹۲</td>
-                                                <td className={'p-3'}>{log.price}</td>
+                                                <td className={'p-3'}>{data.refID}</td>
+                                                <td className={'p-3'}>{data.price}</td>
                                                 <td className={'p-3'}>
-                                                    <button className={"status"} onClick={() => handleBuyGold(log)}>
+                                                    <button className={"status"} onClick={() => handleBuyGold(data)}>
                                                         خرید
                                                     </button>
                                                 </td>

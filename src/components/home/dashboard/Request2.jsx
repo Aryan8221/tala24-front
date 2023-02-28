@@ -79,10 +79,10 @@ const Request2 = () => {
                         <tr>
                             <th className={'p-4 text-center'}>شماره</th>
                             <th className={'p-4 text-center'}>تاریخ</th>
-                            <th className={'p-4 text-center'}>وضعیت درخواست</th>
+                            <th className={'p-4 text-center'}>وضعیت پرداخت</th>
                             <th className={'p-4 text-center'}>کد رهگیری</th>
                             <th className={'p-4 text-center'}>مبلغ</th>
-                            <th className={'p-4 text-center'}>بررسی شده</th>
+                            <th className={'p-4 text-center'}>وضعیت درخواست</th>
                         </tr>
                         {
                             data.map((data, index) =>

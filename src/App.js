@@ -82,8 +82,8 @@ const App = () => {
                         <Route path="/create-password" element={(<CreatePassword/>)}/>
                         <Route path="/dashboard" element={(<Dashboard/>)}>
                             <Route  path="home" element={<Bazaar />} />
-                            <Route  path="request" element={<Request2 />} />
-                            <Route  path="logs" element={<Logs />} />
+                            {/*<Route  path="request" element={<Request2 />} />*/}
+                            <Route  path="request" element={<Logs />} />
                             <Route  path="buy-gold" element={<BuyGold />} />
                             <Route  path="sell-gold" element={<SellGold />} />
                             <Route  path="ticket" element={<UserTicket />} />

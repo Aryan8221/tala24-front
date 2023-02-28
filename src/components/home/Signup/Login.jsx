@@ -54,7 +54,7 @@ const Login = () => {
                 setErrors(["رمز عبور اشتباه است."])
             } else if (res.status === 200) {
                 // info.setDashboardAllowed(true)
-                navigate("/dashboard")
+                navigate("/dashboard/home")
             }
         }
     }
