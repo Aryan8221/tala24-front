@@ -15,11 +15,14 @@ import {VscError} from "react-icons/vsc"
 import {IoClose} from "react-icons/io5";
 import {AiOutlineCheck} from "react-icons/ai";
 import signup from "../../../contexts/signup";
+import {EnglishToPersian} from "../../../helper/EnglishToPersian";
 
 const Logs = () => {
     const [showErrorModal, setShowErrorModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
     const [data, setData] = useState([]);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
     useEffect(() => {
         const getData = async () => {
@@ -74,6 +77,7 @@ const Logs = () => {
                 })
                 if (verifyRes?.Status === 100 || verifyRes?.Status === 101) {
                     setShowSuccessModal(true)
+                    await api.post("zarinpal/purchase/postVerify/")
                     console.log("OK")
                 } else {
                     setShowErrorModal(true)
@@ -179,21 +183,21 @@ const Logs = () => {
                                 </h2>
                                 <table>
                                     <tr>
-                                        <th className={'p-4'}>شماره</th>
-                                        <th className={'p-4'}>تاریخ</th>
-                                        <th className={'p-4'}>وضعیت پرداخت</th>
-                                        <th className={'p-4'}>کد رهگیری</th>
-                                        <th className={'p-4'}>مبلغ</th>
-                                        <th className={'p-4'}>وضعیت درخواست</th>
-                                        <th className={'p-4'}>پرداخت</th>
+                                        <th className={'p-4 text-center'}>شماره</th>
+                                        <th className={'p-4 text-center'}>تاریخ</th>
+                                        <th className={'p-4 text-center'}>وضعیت پرداخت</th>
+                                        <th className={'p-4 text-center'}>کد رهگیری</th>
+                                        <th className={'p-4 text-center'}>مبلغ</th>
+                                        <th className={'p-4 text-center'}>وضعیت درخواست</th>
+                                        <th className={'p-4 text-center'}>پرداخت</th>
                                     </tr>
 
                                     {
                                         data?.map((data, index) => (
                                             <tr key={index}>
-                                                <td className={'p-3'}>{index + 1}</td>
-                                                <td className={'p-3'}>{data.date}</td>
-                                                <td className={'p-3'}>
+                                                <td className={'p-3 text-center'}>{index + 1}</td>
+                                                <td className={'p-3 text-center'}>{data.date}</td>
+                                                <td className={'p-3 flex justify-center'}>
                                                     {
                                                         data.status === "pending"
                                                             ? <p className={'statusPending'}>
@@ -210,10 +214,11 @@ const Logs = () => {
                                                                 : null
                                                     }
                                                 </td>
-                                                <td className={'p-3'}>{data.refID}</td>
-                                                <td className={'p-3'}>{data.price}</td>
-                                                <td className={'p-3'}>
-                                                    <button className={"status"} onClick={() => handleBuyGold(data)}>
+                                                <td className={'p-3 text-center'}>{data.refID}</td>
+                                                <td className={'p-3 text-center'}>{EnglishToPersian(data.price?.toString()) + " ریال"}</td>
+                                                <td className={'p-3 flex justify-center'}>{data.isAuthorized ? <p className={'authorizedSuccessful'}>تایید شده</p> : <p className={'authorizedFailed'}>تایید نشده</p>}</td>
+                                                <td className={'p-3 text-center'}>
+                                                    <button disabled={!(data.isAuthorized && data.status === "pending")} className={"status disabled:bg-amber-200 disabled:text-gray-600 bg-gold text-black"} onClick={() => handleBuyGold(data)}>
                                                         خرید
                                                     </button>
                                                 </td>

@@ -30,7 +30,7 @@ const NumericFormatCustom = React.forwardRef(function NumericFormatCustom(
             thousandSeparator
             valueIsNumericString
             // className={}
-            prefix="ريال"
+            prefix="ريال "
         />
     );
 });

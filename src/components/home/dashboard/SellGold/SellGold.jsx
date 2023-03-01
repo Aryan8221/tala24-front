@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import PropTypes from 'prop-types';
 import {styled} from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -21,6 +21,7 @@ import {CacheProvider} from '@emotion/react';
 import createCache from '@emotion/cache';
 import StepSellType from "./StepSellType"
 import StepSelectCard from "./StepSelectCard"
+import api from "../../../../api/api";
 
 const ColorlibConnector = styled(StepConnector)(({theme}) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -123,6 +124,10 @@ function SellGold() {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [skipped, setSkipped] = React.useState(new Set());
+    const [valuePrice, setValuePrice] = React.useState();
+    const [valueWeight, setValueWeight] = useState();
+    const [rialToWeightCoefficient, setRialToWeightCoefficient] = useState(50000000);
+    const [type, setType] = useState("price");
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -132,7 +137,21 @@ function SellGold() {
         return skipped.has(step);
     };
 
+    const handleSubmit = async () => {
+
+        await api.post("payment", {
+            weight: type === "price" ? valuePrice / rialToWeightCoefficient : valueWeight,
+            price: type === "weight" ? valueWeight * rialToWeightCoefficient : valuePrice,
+            status: "pending",
+            isConverted: false,
+            accountId: localStorage.getItem("id")
+        })
+    }
+
     const handleNext = () => {
+        if (activeStep === steps.length - 1) {
+            handleSubmit()
+        }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());

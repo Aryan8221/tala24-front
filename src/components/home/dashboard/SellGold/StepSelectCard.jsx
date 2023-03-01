@@ -24,7 +24,6 @@ function StepSelectCard() {
         setValue(event.target.value);
     };
     const handleShowNewShabaNumber = () => {
-        console.log(isInputNewShabaNumber)
         setIsInputNewShabaNumber(() => !isInputNewShabaNumber)
     }
     const filteredPeople =

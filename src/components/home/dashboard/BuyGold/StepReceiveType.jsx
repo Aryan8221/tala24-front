@@ -7,8 +7,8 @@ import {InputAdornment, TextField} from "@mui/material";
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 
-function StepReceiveType() {
-    const [value, setValue] = React.useState('cash');
+function StepReceiveType(props) {
+    // const [value, setValue] = React.useState('cash');
     const [address, setAddress] = useState([
         {id: 1, name: 'آدرس 1'},
         {id: 2, name: 'آدرس 2'},
@@ -20,9 +20,9 @@ function StepReceiveType() {
     const [selected, setSelected] = useState(address[0])
     const [query, setQuery] = useState('')
     const [isInputNewAddress, setIsInputNewAddress] = useState(false)
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setValue(event.target.value);
+    // };
     const handleShowNewAddress = () => {
         console.log(isInputNewAddress)
         setIsInputNewAddress(() => !isInputNewAddress)
@@ -47,8 +47,10 @@ function StepReceiveType() {
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
                         name="controlled-radio-buttons-group"
-                        value={value}
-                        onChange={handleChange}
+                        value={props.value}
+                        onChange={(event) => {
+                            props.handleChange(event.target.value)
+                        }}
                     >
                         <FormControlLabel value="cash" control={<Radio/>} label="نگه داری در صندوق"/>
                         <FormControlLabel value="delivery" control={<Radio/>} label="تحویل درب منزل"/>
@@ -56,7 +58,7 @@ function StepReceiveType() {
                 </FormControl>
                 <div className="md:w-2/4">
                     {
-                        value === 'cash'
+                        props.value === 'cash'
                             ? (
                                 null
                             )

@@ -5,10 +5,6 @@ import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Check from '@mui/icons-material/Check';
-import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, {stepConnectorClasses} from '@mui/material/StepConnector';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -23,15 +19,9 @@ import StepBuyGold from "./StepBuyGold";
 import StepReceiveType from "./StepReceiveType";
 import StepPayment from "./StepPayment";
 import "./../../../../style/BuyGold.css"
-import FormControl from "@mui/material/FormControl";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import {InputAdornment} from "@mui/material";
 import {useContext, useState} from "react";
 import signup from "../../../../contexts/signup";
 import api from "../../../../api/api";
-import {valueOrDefault} from "chart.js/helpers";
 
 
 const ColorlibConnector = styled(StepConnector)(({theme}) => ({
@@ -40,12 +30,12 @@ const ColorlibConnector = styled(StepConnector)(({theme}) => ({
     },
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            background: '#dfaf3d;',
+            background: '#FFC800;',
         },
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            background: '#dfaf3d;',
+            background: '#FFC800;',
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
@@ -60,7 +50,7 @@ const ColorlibConnector = styled(StepConnector)(({theme}) => ({
 const ColorlibStepIconRoot = styled('div')(({theme, ownerState}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
     zIndex: 0,
-    color: '#fff',
+    color: '#000',
     width: 50,
     height: 50,
     display: 'flex',
@@ -68,11 +58,11 @@ const ColorlibStepIconRoot = styled('div')(({theme, ownerState}) => ({
     justifyContent: 'center',
     alignItems: 'center',
     ...(ownerState.active && {
-        background: '#dfaf3d;',
+        background: '#FFC800;',
         boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
     }),
     ...(ownerState.completed && {
-        background: '#dfaf3d;',
+        background: '#FFC800;',
     }),
 }));
 
@@ -137,16 +127,16 @@ export default function BuyGold() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [valuePrice, setValuePrice] = React.useState({
-        numberformat: '1320',
+        numberformat: "",
     });
     const [valueWeight, setValueWeight] = useState("");
     const [rialToWeightCoefficient, setRialToWeightCoefficient] = useState(50000000);
     const [type, setType] = useState("price");
-
+    const [shipmentType, setShipmentType] = useState("cash");
     const [value, setValue] = React.useState('cash');
-    const handleChange = (event) => {
-        setValue(event.target.value);
-        console.log(value)
+    const handleChange = async (event) => {
+        console.log(event)
+        await setValue(event.target.value);
     };
 
     const handleChangePrice = (event) => {
@@ -156,6 +146,13 @@ export default function BuyGold() {
         });
     };
 
+    const handleChangeWeight = (event) => {
+        setValueWeight(event.target.value)
+        setValuePrice({
+            ...valuePrice,
+            numberformat: parseInt(event.target.value) * rialToWeightCoefficient,
+        });
+    }
     const isStepOptional = (step) => {
         return step === 1;
     };
@@ -167,8 +164,8 @@ export default function BuyGold() {
     const handleSubmit = async () => {
 
         await api.post("payment", {
-            weight: type === "price" ? valuePrice.numberformat / rialToWeightCoefficient : valueWeight,
-            price: type === "weight" ? valueWeight * rialToWeightCoefficient : valuePrice.numberformat,
+            weight: type === "price" ? parseInt(valuePrice.numberformat) / rialToWeightCoefficient : parseInt(valueWeight),
+            price: (parseInt(type === "weight" ? parseInt(valueWeight) * rialToWeightCoefficient : valuePrice.numberformat) + 50000 + (shipmentType === "delivery" ? 500000 : 0)).toString(),
             status: "pending",
             isConverted: false,
             accountId: localStorage.getItem("id")
@@ -230,7 +227,8 @@ export default function BuyGold() {
                                 <React.Fragment>
                                     <div className="text-white bg-[#141414] mt-10 rounded-[8px] p-5 font-bold text-center">
                                         <div className="text-sky-50">
-                                            خرید با موفقیت انجام شد
+                                            <h6 className={"mb-3 text-mainGold"}>درخواست خرید شما با موفقیت ارسال شد.</h6>
+                                            <p className={"font-light text-[0.8rem]"}>پس از تایید توسط کارشناس سامانه امکان خرید برای شما ایجاد شده و با مراجعه به صفحه درخواست ها می توانید فرایند خرید را انجام دهید</p>
                                         </div>
                                     </div>
                                     <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
@@ -243,18 +241,18 @@ export default function BuyGold() {
                                     <div className={'text-white bg-[#141414] mt-10 rounded-[8px] p-5'}>
                                         {(() => {
                                             if (activeStep === 0) {
-                                                return <StepReceiveType/>;
+                                                return <StepReceiveType value={shipmentType} handleChange={setShipmentType}/>;
                                             } else if (activeStep === 1) {
                                                 return <StepBuyGold
                                                     valuePrice={valuePrice}
                                                     handleChangePrice={handleChangePrice}
                                                     valueWeight={valueWeight}
-                                                    handleChangeWeight={setValueWeight}
+                                                    handleChangeWeight={handleChangeWeight}
                                                     type={type}
                                                     setType={setType}
                                                 />;
                                             } else if (activeStep === 2) {
-                                                return <StepPayment valuePrice={valuePrice} value={value} handleChange={handleChange}/>;
+                                                return <StepPayment valuePrice={valuePrice} value={value} shipmentType={shipmentType} handleChange={handleChange}/>;
                                             }
                                         })()}
                                         <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>

@@ -4,6 +4,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import {FormLabel, TextField} from "@mui/material";
+import {EnglishToPersian} from "../../../../helper/EnglishToPersian";
 
 function StepPayment(props) {
     // const [value, setValue] = React.useState('cash');
@@ -37,14 +38,22 @@ function StepPayment(props) {
                         <div>قیمت طلا</div>
                         <div>{props.valuePrice.numberformat} ریال</div>
                     </div>
+                    {
+                        props.shipmentType === "cash" ? null :
+                        <div className="flex flex-row justify-between">
+                            <div>هزینه ارسال</div>
+                            <div>500000 ریال</div>
+                        </div>
+                    }
                     <div className="flex flex-row justify-between">
-                        <div>هزینه ارسال</div>
-                        <div>{props.valuePrice.numberformat} ریال</div>
+                        <div>کارمزد تراکنش</div>
+                        <div>50000 ریال</div>
                     </div>
+
                     <div className="border border-sky-50 border-solid my-2"></div>
                     <div className="flex flex-row justify-between">
                         <div>قابل پرداخت</div>
-                        <div>{props.valuePrice.numberformat} ریال</div>
+                        <div>{(parseInt(props.valuePrice.numberformat) + 50000 + (props.shipmentType === "delivery" ? 500000 : 0))} ریال</div>
                     </div>
                 </div>
             </div>

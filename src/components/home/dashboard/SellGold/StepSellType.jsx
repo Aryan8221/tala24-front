@@ -30,7 +30,7 @@ const NumericFormatCustom = React.forwardRef(function NumericFormatCustom(
             thousandSeparator
             valueIsNumericString
             // className={}
-            prefix="ريال"
+            prefix="ريال "
         />
     );
 });
@@ -44,7 +44,7 @@ NumericFormatCustom.propTypes = {
 function StepSellType() {
     const [value, setValue] = React.useState('price');
     const [valuePrice, setValuePrice] = React.useState({
-        numberformat: '1320',
+        numberformat: '',
     });
 
     const handleChangePrice = (event) => {
@@ -91,6 +91,8 @@ function StepSellType() {
                                 />
                             )
                             : (
+
+
                                 <TextField
                                     label="وزن طلا"
                                     id="outlined-start-adornment"

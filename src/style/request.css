@@ -45,13 +45,27 @@ tr:first-child , tr:nth-child(2) {
     padding: 2px 15px;
     border-radius: 20px;
 }
-
-.status {
-    background-color: rgba(33, 186, 85, 0.15);
+.authorizedSuccessful {
+    background-color: #42d57e;
     width: fit-content;
-    color: #21BA55;
+    color: #000000;
     padding: 2px 15px;
     border-radius: 20px;
+}
+
+.authorizedFailed {
+    background-color: rgb(229, 76, 76);
+    width: fit-content;
+    color: #ffffff;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+
+.status {
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 4px 23px;
+    border-radius: 10px;
 }
 
 .statusPending {
