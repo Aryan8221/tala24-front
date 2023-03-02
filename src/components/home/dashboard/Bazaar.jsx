@@ -1,6 +1,6 @@
 import '../../../style/chart.css'
 import {Line} from "react-chartjs-2";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import signup from "../../../contexts/signup";
 import {useNavigate} from "react-router-dom";
 
@@ -10,6 +10,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import api from "../../../api/api";
 
 const Bazaar = () => {
     const info = useContext(signup)
@@ -18,57 +19,41 @@ const Bazaar = () => {
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
 
-    const UserData = [
-        {
-            id: 1,
-            year: 2016,
-            userGain: 80000,
-            userLost: 823
-        },
-        {
-            id: 2,
-            year: 2017,
-            userGain: 35000,
-            userLost: 235
-        },
-        {
-            id: 3,
-            year: 2018,
-            userGain: 90000,
-            userLost: 222
-        },
-        {
-            id: 4,
-            year: 2019,
-            userGain: 30000,
-            userLost: 236
-        },
-        {
-            id: 5,
-            year: 2020,
-            userGain: 100000,
-            userLost: 456
-        },
-
-    ]
-
     const [userData, setUserData] = useState({
-        labels: UserData.map((i) => i.year), // years
+        labels: null,
         datasets: [
-            {
-                label: "قیمت طلا",
-                data: UserData.map((i) => i.userGain),
-                backgroundColor: ["#d0a94d"],
-                borderColor: ["#d0a94d"],
-                tension: 0.1,
-                // borderDash: [3],
-                // borderDashOffset: 5
-                // borderJoinStyle: 'round'
-                // clip: 4,
-                // fill: true,
-            }
+            {}
         ],
     })
+    useEffect(() => {
+        const getPriceData = async () => {
+            const priceDataRes = await api.get("goldPrice/chart")
+            let labelData = []
+            let priceData = []
+            for (let i = 9; i >= 0; i--) {
+                labelData.push(priceDataRes[i]?.date.slice(10, 16))
+                priceData.push(priceDataRes[i]?.price)
+            }
+            setUserData({
+                labels: labelData, // years;
+                datasets: [
+                    {
+                        label: "قیمت طلا",
+                        data: priceData,
+                        backgroundColor: ["#d0a94d"],
+                        borderColor: ["#d0a94d"],
+                        tension: 0.1,
+                        // borderDash: [3],
+                        // borderDashOffset: 5
+                        // borderJoinStyle: 'round'
+                        // clip: 4,
+                        // fill: true,
+                    }
+                ],
+            })
+        }
+        getPriceData()
+    }, []);
 
     const handleBuy = () => {
         if (info.verified === false) {

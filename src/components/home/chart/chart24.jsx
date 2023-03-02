@@ -3,60 +3,44 @@ import person from '../../../images/person.svg'
 import goldPrice from '../../../images/goldPriceChart.png'
 import {Line, Bar} from "react-chartjs-2";
 import {useEffect, useState} from "react";
+import api from "../../../api/api";
 
 const Chart24 = () => {
-
-    const UserData = [
-        {
-            id: 1,
-            year: 2016,
-            userGain: 80000,
-            userLost: 823
-        },
-        {
-            id: 2,
-            year: 2017,
-            userGain: 60000,
-            userLost: 235
-        },
-        {
-            id: 3,
-            year: 2018,
-            userGain: 55456,
-            userLost: 222
-        },
-        {
-            id: 4,
-            year: 2019,
-            userGain: 65466,
-            userLost: 236
-        },
-        {
-            id: 5,
-            year: 2020,
-            userGain: 88899,
-            userLost: 456
-        },
-
-    ]
-
     const [userData, setUserData] = useState({
-        labels: UserData.map((i) => i.year), // years
+        labels: null,
         datasets: [
-            {
-                label: "قیمت طلا",
-                data: UserData.map((i) => i.userGain),
-                backgroundColor: ["#d0a94d"],
-                borderColor: ["#d0a94d"],
-                tension: 0.1,
-                // borderDash: [3],
-                // borderDashOffset: 5
-                // borderJoinStyle: 'round'
-                // clip: 4,
-                // fill: true,
-            }
+            {}
         ],
     })
+    useEffect(() => {
+        const getPriceData = async () => {
+            const priceDataRes = await api.get("goldPrice/chart")
+            let labelData = []
+            let priceData = []
+            for (let i = 9; i >= 0; i--) {
+                labelData.push(priceDataRes[i]?.date.slice(10, 16))
+                priceData.push(priceDataRes[i]?.price)
+            }
+            setUserData({
+                labels: labelData, // years;
+                datasets: [
+                    {
+                        label: "قیمت طلا",
+                        data: priceData,
+                        backgroundColor: ["#d0a94d"],
+                        borderColor: ["#d0a94d"],
+                        tension: 0.1,
+                        // borderDash: [3],
+                        // borderDashOffset: 5
+                        // borderJoinStyle: 'round'
+                        // clip: 4,
+                        // fill: true,
+                    }
+                ],
+            })
+        }
+        getPriceData()
+    }, []);
 
     return (
         <>
@@ -112,7 +96,8 @@ const Chart24 = () => {
                     </button>
                 </div>
 
-                <div className={'xsm:pr-0 sm:pr-[20px] md2:w-3/5 md2:m-0 md2:p-0 md1:block md1:w-7/12 mr-[50px] mb-[50px] '}>
+                <div
+                    className={'xsm:pr-0 sm:pr-[20px] md2:w-3/5 md2:m-0 md2:p-0 md1:block md1:w-7/12 mr-[50px] mb-[50px] '}>
                     <div className={'main-chart mt-[30px] ml-[30px]'}>
                         <div className={'mainPrice mb-3 pb-5'}>
                             <p className={'text-[12px]'}>
