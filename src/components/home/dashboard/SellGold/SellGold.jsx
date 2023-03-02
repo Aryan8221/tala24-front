@@ -1,20 +1,13 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import PropTypes from 'prop-types';
 import {styled} from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Check from '@mui/icons-material/Check';
-import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, {stepConnectorClasses} from '@mui/material/StepConnector';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
 import rtlPlugin from 'stylis-plugin-rtl';
 import {prefixer} from 'stylis';
 import {CacheProvider} from '@emotion/react';
@@ -124,10 +117,34 @@ function SellGold() {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [skipped, setSkipped] = React.useState(new Set());
-    const [valuePrice, setValuePrice] = React.useState();
-    const [valueWeight, setValueWeight] = useState();
     const [rialToWeightCoefficient, setRialToWeightCoefficient] = useState(50000000);
     const [type, setType] = useState("price");
+
+    const [value, setValue] = React.useState('price');
+    const [valueWeight, setValueWeight] = useState("");
+    const [valuePrice, setValuePrice] = React.useState({
+        numberformat: '',
+    });
+
+    const handleChangePrice = (event) => {
+        setValuePrice({
+            ...valuePrice,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
+
+    const handleChangeWeight = (event) => {
+        setValueWeight(event.target.value)
+        setValuePrice({
+            ...valuePrice,
+            numberformat: (parseInt(event.target.value) * rialToWeightCoefficient).toString(),
+        });
+    }
+
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -138,15 +155,21 @@ function SellGold() {
     };
 
     const handleSubmit = async () => {
-
-        await api.post("payment", {
-            weight: type === "price" ? valuePrice / rialToWeightCoefficient : valueWeight,
-            price: type === "weight" ? valueWeight * rialToWeightCoefficient : valuePrice,
-            status: "pending",
-            isConverted: false,
+        await api.post("sellRequest", {
+            weight: type === "price" ? (parseInt(valuePrice.numberformat) - 50000) / rialToWeightCoefficient : parseInt(valueWeight),
+            price: (parseInt(type === "weight" ? parseInt(valueWeight) * rialToWeightCoefficient - 50000 : valuePrice.numberformat) - 50000).toString(),
             accountId: localStorage.getItem("id")
         })
     }
+
+    useEffect(() => {
+        const getPrice = async () => {
+            const getPriceRes = await api.get("goldPrice/latestPrice")
+            setRialToWeightCoefficient(getPriceRes.price)
+        }
+        getPrice()
+    }, [activeStep]);
+
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -217,9 +240,16 @@ function SellGold() {
                                     <div className={'text-white bg-[#141414] mt-10 rounded-[8px] p-5'}>
                                         {(() => {
                                             if (activeStep == 0) {
-                                                return <StepSellType/>;
+                                                return <StepSellType
+                                                    value={value}
+                                                    handleChange={handleChange}
+                                                    valuePrice={valuePrice}
+                                                    handleChangePrice={handleChangePrice}
+                                                    valueWeight={valueWeight}
+                                                    handleChangeWeight={handleChangeWeight}
+                                                />;
                                             } else if (activeStep == 1) {
-                                                return <StepSelectCard/>;
+                                                return <StepSelectCard valuePrice={valuePrice}/>;
                                             }
                                         })()}
                                         <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>

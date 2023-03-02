@@ -26,45 +26,14 @@ const Logs = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const getPaymentsRes = await api.get(`account/${localStorage.getItem("id")}`)
-            if (getPaymentsRes) {
-                setData(getPaymentsRes.payments)
+            const getDataRes = await api.get(`account/${localStorage.getItem("id")}`)
+            if (getDataRes) {
+                setData([...getDataRes.payments, ...getDataRes.orders])
             }
         }
         getData()
-        console.log(data)
-    }, []);
 
-    const navigate = useNavigate()
-
-    const info = useContext(signup)
-
-    const [logs, setLogs] = useState([{
-        id: "123",
-        weight: 2,
-        price: 200000,
-        date: "1401/01/02",
-        status: "pending",
-        isConverted: false,
-        isAuthorized: false,
-
-    }
-    ]);
-
-    const handleClose = () => {
-        setShowErrorModal(false)
-        setShowSuccessModal(false)
-        navigate("")
-    }
-
-    useEffect(() => {
         const zarinHandle = async () => {
-            const getRes = await api.post(`payment/search/${localStorage.getItem("id")}`, {status: "pending"})
-
-            if (getRes) {
-                setLogs(getRes)
-            }
-
             let currentURL = window.location.href;
             if (currentURL.slice(-3) === "NOK") {
                 setShowErrorModal(true)
@@ -77,15 +46,58 @@ const Logs = () => {
                 })
                 if (verifyRes?.Status === 100 || verifyRes?.Status === 101) {
                     setShowSuccessModal(true)
-                    await api.post("zarinpal/purchase/postVerify/")
+                    await api.post(`zarinpal/purchase/verifySuccess/${localStorage.getItem("paymentID")}`, {...verifyRes})
                     console.log("OK")
                 } else {
+                    await api.post(`zarinpal/purchase/verifyFail/${localStorage.getItem("paymentID")}`, {})
                     setShowErrorModal(true)
                     console.log("Not OK")
                 }
             }
         }
         zarinHandle()
+
+    }, []);
+
+    const navigate = useNavigate()
+
+    const info = useContext(signup)
+
+    const handleClose = () => {
+        setShowErrorModal(false)
+        setShowSuccessModal(false)
+        navigate("")
+    }
+
+    useEffect(() => {
+        // const zarinHandle = async () => {
+        //     const getRes = await api.post(`payment/search/${localStorage.getItem("id")}`, {})
+        //
+        //     if (getRes) {
+        //         setData(getRes)
+        //     }
+        //
+        //     let currentURL = window.location.href;
+        //     if (currentURL.slice(-3) === "NOK") {
+        //         setShowErrorModal(true)
+        //         console.log("Not OK")
+        //     } else if (currentURL.slice(-3) === "=OK") {
+        //         let authority = currentURL.slice(-46, -10)
+        //         const verifyRes = await api.post("zarinpal/purchase/verify", {
+        //             Authority: authority,
+        //             Amount: parseInt(localStorage.getItem("price"))
+        //         })
+        //         if (verifyRes?.Status === 100 || verifyRes?.Status === 101) {
+        //             setShowSuccessModal(true)
+        //             await api.post(`zarinpal/purchase/verifySuccess/${localStorage.getItem("paymentID")}`, {...verifyRes})
+        //             console.log("OK")
+        //         } else {
+        //             setShowErrorModal(true)
+        //             console.log("Not OK")
+        //         }
+        //     }
+        // }
+        // zarinHandle()
     }, [])
 
     const successStyle = {
@@ -117,11 +129,12 @@ const Logs = () => {
     };
 
     const handleBuyGold = async (log) => {
+        localStorage.setItem("paymentID", log.id)
         localStorage.setItem("price", log.price)
         const initRes = await api.post("zarinpal/purchase/init", {
             Amount: log.price,
             Description: "شارژ اکانت",
-            CallbackURL: "http://localhost:3000/dashboard/logs",
+            CallbackURL: "http://localhost:3000/dashboard/request",
             accountId: localStorage.getItem("id")
         })
         if (initRes?.Status === "100") {
@@ -134,7 +147,7 @@ const Logs = () => {
     return (
         <div className={'mx-9 mt-5'}>
             <h2 className={'text-white'}>
-                گزارشات
+                درخواست ها
             </h2>
 
             <div className={'text-white bg-[#141414] mt-10 rounded-[8px] p-5'}>
@@ -185,9 +198,9 @@ const Logs = () => {
                                     <tr>
                                         <th className={'p-4 text-center'}>شماره</th>
                                         <th className={'p-4 text-center'}>تاریخ</th>
+                                        <th className={'p-4 text-center'}>مبلغ</th>
                                         <th className={'p-4 text-center'}>وضعیت پرداخت</th>
                                         <th className={'p-4 text-center'}>کد رهگیری</th>
-                                        <th className={'p-4 text-center'}>مبلغ</th>
                                         <th className={'p-4 text-center'}>وضعیت درخواست</th>
                                         <th className={'p-4 text-center'}>پرداخت</th>
                                     </tr>
@@ -197,6 +210,7 @@ const Logs = () => {
                                             <tr key={index}>
                                                 <td className={'p-3 text-center'}>{index + 1}</td>
                                                 <td className={'p-3 text-center'}>{data.date}</td>
+                                                <td className={'p-3 text-center'}>{EnglishToPersian(data.price?.toString()) + " ریال"}</td>
                                                 <td className={'p-3 flex justify-center'}>
                                                     {
                                                         data.status === "pending"
@@ -204,23 +218,29 @@ const Logs = () => {
                                                                 در حال بررسی
                                                             </p>
                                                             : data.status === "failed"
-                                                            ? <p className={'statusFailed'}>
-                                                                رد شده
-                                                            </p>
-                                                            : data.status === "successful"
-                                                                ? <p className={'statusSuccessful'}>
-                                                                    موفق
+                                                                ? <p className={'statusFailed'}>
+                                                                    رد شده
                                                                 </p>
-                                                                : null
+                                                                : data.status === "successful"
+                                                                    ? <p className={'statusSuccessful'}>
+                                                                        موفق
+                                                                    </p>
+                                                                    : null
                                                     }
                                                 </td>
-                                                <td className={'p-3 text-center'}>{data.refID}</td>
-                                                <td className={'p-3 text-center'}>{EnglishToPersian(data.price?.toString()) + " ریال"}</td>
-                                                <td className={'p-3 flex justify-center'}>{data.isAuthorized ? <p className={'authorizedSuccessful'}>تایید شده</p> : <p className={'authorizedFailed'}>تایید نشده</p>}</td>
+                                                <td className={'p-3 text-center'}>{data.refId === undefined ? "___" : data.refId}</td>
+                                                <td className={'p-3 flex justify-center'}>{
+                                                    data.authorized === undefined ?
+                                                        <small>&nbsp;</small> : data.authorized === true ?
+                                                            <p className={'authorizedSuccessful'}>تایید شده</p> : data.authorized === false ?
+                                                                <p className={'authorizedFailed'}>تایید نشده</p> : <small>&nbsp;</small>
+                                                }</td>
                                                 <td className={'p-3 text-center'}>
-                                                    <button disabled={!(data.isAuthorized && data.status === "pending")} className={"status disabled:bg-amber-200 disabled:text-gray-600 bg-gold text-black"} onClick={() => handleBuyGold(data)}>
-                                                        خرید
-                                                    </button>
+                                                    {
+                                                        data.payment_id === null ? null : <button disabled={!(data.authorized && data.status === "pending")} className={"status disabled:bg-amber-200 disabled:text-gray-600 bg-gold text-black"} onClick={() => handleBuyGold(data)}>
+                                                            خرید
+                                                        </button>
+                                                    }
                                                 </td>
                                             </tr>
                                         ))

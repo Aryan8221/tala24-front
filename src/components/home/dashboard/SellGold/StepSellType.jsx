@@ -41,23 +41,7 @@ NumericFormatCustom.propTypes = {
 };
 
 
-function StepSellType() {
-    const [value, setValue] = React.useState('price');
-    const [valuePrice, setValuePrice] = React.useState({
-        numberformat: '',
-    });
-
-    const handleChangePrice = (event) => {
-        setValuePrice({
-            ...valuePrice,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
-
+function StepSellType(props) {
     return (
         <>
             <h2 className="text-sky-100 text-xl font-medium mb-6">
@@ -68,8 +52,8 @@ function StepSellType() {
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
                         name="controlled-radio-buttons-group"
-                        value={value}
-                        onChange={handleChange}
+                        value={props.value}
+                        onChange={props.handleChange}
                     >
                         <FormControlLabel value="price" control={<Radio/>} label="بر اساس مبلغ"/>
                         <FormControlLabel value="weight" control={<Radio/>} label="بر اساس وزن طلا"/>
@@ -77,12 +61,12 @@ function StepSellType() {
                 </FormControl>
                 <div className="md:w-1/2 mt-4 md:mt-0">
                     {
-                        value === 'price'
+                        props.value === 'price'
                             ? (
                                 <TextField
                                     label="مبلغ پرداختی"
-                                    value={valuePrice.numberformat}
-                                    onChange={handleChangePrice}
+                                    value={props.valuePrice.numberformat}
+                                    onChange={props.handleChangePrice}
                                     name="numberformat"
                                     id="formatted-numberformat-input"
                                     InputProps={{
@@ -96,6 +80,8 @@ function StepSellType() {
                                 <TextField
                                     label="وزن طلا"
                                     id="outlined-start-adornment"
+                                    value={props.valueWeight}
+                                    onChange={props.handleChangeWeight}
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">گرم</InputAdornment>,
                                     }}

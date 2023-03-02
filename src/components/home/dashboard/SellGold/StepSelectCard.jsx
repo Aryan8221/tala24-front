@@ -7,8 +7,7 @@ import {InputAdornment, TextField} from "@mui/material";
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 
-function StepSelectCard() {
-    const [value, setValue] = React.useState('cash');
+function StepSelectCard(props) {
     const [ShabaNumber, setShabaNumber] = useState([
         {id: 1, name: 'شبا 1'},
         {id: 2, name: 'شبا 2'},
@@ -20,9 +19,6 @@ function StepSelectCard() {
     const [selected, setSelected] = useState(ShabaNumber[0])
     const [query, setQuery] = useState('')
     const [isInputNewShabaNumber, setIsInputNewShabaNumber] = useState(false)
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
     const handleShowNewShabaNumber = () => {
         setIsInputNewShabaNumber(() => !isInputNewShabaNumber)
     }
@@ -147,16 +143,16 @@ function StepSelectCard() {
                     <div className='mb-2 text-md text-white'>اطلاعات تکمیلی:</div>
                     <div className="flex flex-row justify-between">
                         <div>قیمت طلا</div>
-                        <div>257588125 ریال</div>
+                        <div>{props.valuePrice.numberformat} ریال</div>
                     </div>
                     <div className="flex flex-row justify-between">
-                        <div>هزینه ارسال</div>
-                        <div>257588125 ریال</div>
+                        <div>کارمزد تراکنش</div>
+                        <div>-50000 ریال</div>
                     </div>
                     <div className="border border-sky-50 border-solid my-2"></div>
                     <div className="flex flex-row justify-between">
                         <div>قابل پرداخت</div>
-                        <div>257588125 ریال</div>
+                        <div>{(parseInt(props.valuePrice.numberformat) - 50000)} ریال</div>
                     </div>
                 </div>
             </div>

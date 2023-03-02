@@ -19,7 +19,7 @@ import StepBuyGold from "./StepBuyGold";
 import StepReceiveType from "./StepReceiveType";
 import StepPayment from "./StepPayment";
 import "./../../../../style/BuyGold.css"
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import signup from "../../../../contexts/signup";
 import api from "../../../../api/api";
 
@@ -135,9 +135,15 @@ export default function BuyGold() {
     const [shipmentType, setShipmentType] = useState("cash");
     const [value, setValue] = React.useState('cash');
     const handleChange = async (event) => {
-        console.log(event)
         await setValue(event.target.value);
     };
+    useEffect(() => {
+        const getPrice = async () => {
+            const getPriceRes = await api.get("goldPrice/latestPrice")
+            setRialToWeightCoefficient(getPriceRes.price)
+        }
+        getPrice()
+    }, [activeStep]);
 
     const handleChangePrice = (event) => {
         setValuePrice({
