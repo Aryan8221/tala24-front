@@ -168,7 +168,6 @@ export default function BuyGold() {
     };
 
     const handleSubmit = async () => {
-
         await api.post("payment", {
             weight: type === "price" ? parseInt(valuePrice.numberformat) / rialToWeightCoefficient : parseInt(valueWeight),
             price: (parseInt(type === "weight" ? parseInt(valueWeight) * rialToWeightCoefficient : valuePrice.numberformat) + 50000 + (shipmentType === "delivery" ? 500000 : 0)).toString(),

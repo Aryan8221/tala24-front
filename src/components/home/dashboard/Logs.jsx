@@ -28,7 +28,7 @@ const Logs = () => {
         const getData = async () => {
             const getDataRes = await api.get(`account/${localStorage.getItem("id")}`)
             if (getDataRes) {
-                setData([...getDataRes.payments, ...getDataRes.orders])
+                setData([...getDataRes.payments, ...getDataRes.orders, ...getDataRes.sellReqs])
             }
         }
         getData()
@@ -147,7 +147,7 @@ const Logs = () => {
     return (
         <div className={'mx-9 mt-5'}>
             <h2 className={'text-white'}>
-                درخواست ها
+                گزارش ها
             </h2>
 
             <div className={'text-white bg-[#141414] mt-10 rounded-[8px] p-5'}>
@@ -192,24 +192,44 @@ const Logs = () => {
                         data ?
                             <>
                                 <h2 className={'my-5'}>
-                                    سابقه واریزی ها
+                                    گزارشات
                                 </h2>
                                 <table>
                                     <tr>
                                         <th className={'p-4 text-center'}>شماره</th>
                                         <th className={'p-4 text-center'}>تاریخ</th>
+                                        <th className={'p-4 text-center'}>وضعیت درخواست</th>
                                         <th className={'p-4 text-center'}>مبلغ</th>
                                         <th className={'p-4 text-center'}>وضعیت پرداخت</th>
                                         <th className={'p-4 text-center'}>کد رهگیری</th>
-                                        <th className={'p-4 text-center'}>وضعیت درخواست</th>
-                                        <th className={'p-4 text-center'}>پرداخت</th>
                                     </tr>
 
                                     {
-                                        data?.map((data, index) => (
+                                        data?.filter(({status}) => status !== "pending").filter(({order}) => order === undefined || order === null).map((data, index) => (
                                             <tr key={index}>
                                                 <td className={'p-3 text-center'}>{index + 1}</td>
                                                 <td className={'p-3 text-center'}>{data.date}</td>
+                                                <td className={'p-3 flex justify-center'}>
+                                                    {
+                                                        data.isAuthorized === undefined
+                                                            ? <p className={'authorizedSuccessful'}>
+                                                                تایید شده
+                                                            </p>
+                                                            : data.isAuthorized === "pending"
+                                                                ? <p className={'statusPending'}>
+                                                                    در حال بررسی
+                                                                </p>
+                                                                : data.isAuthorized === "failed"
+                                                                    ? <p className={'authorizedFailed'}>
+                                                                        تایید نشده
+                                                                    </p>
+                                                                    : data.isAuthorized === "successful"
+                                                                        ? <p className={'authorizedSuccessful'}>
+                                                                            تایید شده
+                                                                        </p>
+                                                                        : null
+                                                    }
+                                                </td>
                                                 <td className={'p-3 text-center'}>{EnglishToPersian(data.price?.toString()) + " ریال"}</td>
                                                 <td className={'p-3 flex justify-center'}>
                                                     {
@@ -225,23 +245,12 @@ const Logs = () => {
                                                                     ? <p className={'statusSuccessful'}>
                                                                         موفق
                                                                     </p>
-                                                                    : null
+                                                                    : <p className={'statusSuccessful'}>
+                                                                        موفق
+                                                                    </p>
                                                     }
                                                 </td>
                                                 <td className={'p-3 text-center'}>{data.refId === undefined ? "___" : data.refId}</td>
-                                                <td className={'p-3 flex justify-center'}>{
-                                                    data.authorized === undefined ?
-                                                        <small>&nbsp;</small> : data.authorized === true ?
-                                                            <p className={'authorizedSuccessful'}>تایید شده</p> : data.authorized === false ?
-                                                                <p className={'authorizedFailed'}>تایید نشده</p> : <small>&nbsp;</small>
-                                                }</td>
-                                                <td className={'p-3 text-center'}>
-                                                    {
-                                                        data.payment_id === null ? null : <button disabled={!(data.authorized && data.status === "pending")} className={"status disabled:bg-amber-200 disabled:text-gray-600 bg-gold text-black"} onClick={() => handleBuyGold(data)}>
-                                                            خرید
-                                                        </button>
-                                                    }
-                                                </td>
                                             </tr>
                                         ))
                                     }

@@ -36,17 +36,17 @@ const Hamburger = () => {
                         <p className={'py-2 mr-1'}>بازار</p>
                     </div>
                 </NavLink>
-                {/*<NavLink exact to="/dashboard/request"  activeClassName="active-navbar" >*/}
-                {/*    <div className={`flex cursor-pointer mt-2`}>*/}
-                {/*        /!*<img src={bazaar} alt={'bazaar'} />*!/*/}
-
-                {/*        <div className={'pr-5 py-2'}>*/}
-                {/*            <BiFirstAid size={'23'}/>*/}
-                {/*        </div>*/}
-                {/*        <p className={'py-2 mr-1'}>درخواست</p>*/}
-                {/*    </div>*/}
-                {/*</NavLink>*/}
                 <NavLink exact to="/dashboard/request"  activeClassName="active-navbar" >
+                    <div className={`flex cursor-pointer mt-2`}>
+                        {/*<img src={bazaar} alt={'bazaar'} />*/}
+
+                        <div className={'pr-5 py-2'}>
+                            <BiFirstAid size={'23'}/>
+                        </div>
+                        <p className={'py-2 mr-1'}>درخواست</p>
+                    </div>
+                </NavLink>
+                <NavLink exact to="/dashboard/log"  activeClassName="active-navbar" >
                     <div className={`flex cursor-pointer mt-2`}>
                         {/*<img src={bazaar} alt={'bazaar'} />*/}
                         <div className={'pr-5 py-2'}>
