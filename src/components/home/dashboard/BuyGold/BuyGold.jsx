@@ -173,6 +173,7 @@ export default function BuyGold() {
             price: (parseInt(type === "weight" ? parseInt(valueWeight) * rialToWeightCoefficient : valuePrice.numberformat) + 50000 + (shipmentType === "delivery" ? 500000 : 0)).toString(),
             status: "pending",
             isConverted: false,
+            isStored: shipmentType === "cash" ? "true" : "false",
             accountId: localStorage.getItem("id")
         })
     }

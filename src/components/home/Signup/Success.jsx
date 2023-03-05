@@ -7,7 +7,11 @@ import signup from "../../../contexts/signup";
 const Success = () => {
 
     const info = useContext(signup)
-
+    const [redirect, setRedirect] = useState(
+        localStorage.getItem("role") === "ADMIN" ? "/admin" :
+            localStorage.getItem("role") === "USER" ? "/dashboard/home" :
+                localStorage.getItem("role") === "MANAGER" ? "/manager" : null
+    );
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -40,7 +44,7 @@ const Success = () => {
                     </div>
 
                     <div className={'mx-4 mt-5'}>
-                        <Link to="/dashboard/home" className={'flex justify-center items-center bg-[#212121] w-full rounded h-[45px]'}>
+                        <Link to={redirect} className={'flex justify-center items-center bg-[#212121] w-full rounded h-[45px]'}>
                             <span className={'text-white'}>
                                 داشبورد
                             </span>
