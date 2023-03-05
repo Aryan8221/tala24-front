@@ -52,6 +52,7 @@ export default function ConfirmBuyGold() {
     let [isReject, setIsReject] = useState(false)
     let [failedDescription, setFailedDescription] = useState(false)
     let [failedDescriptionContent, setFailedDescriptionContent] = useState()
+    let [paymentId, setPaymentId] = useState()
 
     function closeModalProfile() {
         setIsOpenProfile(false)
@@ -70,8 +71,13 @@ export default function ConfirmBuyGold() {
         setRequestsTarget('')
     }
 
-    function openModal(isAuthorized) {
+    async function openModal(isAuthorized,id) {
+        setPaymentId(id)
         setAdminConfirm(isAuthorized);
+        if(isAuthorized === "failed"){
+            const getFailureReason = await api.get(`failureReason/search?paymentId=${id}`)
+            setFailedDescriptionContent(getFailureReason[0].reason)
+        }
         setIsOpen(true)
     }
 
@@ -83,17 +89,35 @@ export default function ConfirmBuyGold() {
         setAdminConfirm(event.target.value);
     };
 
-    async function handleAdminConfirm(id) {
-        await api.put(`payment/${id}`, {
-            isAuthorized: adminConfirm,
-        })
+    async function handleAdminConfirm() {
+
+        if(adminConfirm === "failed"){
+
+            await api.put(`payment/${paymentId}`, {
+                isAuthorized: adminConfirm,
+            })
+
+            await api.post(`failureReason`,{
+                reason:failedDescriptionContent,
+                paymentId:paymentId
+            })
+
+            setFailedDescriptionContent("")
+
+        }else {
+
+            await api.put(`payment/${paymentId}`, {
+                isAuthorized: adminConfirm,
+            })
+
+        }
 
         const getPaymentsRes = await api.get(`payment`)
         if (getPaymentsRes) {
             setGoldBuyRequests(getPaymentsRes)
         }
 
-        setAdminConfirm("نامشخص")
+        setAdminConfirm("pending")
         setIsOpen(false)
     }
 
@@ -163,9 +187,8 @@ export default function ConfirmBuyGold() {
                             <td className={'p-3 flex'}>
                                 <button
                                     type="button"
-                                    onClick={() => openModal(requests.isAuthorized)}
-                                    className="relative cursor-default rounded flex border-[1px] border-neutral-700 border-solid bg-transparent text-white py-2 px-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-                                >
+                                    onClick={() => openModal(requests.isAuthorized,requests.id)}
+                                    className="relative cursor-default rounded flex border-[1px] border-neutral-700 border-solid bg-transparent text-white py-2 px-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                                     تعيين وضعيت
                                 </button>
                                 <Transition appear show={isOpen} as={Fragment}>
@@ -221,17 +244,20 @@ export default function ConfirmBuyGold() {
                                                             </CacheProvider>
                                                             {
                                                                 adminConfirm === "failed"
-                                                                    && (
-                                                                        <CacheProvider value={cacheRtl}>
-                                                                            <ThemeProvider theme={theme}>
+                                                                && (
+                                                                    <CacheProvider value={cacheRtl}>
+                                                                        <ThemeProvider theme={theme}>
+                                                                            <div className="mt-5">
                                                                                 <TextField
+                                                                                    fullWidth
                                                                                     name="description"
                                                                                     label="توضیحات رد درخواست"
                                                                                     value={failedDescriptionContent}
                                                                                     onChange={(e) => (setFailedDescriptionContent(e.target.value))}
                                                                                 />
-                                                                            </ThemeProvider>
-                                                                        </CacheProvider>
+                                                                            </div>
+                                                                        </ThemeProvider>
+                                                                    </CacheProvider>
                                                                 )
                                                             }
                                                         </div>
@@ -275,6 +301,7 @@ export default function ConfirmBuyGold() {
                                 <Transition appear show={isOpenProfile} as={Fragment}>
                                     <Dialog as="div" className="relative z-10" onClose={closeModalProfile}
                                             dir="rtl">
+
                                         <Transition.Child
                                             as={Fragment}
                                             enter="ease-out duration-300"
