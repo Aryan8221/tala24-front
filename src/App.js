@@ -20,14 +20,19 @@ import UserTicket from "./components/home/dashboard/Ticket/UserTicket";
 import UserChat from "./components/home/dashboard/Ticket/UserChat"
 import CompleteRegistration from "./components/home/Signup/CompleteRegistration";
 import SellGold from "./components/home/dashboard/SellGold/SellGold";
-import AdminChat from "./components/admin/Ticket/UserChat";
-import AdminTicket from "./components/admin/Ticket/UserTicket";
-import GoldPriceRecord from "./components/admin/GoldPriceRecord";
-import ConfirmBuyGold from "./components/admin/ConfirmBuyGold";
-import ConfirmSellGold from "./components/admin/ConfirmSellGold";
-import ManagerTicket from "./components/manager/Ticket/UserTicket";
-import ManagerChat from "./components/manager/Ticket/UserChat";
-import AddAdmin from "./components/manager/AddAdmin";
+import AdminDashboard from './components/home/admin/Dashboard';
+import ConfirmBuyGold from './components/home/admin/ConfirmBuyGold';
+import ConfirmSellGold from './components/home/admin/ConfirmSellGold'
+import GoldPriceRecord from "./components/home/admin/GoldPriceRecord";
+import AdminTicket from "./components/home/admin/Ticket/UserTicket";
+import AdminChat from "./components/home/admin/Ticket/UserChat";
+import ManagerDashboard from './components/home/manager/Dashboard';
+import ManagerConfirmBuyGold from './components/home/manager/ConfirmBuyGold';
+import ManagerConfirmSellGold from './components/home/manager/ConfirmSellGold'
+import ManagerGoldPriceRecord from "./components/home/manager/GoldPriceRecord";
+import ManagerTicket from "./components/home/manager/Ticket/UserTicket";
+import ManagerChat from "./components/home/manager/Ticket/UserChat";
+import AddAdmin from './components/home/manager/AddAdmin'
 
 const App = () => {
     const [OTPAllowed, setOTPAllowed] = useState(false)
