@@ -74,10 +74,14 @@ export default function ConfirmBuyGold() {
     async function openModal(isAuthorized,id) {
         setPaymentId(id)
         setAdminConfirm(isAuthorized);
+        setFailedDescriptionContent("")
         if(isAuthorized === "failed"){
             const getFailureReason = await api.get(`failureReason/search?paymentId=${id}`)
-            setFailedDescriptionContent(getFailureReason[0].reason)
+            if(getFailureReason[0]){
+                setFailedDescriptionContent(getFailureReason[0].reason)
+            }
         }
+
         setIsOpen(true)
     }
 
