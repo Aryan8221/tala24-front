@@ -20,6 +20,14 @@ import UserTicket from "./components/home/dashboard/Ticket/UserTicket";
 import UserChat from "./components/home/dashboard/Ticket/UserChat"
 import CompleteRegistration from "./components/home/Signup/CompleteRegistration";
 import SellGold from "./components/home/dashboard/SellGold/SellGold";
+import AdminChat from "./components/admin/Ticket/UserChat";
+import AdminTicket from "./components/admin/Ticket/UserTicket";
+import GoldPriceRecord from "./components/admin/GoldPriceRecord";
+import ConfirmBuyGold from "./components/admin/ConfirmBuyGold";
+import ConfirmSellGold from "./components/admin/ConfirmSellGold";
+import ManagerTicket from "./components/manager/Ticket/UserTicket";
+import ManagerChat from "./components/manager/Ticket/UserChat";
+import AddAdmin from "./components/manager/AddAdmin";
 
 const App = () => {
     const [OTPAllowed, setOTPAllowed] = useState(false)
