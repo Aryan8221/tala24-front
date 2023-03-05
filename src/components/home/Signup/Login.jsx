@@ -47,14 +47,17 @@ const Login = () => {
             localStorage.setItem("password", password)
             const res = await LoginApi()
 
-            console.log(123)
-            console.log(res)
-
             if (res.status === 403) {
                 setErrors(["رمز عبور اشتباه است."])
             } else if (res.status === 200) {
                 // info.setDashboardAllowed(true)
-                navigate("/dashboard/home")
+                if (localStorage.getItem("role") === "ADMIN") {
+                    navigate("/admin")
+                } else if (localStorage.getItem("role") === "USER") {
+                    navigate("/dashboard/home")
+                } else if (localStorage.getItem("role") === "MANAGER") {
+                    navigate("/manager")
+                }
             }
         }
     }
