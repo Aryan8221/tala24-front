@@ -16,6 +16,8 @@ import {IoClose} from "react-icons/io5";
 import {AiOutlineCheck} from "react-icons/ai";
 import signup from "../../../contexts/signup";
 import {EnglishToPersian} from "../../../helper/EnglishToPersian";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 const Logs = () => {
     const [showErrorModal, setShowErrorModal] = useState(false)
@@ -210,25 +212,35 @@ const Logs = () => {
                                                 <td className={'p-3 text-center'}>{index + 1}</td>
                                                 <td className={'p-3 text-center'}>{data.date}</td>
                                                 <td className={'p-3 flex justify-center'}>
-                                                    {
-                                                        data.isAuthorized === undefined
-                                                            ? <p className={'authorizedSuccessful'}>
-                                                                تایید شده
-                                                            </p>
-                                                            : data.isAuthorized === "pending"
-                                                                ? <p className={'statusPending'}>
-                                                                    در حال بررسی
+                                                    <OverlayTrigger
+                                                        className={'p-3 flex justify-center'}
+                                                        placement="bottom"
+                                                        delay={{ show: 250, hide: 400 }}
+                                                        overlay={<Tooltip id="button-tooltip">
+                                                            {data.failureReason}
+                                                        </Tooltip>
+                                                        }
+                                                    >
+                                                        {
+                                                            data.isAuthorized === undefined
+                                                                ? <p className={'authorizedSuccessful'}>
+                                                                    تایید شده
                                                                 </p>
-                                                                : data.isAuthorized === "failed"
-                                                                    ? <p className={'authorizedFailed'}>
-                                                                        تایید نشده
+                                                                : data.isAuthorized === "pending"
+                                                                    ? <p className={'statusPending'}>
+                                                                        در حال بررسی
                                                                     </p>
-                                                                    : data.isAuthorized === "successful"
-                                                                        ? <p className={'authorizedSuccessful'}>
-                                                                            تایید شده
+                                                                    : data.isAuthorized === "failed"
+                                                                        ? <p className={'authorizedFailed'}>
+                                                                            تایید نشده
                                                                         </p>
-                                                                        : null
-                                                    }
+                                                                        : data.isAuthorized === "successful"
+                                                                            ? <p className={'authorizedSuccessful'}>
+                                                                                تایید شده
+                                                                            </p>
+                                                                            : null
+                                                        }
+                                                    </OverlayTrigger>
                                                 </td>
                                                 <td className={'p-3 text-center'}>{EnglishToPersian(data.price?.toString()) + " ریال"}</td>
                                                 <td className={'p-3 flex justify-center'}>
