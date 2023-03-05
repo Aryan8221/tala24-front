@@ -90,6 +90,24 @@ const App = () => {
                             <Route  path="ticket/chat" element={<UserChat />} />
                             <Route  path="complete-info" element={<CompleteRegistration />} />
                         </Route>
+                        <Route path="/admin" element={(<AdminDashboard/>)}>
+                            {/*<Route path="price-record" element={<GoldPriceRecord />} />*/}
+                            <Route path="" element={<GoldPriceRecord />} />
+                            <Route path="confirm-buy" element={<ConfirmBuyGold />} />
+                            <Route path="confirm-sell" element={<ConfirmSellGold />} />
+                            <Route path="ticket" element={<AdminTicket />} />
+                            <Route path="ticket/chat" element={<AdminChat />} />
+                        </Route>
+                        <Route path="/manager" element={(<ManagerDashboard/>)}>
+                            {/*<Route path="price-record" element={<GoldPriceRecord />} />*/}
+                            <Route path="" element={<ManagerGoldPriceRecord />} />
+                            <Route path="confirm-buy" element={<ManagerConfirmBuyGold />} />
+                            <Route path="confirm-sell" element={<ManagerConfirmSellGold />} />
+                            <Route path="ticket" element={<ManagerTicket />} />
+                            <Route path="ticket/chat" element={<ManagerChat />} />
+                            <Route path="add-admin" element={<AddAdmin />} />
+                        </Route>
+
                         <Route path="/forgot-password" element={(<ForgotPassword/>)}/>
                         {/*<Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>*/}
                     </Routes>
