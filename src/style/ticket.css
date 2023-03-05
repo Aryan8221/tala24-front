@@ -77,12 +77,9 @@
     flex-direction: column;
 }
 .chat-box  .chat-messenger-footer input {
-    border: none;
-    background-color: #757575;
-    padding: 0.5rem;
-    font-size: 16px;
-    font-weight: 500;
     color: #fff;
+    font-weight: 400;
+    font-size: 12px;
 }
 .chat-box  .chat-messenger-footer .send-message {
     margin-top: 1rem;
@@ -103,5 +100,12 @@
 }
 ::placeholder {
     color: #fff;
+    font-weight: 400;
+    font-size: 12px;
+}
+.MuiAvatar-root.MuiAvatar-circular.MuiAvatar-colorDefault.ml-2.css-2s90m6-MuiAvatar-root {
+    width: 30px;
+    height: 30px;
     font-size: 14px;
+    color: #404040;
 }
