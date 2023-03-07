@@ -87,7 +87,7 @@ const SignupOrLogin = () => {
                         />
                         {
                             errors.map((error, index) =>
-                                <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
+                                <small key={index} className={"text-red-600 mt-4 text-[0.6rem]"}>{error}</small>
                             )
                         }
                     </div>

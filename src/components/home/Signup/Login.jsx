@@ -92,7 +92,7 @@ const Login = () => {
                         }
                     </div>
 
-                    <button className={'text-white text-[9px] mx-4'} onClick={() => {
+                    <button className={'text-white text-[12px] mx-8'} onClick={() => {
                         navigate("/forgot-password")
                     }}>
                         <small>

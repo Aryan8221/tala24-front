@@ -84,6 +84,7 @@ const ForgotPassword = () => {
                             error={errors.length !== 0}
                             value={password}
                             type={"password"}
+                            sx={{ input: { color: '#fff !important' } }}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(value) => handleInputPassword(value)}
                         />
