@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {Fragment, useState} from 'react'
 import {createTheme} from '@mui/material/styles';
 import rtlPlugin from 'stylis-plugin-rtl';
 import {CacheProvider, ThemeProvider} from '@emotion/react';
@@ -29,8 +28,8 @@ export default function GoldPriceRecord() {
 
     let [isOpen, setIsOpen] = useState(false)
     let [isOpenConfirm, setIsOpenConfirm] = useState(false)
-    let [newGoldPrice,setNewGoldPrice] = useState(null)
-    let [goldPriceHistory,setGoldPriceHistory] = useState([])
+    let [newGoldPrice, setNewGoldPrice] = useState(null)
+    let [goldPriceHistory, setGoldPriceHistory] = useState([])
 
 
     useEffect(() => {
@@ -57,6 +56,7 @@ export default function GoldPriceRecord() {
         setIsOpenConfirm(false)
         setIsOpen(true)
     }
+
     function openModalConfirm() {
         setIsOpen(false)
         setIsOpenConfirm(true)
@@ -65,7 +65,12 @@ export default function GoldPriceRecord() {
     const getPrice = e => setNewGoldPrice(e.target.value)
 
     async function recordNewPrice() {
-        await api.post("goldPrice",{price:newGoldPrice})
+        await api.post("goldPrice",
+            {
+                price: newGoldPrice,
+                adminName: localStorage.getItem("username")
+            }
+        )
         setIsOpenConfirm(false)
         setNewGoldPrice(null)
 
@@ -136,7 +141,8 @@ export default function GoldPriceRecord() {
                                                                 value={newGoldPrice}
                                                                 onChange={getPrice}
                                                                 InputProps={{
-                                                                    endAdornment: <InputAdornment position="end"><span style={{color:"000"}}>ریال</span></InputAdornment>,
+                                                                    endAdornment: <InputAdornment position="end"><span
+                                                                        style={{color: "000"}}>ریال</span></InputAdornment>,
                                                                 }}
                                                                 InputLabelProps={{
                                                                     style: {
@@ -174,6 +180,7 @@ export default function GoldPriceRecord() {
                         </div>
                     </Dialog>
                 </Transition>
+
                 <Transition appear show={isOpenConfirm} as={Fragment}>
                     <Dialog as="div" className="relative z-10" onClose={closeModal} dir="rtl">
                         <Transition.Child
@@ -238,26 +245,26 @@ export default function GoldPriceRecord() {
             </div>
             <table className='mt-8 text-white'>
                 <thead>
-                    <tr>
-                        <th className={'p-4'}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                 stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                      d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"/>
-                            </svg>
-                        </th>
-                        <th className={'p-4'}>تاريخ و ساعت</th>
-                        <th className={'p-4'}>ثبت کننده</th>
-                        <th className={'p-4'}>قیمت</th>
-                    </tr>
+                <tr>
+                    <th className={'p-4'}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                             stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"/>
+                        </svg>
+                    </th>
+                    <th className={'p-4'}>تاريخ و ساعت</th>
+                    <th className={'p-4'}>ثبت کننده</th>
+                    <th className={'p-4'}>قیمت</th>
+                </tr>
                 </thead>
                 <tbody>
                 {
-                    goldPriceHistory.map((item,index) => (
+                    goldPriceHistory.map((item, index) => (
                         <tr>
-                            <td className={'p-3'}>{index+1}</td>
+                            <td className={'p-3'}>{index + 1}</td>
                             <td className={'p-3'}>{EnglishToPersian(item.date)}</td>
-                            <td className={'p-3'}>{item.adminName}</td>
+                            <td className={'p-3'}>{item.adminUserName}</td>
                             <td className={'p-3'}>{item.price}</td>
                         </tr>
                     ))

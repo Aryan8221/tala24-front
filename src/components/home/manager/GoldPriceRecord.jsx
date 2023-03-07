@@ -13,15 +13,18 @@ import './../../../style/admin.css'
 const theme = createTheme({
     direction: 'rtl',
 });
+
 const cacheRtl = createCache({
     key: 'muirtl',
     stylisPlugins: [prefixer, rtlPlugin],
 });
+
 function RTL(props) {
     return <CacheProvider value={cacheRtl}>{props.children}</CacheProvider>;
 }
 
 export default function GoldPriceRecord() {
+
     let [isOpen, setIsOpen] = useState(false)
     let [isOpenConfirm, setIsOpenConfirm] = useState(false)
     let [goldPriceHistory,setGoldPriceHistory] = useState([
