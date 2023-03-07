@@ -81,7 +81,7 @@ function StepBuyGold(props) {
                                     label="وزن طلا"
                                     id="outlined-start-adornment"
                                     value={props.valueWeight}
-                                    style={{color: '#000 !important'}}
+                                    sx={{ input: { color: '#fff !important' } }}
                                     onChange={props.handleChangeWeight}
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">گرم</InputAdornment>,
