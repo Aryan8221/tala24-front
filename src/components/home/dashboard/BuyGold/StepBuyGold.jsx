@@ -68,6 +68,7 @@ function StepBuyGold(props) {
                                     label="مبلغ پرداختی"
                                     value={props.valuePrice.numberformat}
                                     onChange={props.handleChangePrice}
+                                    style={{color: '#000 !important'}}
                                     name="numberformat"
                                     id="formatted-numberformat-input"
                                     InputProps={{
@@ -80,6 +81,7 @@ function StepBuyGold(props) {
                                     label="وزن طلا"
                                     id="outlined-start-adornment"
                                     value={props.valueWeight}
+                                    style={{color: '#000 !important'}}
                                     onChange={props.handleChangeWeight}
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">گرم</InputAdornment>,

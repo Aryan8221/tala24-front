@@ -159,6 +159,7 @@ function StepReceiveType(props) {
                                                     label="آدرس"
                                                     multiline
                                                     rows={2}
+                                                    style={{color: '#000 !important'}}
                                                     className='text-sky-50 w-full'
                                                 />
                                             )

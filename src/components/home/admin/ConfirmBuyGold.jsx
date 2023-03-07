@@ -188,7 +188,7 @@ export default function ConfirmBuyGold() {
                                                 </span>) : null
                                 }
                             </td>
-                            <td className={'p-3 flex'}>
+                            <td className={'p-3'}>
                                 <button
                                     type="button"
                                     onClick={() => openModal(requests.isAuthorized,requests.id)}

@@ -72,7 +72,7 @@ const Dashboard = () => {
 
                         <div className={'md1:flex hidden justify-start w-full'}>
                             <p className={'text-white text-[0.8rem] mr-5'}>
-                                سلام میلاد عزیز، خوش آمدید!
+                                سلام، خوش آمدید!
                             </p>
                         </div>
 

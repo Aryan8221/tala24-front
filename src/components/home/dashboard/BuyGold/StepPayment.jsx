@@ -28,7 +28,7 @@ function StepPayment(props) {
                             className='mr-3'
                         >
                             <FormControlLabel value="cash" control={<Radio/>} label="پرداخت اینترنتی"/>
-                            <FormControlLabel value="delivery" control={<Radio/>} label="پرداخت در محل(با کارت بانکی)"/>
+                            {/*<FormControlLabel value="delivery" control={<Radio/>} label="پرداخت در محل(با کارت بانکی)"/>*/}
                         </RadioGroup>
                     </FormControl>
                 </div>

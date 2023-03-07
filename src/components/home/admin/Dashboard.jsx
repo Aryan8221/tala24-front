@@ -64,7 +64,7 @@ const Dashboard = () => {
 
                         <div className={'md1:flex hidden justify-start w-full'}>
                             <p className={'text-white text-[0.8rem] mr-5'}>
-                                سلام میلاد عزیز، خوش آمدید!
+                                سلام، خوش آمدید!
                             </p>
                         </div>
 
@@ -76,9 +76,9 @@ const Dashboard = () => {
                         </div>
 
                         <div className={'flex justify-end w-full items-center'}>
-                            <p className={'text-white text-[0.8rem]'}>
+                           {/* <p className={'text-white text-[0.8rem]'}>
                                 خزانه: 938,000 تومان
-                            </p>
+                            </p>*/}
                             <div className={'mx-3'}>
                                 <FcPlus size={'25'}/>
                             </div>

@@ -82,11 +82,12 @@ const Login = () => {
                             value={password}
                             type={"password"}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
+                            style={{color: '#000 !important'}}
                             onChange={(value) => handleInput(value)}
                         />
                         {
                             errors.map((error, index) =>
-                                <small key={index} className={"text-red-600 mt-1 text-[0.6rem]"}>{error}</small>
+                                <small key={index} className={"text-red-600 mt-5 text-[0.8rem]"}>{error}</small>
                             )
                         }
                     </div>

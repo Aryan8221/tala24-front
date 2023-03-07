@@ -254,6 +254,7 @@ const CompleteRegistration = () => {
                                 disabled={!firstNameAllowed}
                                 value={firstName}
                                 type={"text"}
+                                style={{color: '#000 !important'}}
                                 className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
@@ -271,6 +272,7 @@ const CompleteRegistration = () => {
                                 disabled={!lastNameAllowed}
                                 value={lastName}
                                 type={"text"}
+                                style={{color: '#000 !important'}}
                                 className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
@@ -290,6 +292,7 @@ const CompleteRegistration = () => {
                             disabled={!nationalCodeAllowed}
                             value={EnglishToPersian(nationalCode)}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setNationalCode(PersianToEnglish(e.target.value))}
                         />
@@ -307,6 +310,7 @@ const CompleteRegistration = () => {
                             disabled={!accountNumberAllowed}
                             value={EnglishToPersian(accountNumber)}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setAccountNumber(PersianToEnglish(e.target.value))}
                         />
@@ -325,6 +329,7 @@ const CompleteRegistration = () => {
                             // error={errors.length !== 0}
                             value={email}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -341,6 +346,7 @@ const CompleteRegistration = () => {
                             // error={errors.length !== 0}
                             value={EnglishToPersian(postalCode)}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setPostalCode(PersianToEnglish(e.target.value))}
                         />
@@ -359,6 +365,7 @@ const CompleteRegistration = () => {
                             // error={errors.length !== 0}
                             value={address}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setAddress(e.target.value)}
                         />
@@ -370,6 +377,7 @@ const CompleteRegistration = () => {
                             // error={errors.length !== 0}
                             value={fatherName}
                             type={"text"}
+                            style={{color: '#000 !important'}}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(e) => setFatherName(e.target.value)}
                         />
