@@ -68,7 +68,7 @@ function StepBuyGold(props) {
                                     label="مبلغ پرداختی"
                                     value={props.valuePrice.numberformat}
                                     onChange={props.handleChangePrice}
-                                    style={{color: '#000 !important'}}
+                                    sx={{ input: { color: '#fff !important' } }}
                                     name="numberformat"
                                     id="formatted-numberformat-input"
                                     InputProps={{

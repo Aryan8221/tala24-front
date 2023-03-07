@@ -80,6 +80,7 @@ const SignupOrLogin = () => {
                             aria-invalid={true}
                             error={errors.length !== 0}
                             value={EnglishToPersian(number)}
+                            sx={{ input: { color: '#fff !important' } }}
                             type={"text"}
                             className={'field bg-[#212121] w-full rounded h-[45px] p-4 text-white'}
                             onChange={(value) => handleInput(value)}

@@ -130,7 +130,7 @@ function StepSelectCard(props) {
                             ? (
                                 <TextField
                                     id="outlined-multiline-static"
-                                    style={{color: '#000 !important'}}
+                                    sx={{ input: { color: '#fff !important' } }}
                                     label="شماره شبا"
                                     multiline
                                     rows={2}

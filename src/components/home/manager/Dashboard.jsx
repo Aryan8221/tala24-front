@@ -79,9 +79,9 @@ const Dashboard = () => {
                             {/*<p className={'text-white text-[0.8rem]'}>
                                 خزانه: 938,000 تومان
                             </p>*/}
-                            <div className={'mx-3'}>
+                            {/*<div className={'mx-3'}>
                                 <FcPlus size={'25'}/>
-                            </div>
+                            </div>*/}
                             <div className={'md1:block hidden pr-5'} style={{borderRight: '1px solid #AFAFAF'}}>
                                 <IoCalendarOutline size={'25'}/>
                             </div>
