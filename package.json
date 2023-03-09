@@ -2,6 +2,9 @@
   "name": "tala-website",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "transformIgnorePatterns": []
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -15,6 +18,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
+    "axios-mock-adapter": "^1.21.2",
     "chart.js": "^4.2.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",

@@ -2,7 +2,7 @@ import axios from "axios";
 import LoginApi from "./LoginApi";
 
 const axiosParams = {
-    baseURL: 'https://api.tala24.co/api/v1/'
+    baseURL: 'http://localhost:8090/api/v1/'
 }
 
 const axiosInstance = axios.create(axiosParams);
@@ -114,7 +114,28 @@ const api = {
                 console.log("error in main put api")
             }
         }
-    }
+    },
+
+    register: async (url, body, config = {}) => {
+        try {
+            const response = await axiosInstance.post(url, body, {
+                ...config,
+                withCredentials: true,
+            });
+            return response.data
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                await LoginApi()
+                const response = await axiosInstance.post(url, body, {
+                    ...config,
+                    withCredentials: true,
+                });
+                return response.data
+            } else {
+                console.log(error)
+            }
+        }
+    },
 }
 
 export default api;
