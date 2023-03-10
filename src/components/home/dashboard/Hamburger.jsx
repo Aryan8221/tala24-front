@@ -5,7 +5,7 @@ import {TbReportAnalytics} from "react-icons/tb";
 import {Link, NavLink} from "react-router-dom"
 import '../../../style/hamburger.css';
 import {useContext} from "react";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 
 
 const Hamburger = () => {

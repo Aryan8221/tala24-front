@@ -20,7 +20,7 @@ import StepReceiveType from "./StepReceiveType";
 import StepPayment from "./StepPayment";
 import "./../../../../style/BuyGold.css"
 import {useContext, useEffect, useState} from "react";
-import signup from "../../../../contexts/signup";
+import signup from "../../../../contexts/Signup";
 import api from "../../../../api/api";
 
 

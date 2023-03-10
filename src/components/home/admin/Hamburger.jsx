@@ -3,7 +3,7 @@ import {AiOutlineClose, AiOutlineStock} from "react-icons/ai";
 import {Link} from "react-router-dom"
 import '../../../style/hamburger.css';
 import {useContext} from "react";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 
 
 const Hamburger = ({selected, setSelected}) => {

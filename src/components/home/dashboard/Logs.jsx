@@ -14,7 +14,7 @@ import {useNavigate} from "react-router-dom";
 import {VscError} from "react-icons/vsc"
 import {IoClose} from "react-icons/io5";
 import {AiOutlineCheck} from "react-icons/ai";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import {EnglishToPersian} from "../../../helper/EnglishToPersian";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";

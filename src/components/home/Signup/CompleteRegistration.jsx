@@ -4,7 +4,7 @@ import OTPInput from "../../OTPInput";
 import Countdown from "react-countdown";
 import {Link, useNavigate} from "react-router-dom";
 import {TextField} from "@mui/material";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import api from "../../../api/api";
 import * as yup from "yup";
 import {EnglishToPersian} from "../../../helper/EnglishToPersian";

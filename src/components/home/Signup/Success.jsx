@@ -2,7 +2,7 @@ import logo from '../../../images/lastLogo.png'
 import '../../../style/signupOrLogin.css'
 import {Link, useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 
 const Success = () => {
 

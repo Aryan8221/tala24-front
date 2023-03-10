@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import OTPInput from "../../OTPInput";
 import api from "../../../api/api";
 import RegisterApi from "../../../api/RegisterApi";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 
 const Signup = () => {
     const info = useContext(signup)

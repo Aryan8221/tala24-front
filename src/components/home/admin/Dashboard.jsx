@@ -9,7 +9,7 @@ import {FcPlus} from "react-icons/fc";
 import {RxHamburgerMenu} from "react-icons/rx";
 import Hamburger from "./Hamburger";
 import { Outlet } from "react-router-dom";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import {useNavigate} from "react-router-dom";
 import LoginApi from "../../../api/LoginApi";
 import axios from "axios";

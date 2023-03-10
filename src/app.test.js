@@ -1,71 +1,52 @@
 import api from "./api/api";
 import axios from "axios";
+import {render, fireEvent, getByRole, screen} from "@testing-library/react";
+import Bazaar from "./components/home/dashboard/Bazaar";
+import { createMemoryHistory } from 'history';
+import { Router, MemoryRouter } from 'react-router-dom';
+import Signup from './contexts/Signup'
+import {useContext} from "react";
+import signup from "./contexts/Signup";
 
 // jest.mock('axios');
 
 describe('app', () => {
 
+    test('shows modal when buyButton is clicked', () => {
 
-    // it('modal appears when button is clicked', () => {
-    //     const { getByText, queryByText } = render(<Bazaar />);
-    //     const button = getByText('خرید');
-    //     fireEvent.click(button);
-    //
-    //     expect(queryByText('Modal Content')).toBeNull();
-    // });
+        render(
+            <Signup.Provider value={{
+                verified: false
+            }}>
+                <MemoryRouter>
+                    <Bazaar />
+                </MemoryRouter>
+            </Signup.Provider>
+    );
 
-    // afterEach(() => {
-    //     jest.resetAllMocks();
+        // Ensure modal is initially hidden
+        expect(screen.queryByText('مشخصات خود را تکمیل کنید!')).toBeNull();
+
+        // Find and click button to open modal
+        const button = screen.getByRole('buyButton');
+        fireEvent.click(button);
+
+        // Ensure modal is now visible
+        expect(screen.getByText('مشخصات خود را تکمیل کنید!')).toBeInTheDocument;
+    });
+
     // });
-    //
-    // it('should make a POST request with the provided data and headers', async () => {
-    //     const mockResponseData = {
-    //         firstName: null,
-    //         lastName: null,
-    //         nationalCode: null,
-    //         otp: null,
-    //         password: null,
-    //         phoneNumber: "09924664362",
-    //         role: null,
-    //         status: "exist"
-    //     };
-    //     // axios.post.mockResolvedValueOnce({ mockResponseData });
-    //
-    //     const data = { phoneNumber: "09924664362" };
-    //
-    //     const response = await axios.post("http://localhost:8090/api/v1/register/init", data, {
-    //         withCredentials: true,
-    //     });
-    //     console.log(response)
-    //
-    //     expect(response).toEqual(mockResponseData);
-    // });
-    //
-    // it('should login work',async () => {
-    //     // const mockResponseData = 200
-    //     // axios.post.mockResolvedValueOnce({ mockResponseData });
-    //
-    //     const data = {
-    //         password: "airByte",
-    //         username: "09924664362"
-    //     };
-    //
-    //     const response = await axios.post("http://localhost:8090/login", data, {
-    //         withCredentials: true,
-    //     });
-    //
-    //     console.log(response)
-    //
-    //     expect(response.mockResponseData).toEqual(200);
-    // });
-    test("should axios work", async() => {
+    test("should custom hook work!", async() => {
 
         const data = {
             phoneNumber: "09924664362"
         };
 
-        const result = await api.register("register/init", data)
+        const result = await api.get("https://persiancalapi.ir/jalali/1401/1/1")
+        // const result = await axios.post("http://localhost:8090/api/v1/register/init", data)
         console.log(result)
+
+        expect(result.is_holiday).toEqual(true)
     })
 
 })

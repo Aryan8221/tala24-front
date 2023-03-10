@@ -9,7 +9,7 @@ import Signup from "./components/home/Signup/Signup";
 import Login from "./components/home/Signup/Login";
 import CreatePassword from "./components/home/Signup/CreatePassword";
 import Dashboard from "./components/home/dashboard/Dashboard";
-import signup from "./contexts/signup";
+import signup from "./contexts/Signup";
 import ForgotPassword from "./components/home/Signup/ForgotPass/ForgotPassword";
 import ConfirmUsername from "./components/home/Signup/ForgotPass/ConfirmUsername";
 import Bazaar from "./components/home/dashboard/Bazaar";
@@ -125,6 +125,7 @@ const App = () => {
                         {/*<Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>*/}
                     </Routes>
                 </BrowserRouter>
+                <app.test />
             </signup.Provider>
         </>
     )

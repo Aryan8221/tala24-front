@@ -11,11 +11,11 @@ const api = {
         get: async (url, config = {}) => {
             try {
                 const response = await axiosInstance.get(url, {
-                    ...config,
-                    headers: {
-                        ...config.headers,
-                        'Authorization': localStorage.getItem("Authorization"),
-                    }
+                    // ...config,
+                    // headers: {
+                    //     ...config.headers,
+                    //     'Authorization': localStorage.getItem("Authorization"),
+                    // }
                 });
                 return response.data
             } catch (error) {

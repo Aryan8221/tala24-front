@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import signup from "../../../../contexts/signup";
+import signup from "../../../../contexts/Signup";
 import {useNavigate} from "react-router-dom";
 import * as yup from "yup";
 import ResgisterApi from "../../../../api/RegisterApi";

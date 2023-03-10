@@ -6,7 +6,7 @@ import * as yup from "yup";
 import {PersianToEnglish} from "../../../helper/PersianToEnglish";
 import LoginApi from "../../../api/LoginApi";
 import {useNavigate} from "react-router-dom";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import api from "../../../api/api";
 import axios from "axios";
 

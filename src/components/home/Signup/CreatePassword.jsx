@@ -4,7 +4,7 @@ import {TextField} from "@mui/material";
 import {useContext, useEffect, useState} from "react";
 import * as yup from "yup";
 import PasswordStrengthIndicator from "../PasswordStrengthIndicator";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import {useNavigate} from "react-router-dom";
 import api from "../../../api/api";
 import ResgisterApi from "../../../api/RegisterApi";

@@ -17,7 +17,7 @@ import Hamburger from "./Hamburger";
 import { Outlet } from "react-router-dom";
 
 import '../../../style/hamburger.css'
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import {useNavigate} from "react-router-dom";
 import LoginApi from "../../../api/LoginApi";
 import axios from "axios";

@@ -1,7 +1,7 @@
 import '../../../style/chart.css'
 import {Line} from "react-chartjs-2";
 import {useContext, useEffect, useState} from "react";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 import {useNavigate} from "react-router-dom";
 
 import Backdrop from '@mui/material/Backdrop';
@@ -109,6 +109,7 @@ const Bazaar = () => {
                                         </div>
 
                                         <button
+                                            role={"buyButton"}
                                             onClick={handleBuy}
                                             className={'flex justify-center items-center rounded-[10px] text-white py-2 w-[135px]'}
                                             style={{border: '1px solid green'}}>
@@ -162,6 +163,7 @@ const Bazaar = () => {
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
+                data-testid={"modal"}
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
                     backdrop: {

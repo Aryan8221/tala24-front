@@ -9,7 +9,7 @@ import api from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 import RegisterApi from "../../../api/RegisterApi";
 import axios from "axios";
-import signup from "../../../contexts/signup";
+import signup from "../../../contexts/Signup";
 
 const SignupOrLogin = () => {
 
