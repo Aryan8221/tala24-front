@@ -2,7 +2,6 @@ import api from "./api/api";
 import axios from "axios";
 import {render, fireEvent, getByRole, screen} from "@testing-library/react";
 import Bazaar from "./components/home/dashboard/Bazaar";
-import { createMemoryHistory } from 'history';
 import { Router, MemoryRouter } from 'react-router-dom';
 import Signup from './contexts/Signup'
 import {useContext} from "react";
