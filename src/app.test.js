@@ -13,6 +13,7 @@ import OTPInput from "./components/OTPInput";
 import Login from "./components/home/Signup/Login";
 import {createMemoryHistory} from "history";
 import ConfirmUsername from "./components/home/Signup/ForgotPass/ConfirmUsername";
+import ForgotPassword from "./components/home/Signup/ForgotPass/ForgotPassword";
 
 // jest.mock('axios');
 
@@ -187,17 +188,13 @@ describe('all', () => {
 
     })
 
-    describe("Confirm username", () => {
-        test("input field", async() => {
+    describe("Forgot Password", () => {
+        test("Confirm username input field", async() => {
             await act(() => {
                 render(
-                    <Signup.Provider value={{
-                        handleSetNumber: handleSetNumber
-                    }}>
-                        <MemoryRouter>
-                            <ConfirmUsername />
-                        </MemoryRouter>
-                    </Signup.Provider>
+                    <MemoryRouter>
+                        <ConfirmUsername />
+                    </MemoryRouter>
                 )
             })
 
@@ -222,7 +219,30 @@ describe('all', () => {
 
         })
 
-        test()
+        test("Forgot password logic", async() => {
+            await act(() => {
+                render(
+                    <MemoryRouter>
+                        <ForgotPassword />
+                    </MemoryRouter>
+                )
+            })
+
+            const button = screen.getByText("تایید")
+            const field1 = screen.getByLabelText("password")
+            const field2 = screen.getByLabelText("passwordRepeat")
+
+            await act(() => {
+                userEvent.type(field1, "123456789")
+                userEvent.type(field2, "123456788")
+                userEvent.click(button)
+            })
+
+            const error = screen.getByText("رمز وارد شده با تکرار آن یکسان نمی باشد.")
+            expect(error).toBeInTheDocument;
+
+
+        })
     })
 })
 
