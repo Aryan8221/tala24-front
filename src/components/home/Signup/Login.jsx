@@ -78,6 +78,7 @@ const Login = () => {
 
                     <div className={'flex flex-col justify-center mx-4 mt-4'}>
                         <TextField
+                            label={"password"}
                             error={errors.length !== 0}
                             value={password}
                             type={"password"}

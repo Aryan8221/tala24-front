@@ -125,7 +125,6 @@ const App = () => {
                         {/*<Route path="/accountCompleteRegistration" element={(<CompleteRegistration/>)}/>*/}
                     </Routes>
                 </BrowserRouter>
-                <app.test />
             </signup.Provider>
         </>
     )
