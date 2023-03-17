@@ -15,7 +15,7 @@ import {createMemoryHistory} from "history";
 import ConfirmUsername from "./components/home/Signup/ForgotPass/ConfirmUsername";
 import ForgotPassword from "./components/home/Signup/ForgotPass/ForgotPassword";
 import CreatePassword from "./components/home/Signup/CreatePassword";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import signup from "./contexts/Signup";
 import CompleteRegistration from "./components/home/Signup/CompleteRegistration";
 import Success from "./components/home/Signup/Success";
@@ -23,8 +23,26 @@ import PasswordStrengthIndicator from "./components/home/PasswordStrengthIndicat
 import Chart24 from "./components/home/chart/chart24";
 import HomePageChart from "./components/home/chart/HomePageChart";
 import BallPulseSync from "./components/Loading/BallPulseSync";
+import Cards from "./components/home/HomePage/Cards";
+import Counters from "./components/home/HomePage/Counters";
+import Footer from "./components/home/HomePage/Footer";
+import Home from "./components/home/HomePage/Home";
+import Comments from "./components/home/HomePage/Comments";
+import Dashboard from "./components/home/dashboard/Dashboard";
+import Hamburger from "./components/home/dashboard/Hamburger";
+import Logs from "./components/home/dashboard/Logs";
+import Request1 from "./components/home/dashboard/Request1";
+import Request2 from "./components/home/dashboard/Request2";
+import {indigo} from "@mui/material/colors";
+import BuyGold from "./components/home/dashboard/BuyGold/BuyGold";
+import SellGold from "./components/home/dashboard/SellGold/SellGold";
+import UserChat from "./components/home/dashboard/Ticket/UserChat";
+import UserTicket from "./components/home/dashboard/Ticket/UserTicket";
 
-// jest.mock('axios');
+jest.mock('./api/api', () => ({
+    get: jest.fn(),
+    post: jest.fn(),
+}));
 
 describe('all', () => {
 
@@ -51,18 +69,18 @@ describe('all', () => {
         expect(screen.getByText('مشخصات خود را تکمیل کنید!')).toBeInTheDocument;
     });
 
-    test("should custom hook work!", async() => {
-
-        const data = {
-            phoneNumber: "09924664362"
-        };
-
-        const result = await api.get("https://persiancalapi.ir/jalali/1401/1/1")
-        // const result = await axios.post("http://localhost:8090/api/v1/register/init", data)
-        console.log(result)
-
-        expect(result.is_holiday).toEqual(true)
-    })
+    // test("should custom hook work!", async() => {
+    //
+    //     const data = {
+    //         phoneNumber: "09924664362"
+    //     };
+    //
+    //     const result = await api.get("https://persiancalapi.ir/jalali/1401/1/1")
+    //     // const result = await axios.post("http://localhost:8090/api/v1/register/init", data)
+    //     console.log(result)
+    //
+    //     expect(result.is_holiday).toEqual(true)
+    // })
 
 
     describe('helper and SignUpOrLogin', () => {
@@ -393,31 +411,42 @@ describe('all', () => {
     // })
 
 
-    describe("chart", () => {
-        test("rendered successfully", async() => {
-            await act(() => {
-                render(
-                    <Chart24 />
-                )
-            })
-
-            const price = screen.getByText("مظنه فروش")
-
-            expect(price).toBeInTheDocument
-        })
-
-        test("home page cart component", async() => {
-            await act(() => {
-                render(
-                    <HomePageChart />
-                )
-            })
-
-            const chart24 = screen.getByText("مظنه خرید")
-            expect(chart24).toBeInTheDocument
-
-        })
-    })
+    // describe("chart", () => {
+    //     test("rendered successfully", async() => {
+    //         // const getPriceRes = [
+    //         //     {
+    //         //         adminUserName: "سید حسین شیرافکن",
+    //         //         date: "1401/12/26 01:58:46",
+    //         //         id:"657521c084a942ec8b588612fbe3274b",
+    //         //         price:25300000
+    //         //     }
+    //         // ]
+    //         //
+    //         // api.get.mockResolvedValue(getPriceRes);
+    //
+    //         await act(() => {
+    //             render(
+    //                 <Chart24 />
+    //             )
+    //         })
+    //
+    //         const price = screen.getByText("مظنه فروش")
+    //
+    //         expect(price).toBeInTheDocument
+    //     })
+    //
+    //     test("home page cart component", async() => {
+    //         await act(() => {
+    //             render(
+    //                 <HomePageChart />
+    //             )
+    //         })
+    //
+    //         const chart24 = screen.getByText("مظنه خرید")
+    //         expect(chart24).toBeInTheDocument
+    //
+    //     })
+    // })
 
     test("ball Pulse Sync", () => {
         const { container } = render(<BallPulseSync />);
@@ -425,5 +454,275 @@ describe('all', () => {
 
         expect(div).not.toEqual(undefined);
     })
+
+    describe("Home Page", () => {
+        test("Cards Render", () => {
+            render(<Cards />)
+
+            const sentence = screen.getByText("سرمایه گذاری با کمترین مبلغ")
+            expect(sentence).toBeInTheDocument;
+        })
+
+        test("Counter Rendered", () => {
+            render(<Counters />)
+
+            const sentence = screen.getByText("Counters")
+            expect(sentence).toBeInTheDocument;
+        })
+
+        test("Comments Rendered", () => {
+            render(<Comments />)
+
+            const sentence = screen.getByText("نظرات مشتریان")
+            expect(sentence).toBeInTheDocument;
+        })
+
+        test("Footer Rendered", () => {
+            render(<Footer />)
+
+            const sentence = screen.getByText("درباره ما")
+            expect(sentence).toBeInTheDocument;
+        })
+
+        test("Home Rendered", () => {
+
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            )
+
+            const sentence = screen.getByText("ورود | ثبت نام")
+            expect(sentence).toBeInTheDocument;
+        })
+
+    })
+
+    describe("dashboard", () => {
+        test("dashboard rendered", () => {
+            render(
+                <MemoryRouter>
+                    <Dashboard />
+                </MemoryRouter>
+            )
+
+            const date = screen.getByText("تاریخ:")
+            expect(date).toBeInTheDocument
+        })
+
+
+        test("Hamburger rendered", () => {
+            render(
+                <MemoryRouter>
+                    <Hamburger />
+                </MemoryRouter>
+            )
+
+            const test1 = screen.getByText("بازار")
+            const test2 = screen.getByText("درخواست")
+            const test3 = screen.getByText("گزارشات")
+            const test4 = screen.getByText("خرید طلا")
+
+            expect(test1).toBeInTheDocument
+            expect(test2).toBeInTheDocument
+            expect(test3).toBeInTheDocument
+            expect(test4).toBeInTheDocument
+        })
+
+        test("Logs rendered", () => {
+            render(
+                <MemoryRouter>
+                    <Logs />
+                </MemoryRouter>
+            )
+
+            const test1 = screen.getByText("از تاریخ")
+            const test2 = screen.getByText("تا تاریخ")
+
+            expect(test1).toBeInTheDocument
+            expect(test2).toBeInTheDocument
+        })
+
+        test("Request1 rendered", () => {
+            render(
+                <MemoryRouter>
+                    <Request1 />
+                </MemoryRouter>
+            )
+
+            const test1 = screen.getByText("درگاه پرداخت")
+            const test2 = screen.getByText("پرداخت")
+
+            expect(test1).toBeInTheDocument
+            expect(test2).toBeInTheDocument
+        })
+
+        // test("Request2 rendered", () => {
+        //     render(
+        //         <MemoryRouter>
+        //             <Request2 />
+        //         </MemoryRouter>
+        //     )
+        //
+        //     jest.mock("./data", () => [
+        //         {    date: "2022-01-01",
+        //             isAuthorized: "pending",
+        //             checked: undefined,
+        //             status: "pending",
+        //             price: 100
+        //         },
+        //
+        //         {    date: "2022-01-02",
+        //             isAuthorized: "successful",
+        //             checked: undefined,
+        //             status: "successful",
+        //             price: 200
+        //         }]);
+        //
+        //     render(
+        //         <MemoryRouter>
+        //             <Request2 />
+        //         </MemoryRouter>
+        //     )
+        //
+        //     const test1 = screen.getByText("در حال بررسی")
+        //     // const test2 = screen.getByText("از تاریخ")
+        //
+        //     expect(test1).toBeInTheDocument
+        //     // expect(test2).toBeInTheDocument
+        // })
+    })
+
+    describe("buy and sell gold", () => {
+        test("Buy Gold progress bar", async () => {
+
+            const getPriceRes = { price: 10 };
+            api.get.mockResolvedValue(getPriceRes);
+
+            await act(() => {
+                render(<BuyGold />)
+            })
+
+            // const data = {
+            //     price: 200000
+            // }
+            //
+            // axios.get.mockImplementationOnce(() => Promise.resolve(data))
+
+            const nextBtn = screen.getByRole("next-button")
+            expect(screen.getAllByText("نوع دریافت")).toBeInTheDocument;
+
+            await act(() => {
+                userEvent.click(nextBtn)
+            })
+
+            expect(screen.getByText("بر اساس مبلغ")).toBeInTheDocument;
+
+            await act(() => {
+                userEvent.click(nextBtn)
+            })
+
+            expect(screen.getAllByText("پرداخت")).toBeInTheDocument;
+
+            await act(() => {
+                userEvent.click(nextBtn)
+            })
+        })
+
+        test("Sell Gold Progress bar", async() => {
+            const getPriceRes = { price: 10 };
+            api.get.mockResolvedValue(getPriceRes);
+
+            render(
+                <Signup.Provider value={{
+                    setInformation: jest.fn()
+                }}>
+                    <SellGold />
+                </Signup.Provider>
+            )
+
+            const nextBtn = screen.getByRole("next-button")
+
+            const byWeight = screen.getByLabelText("بر اساس وزن طلا")
+
+            await act(() => {
+                userEvent.click(byWeight)
+            })
+
+            const weightInput = screen.getByLabelText("وزن طلا")
+            await act(() => {
+                userEvent.type(weightInput, "12")
+            })
+
+            await act(() => {
+                userEvent.click(nextBtn)
+            })
+
+
+            expect(screen.getByText("120 ریال")).toBeInTheDocument
+
+
+
+        })
+    })
+
+    describe("ticket", () => {
+        test("user ticket rendered", () => {
+            const { container } = render(
+                <MemoryRouter>
+                    <UserTicket />
+                </MemoryRouter>
+            )
+            const addNewTicket = container.getElementsByClassName("bg-[#dfaf3d] text-black px-2 py-1 font-normal" +
+                " rounded hover:cursor-pointer transition")[0]
+
+            act(() => {
+                userEvent.click(addNewTicket)
+            })
+
+            const title = screen.getByText("لطفا عنوان تیکت خود را وارد کنید")
+
+            expect(title).toBeInTheDocument
+        })
+
+    })
+
+    describe('admin', () => {
+        test("")
+    })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

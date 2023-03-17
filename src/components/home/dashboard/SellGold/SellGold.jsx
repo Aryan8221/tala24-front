@@ -268,7 +268,7 @@ function SellGold() {
                                                 </Button>
                                             )}*/}
 
-                                            <Button onClick={handleNext}>
+                                            <Button onClick={handleNext} role={"next-button"}>
                                                 {activeStep === steps.length - 1 ? 'اتمام' : 'بعدی'}
                                             </Button>
                                         </Box>

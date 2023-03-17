@@ -277,7 +277,7 @@ export default function BuyGold() {
                                                 </Button>
                                             )}*/}
 
-                                            <Button onClick={handleNext}>
+                                            <Button onClick={handleNext} role={"next-button"}>
                                                 {activeStep === steps.length - 1 ? 'ثبت درخواست' : 'بعدی'}
                                             </Button>
                                         </Box>
