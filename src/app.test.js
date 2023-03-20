@@ -38,6 +38,9 @@ import BuyGold from "./components/home/dashboard/BuyGold/BuyGold";
 import SellGold from "./components/home/dashboard/SellGold/SellGold";
 import UserChat from "./components/home/dashboard/Ticket/UserChat";
 import UserTicket from "./components/home/dashboard/Ticket/UserTicket";
+import ConfirmBuyGold from "./components/home/admin/ConfirmBuyGold";
+import ConfirmSellGold from "./components/home/admin/ConfirmSellGold";
+import GoldPriceRecord from "./components/home/admin/GoldPriceRecord";
 
 jest.mock('./api/api', () => ({
     get: jest.fn(),
@@ -688,7 +691,67 @@ describe('all', () => {
     })
 
     describe('admin', () => {
-        test("")
+        test("confirm buy gold", () => {
+
+            const goldBuyRequests = [
+                {
+                    weight: 2,
+                    price: 200000,
+                    data: "1401/1/1",
+                    status: "pending"
+                }
+            ]
+
+            render(<ConfirmBuyGold />)
+
+            // api.get.mockResolvedValue(goldBuyRequests);
+
+            // const weight = screen.getByTestId("weight")
+
+            // expect(weight.textContent).toEqual(String(goldBuyRequests[0].weight));
+            expect(screen.getByText("وزن")).toBeInTheDocument
+            // expect(screen.getByText("2")).toBeInTheDocument
+        })
+
+        test("confirm sell gold rendered", () => {
+
+            const { getByText, rerender } = render(<ConfirmSellGold />);
+            // render(<ConfirmSellGold />)
+
+            jest.spyOn(React, 'useState').mockImplementation((initialState) => {
+                return [initialState, jest.fn()];
+            });
+
+            act(() => {
+                const [goldBuyRequests, setGoldBuyRequests] = React.useState([
+                    {
+                        weight: 2,
+                        price: 200000,
+                        data: "1401/1/1",
+                        status: "pending"
+                    }
+                ]);
+
+                rerender(<ConfirmSellGold />);
+            });
+
+            // api.get.mockResolvedValue(goldBuyRequests);
+
+            // const weight = screen.getByTestId("weight")
+
+            // expect(weight.textContent).toEqual(String(goldBuyRequests[0].weight));
+            // expect(getByText("در حال انتظار")).toBeInTheDocument
+            expect(screen.getByText("قیمت")).toBeInTheDocument
+        })
+
+        test("gold price rendered", async() => {
+            await act(() => {
+                render(<GoldPriceRecord />)
+            })
+
+            expect(screen.getByText("ثبت قیمت جدید")).toBeInTheDocument
+        })
+
     })
 })
 
